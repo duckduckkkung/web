@@ -1,103 +1,107 @@
-import Image from "next/image";
+import { FanCard } from "@/shared/components/fan-card";
+import { Header } from "@/shared/components/header";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    const fans = [
+        {
+            id: "1",
+            name: "송하영",
+            description:
+                "작고귀엽고사랑스럽고노래도너무잘부르고춤도잘추는레전드송하영사랑꾼들의모임",
+            imageUrl: [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk1q1Fk5medS__SP2mw9fwJLICbzwo5_UpsA&s",
+            ],
+            communityCount: 7,
+            isGoodsSiteExists: false,
+        },
+        {
+            id: "2",
+            name: "릴파",
+            description: "내첫사랑",
+            imageUrl: [
+                "https://yt3.googleusercontent.com/ZqC92CDGtM19mufhDBXEUixTQ0wkzjONrhZqVJBfLiRYEaRhXfilzJX8w7Sn6K9yU8g5iETX=s900-c-k-c0x00ffffff-no-rj",
+            ],
+            communityCount: 4,
+            isGoodsSiteExists: true,
+        },
+        {
+            id: "3",
+            name: "봇치 더 록!",
+            description: "내 아내 니지카 사랑해",
+            imageUrl: [
+                "https://i.namu.wiki/i/YiPDD_HksgrHwFI4iQSQ_ASpLO0RF2uat67-N3yelFBFqKyAp7kfPmF0xa-3o3_Vkx0lwpTYvsMhBAGbnhJP_A.webp",
+            ],
+            communityCount: 5,
+            isGoodsSiteExists: false,
+        },
+        {
+            id: "4",
+            name: "심영",
+            description: "내가 고자라니 ㅠㅠ",
+            imageUrl: [
+                "https://i.namu.wiki/i/BsXbPLjSFVBupEyhtSBPQM2aZZ9dfnXUtgDAHwrsbAcL4U4e2S8a48wz9bz4RnOg5-M2R06zOcQpf57HxvmE4g.webp",
+            ],
+            communityCount: 19,
+            isGoodsSiteExists: true,
+        },
+        {
+            id: "5",
+            name: "귀멸의 칼날",
+            description: "엄",
+            imageUrl: [
+                "https://an2-img.amz.wtchn.net/image/v2/164OpIZTbqcYBKolTKXHbQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZeE5UZzNOamd4TmpNeU5qRXpORFE0T1NKOS5uRERMQV9XN2VRd3NHd2lBT0o1NnY2M3UxeTduR1FKeS1iY1JVVTlIZVJ3",
+            ],
+            communityCount: 24,
+            isGoodsSiteExists: true,
+        },
+        {
+            id: "6",
+            name: "주술회전",
+            description: "영역 전개",
+            imageUrl: [
+                "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fshop-phinf.pstatic.net%2F20230805_93%2F1691163745442HIYcl_JPEG%2F2798572255786923_162918491.jpg&w=1080&q=75",
+            ],
+            communityCount: 49,
+            isGoodsSiteExists: false,
+        },
+        {
+            id: "7",
+            name: "그 비스크 돌은 사랑을 한다",
+            description:
+                "키타가와마린그녀는너무빛이나내가죽을거같아어떡해누나날가져요엉엉",
+            imageUrl: [
+                "https://mblogthumb-phinf.pstatic.net/MjAyMjAzMjlfMTAg/MDAxNjQ4NTU1MjIxMTM3.Wb1JRp43shYEi1X_0Q5B5mxqdnST9ov3mM_-0hBXxbYg.VENxCbTLjpz8roiXMgOFQ7mfO9fjbp_1Jk5o7_-pLfMg.JPEG.lara46/6ec33251fd64ffcf369d95fa10ddaed4dc4dc06e.jpg?type=w800",
+            ],
+            communityCount: 18,
+            isGoodsSiteExists: true,
+        },
+        {
+            id: "8",
+            name: "장난을 잘치는 타카기양",
+            description: "이 요오오오망한년",
+            imageUrl: [
+                "https://i.namu.wiki/i/En-boea9D8WfC0F7pRYgcvZG1Pz5QRjlbKlzs4vdLHl3od6o81PrjJ9DqczG40Z95TFdLUSZtOIajRHWsyeCjw.webp",
+            ],
+            communityCount: 8,
+            isGoodsSiteExists: false,
+        },
+    ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    return (
+        <div>
+            <Header />
+
+            <div className="max-w-[1280px] m-[0_auto] py-[48px] flex flex-col gap-[24px]">
+                <span className="font-p-semibold text-[20px] text-stone-900">
+                    🔥 지금 인기있는 덕질
+                </span>
+
+                <div className="grid grid-cols-4 gap-[32px]">
+                    {fans.map((fan) => (
+                        <FanCard key={fan.name} data={fan} />
+                    ))}
+                </div>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }

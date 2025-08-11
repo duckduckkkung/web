@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+    font-family: "p-black";
+    src: url("/fonts/Paperlogy-9Black.ttf");
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+    font-family: "p-bold";
+    src: url("/fonts/Paperlogy-7Bold.ttf");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+    font-family: "p-extrabold";
+    src: url("/fonts/Paperlogy-8ExtraBold.ttf");
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+    font-family: "p-extralight";
+    src: url("/fonts/Paperlogy-2ExtraLight.ttf");
+}
+
+@font-face {
+    font-family: "p-light";
+    src: url("/fonts/Paperlogy-3Light.ttf");
+}
+
+@font-face {
+    font-family: "p-medium";
+    src: url("/fonts/Paperlogy-5Medium.ttf");
+}
+
+@font-face {
+    font-family: "p-regular";
+    src: url("/fonts/Paperlogy-4Regular.ttf");
+}
+
+@font-face {
+    font-family: "p-semibold";
+    src: url("/fonts/Paperlogy-6SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "p-thin";
+    src: url("/fonts/Paperlogy-1Thin.ttf");
+}
+
+@theme {
+    --color-c-primary: #9d6c52;
+
+    --font-p-black: "p-black";
+    --font-p-bold: "p-bold";
+    --font-p-extrabold: "p-extrabold";
+    --font-p-extralight: "p-extralight";
+    --font-p-light: "p-light";
+    --font-p-medium: "p-medium";
+    --font-p-regular: "p-regular";
+    --font-p-semibold: "p-semibold";
+    --font-p-thin: "p-thin";
 }

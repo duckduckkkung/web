@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    images: {
+        domains: [
+            "encrypted-tbn0.gstatic.com",
+            "yt3.googleusercontent.com",
+            "i.namu.wiki",
+            "an2-img.amz.wtchn.net",
+            "www.wishbucket.io",
+            "mblogthumb-phinf.pstatic.net",
+        ],
+    },
 };
 
 export default nextConfig;
