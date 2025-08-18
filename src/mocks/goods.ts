@@ -1,4 +1,6 @@
-export const goods = [
+import { TypeGoods } from "@/shared/types/types";
+
+export const goods: TypeGoods[] = [
     {
         id: "1",
         name: "[KOLON X 이세페] 콜라보 티셔츠 (ISEGYE FESTIVAL 2025) WHITE",

@@ -1,4 +1,6 @@
-export const fans = [
+import { TypeFan } from "@/shared/types/types";
+
+export const fans: TypeFan[] = [
     {
         id: "1",
         name: "송하영",
@@ -9,6 +11,7 @@ export const fans = [
         ],
         communityCount: 7,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "2",
@@ -19,6 +22,7 @@ export const fans = [
         ],
         communityCount: 4,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "3",
@@ -29,6 +33,7 @@ export const fans = [
         ],
         communityCount: 5,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "4",
@@ -39,6 +44,7 @@ export const fans = [
         ],
         communityCount: 19,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "5",
@@ -49,6 +55,7 @@ export const fans = [
         ],
         communityCount: 24,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "6",
@@ -59,6 +66,7 @@ export const fans = [
         ],
         communityCount: 49,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "7",
@@ -70,6 +78,7 @@ export const fans = [
         ],
         communityCount: 18,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "8",
@@ -80,6 +89,7 @@ export const fans = [
         ],
         communityCount: 8,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "9",
@@ -90,6 +100,7 @@ export const fans = [
         ],
         communityCount: 156,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "10",
@@ -100,6 +111,7 @@ export const fans = [
         ],
         communityCount: 134,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "11",
@@ -110,6 +122,7 @@ export const fans = [
         ],
         communityCount: 112,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "12",
@@ -120,6 +133,7 @@ export const fans = [
         ],
         communityCount: 98,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "13",
@@ -130,6 +144,7 @@ export const fans = [
         ],
         communityCount: 187,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "14",
@@ -140,6 +155,7 @@ export const fans = [
         ],
         communityCount: 245,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "15",
@@ -150,6 +166,7 @@ export const fans = [
         ],
         communityCount: 203,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "16",
@@ -160,6 +177,7 @@ export const fans = [
         ],
         communityCount: 312,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "17",
@@ -170,6 +188,7 @@ export const fans = [
         ],
         communityCount: 189,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "18",
@@ -180,6 +199,7 @@ export const fans = [
         ],
         communityCount: 76,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "19",
@@ -190,6 +210,7 @@ export const fans = [
         ],
         communityCount: 167,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "20",
@@ -200,6 +221,7 @@ export const fans = [
         ],
         communityCount: 82,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "21",
@@ -210,6 +232,7 @@ export const fans = [
         ],
         communityCount: 45,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "22",
@@ -220,6 +243,7 @@ export const fans = [
         ],
         communityCount: 156,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "23",
@@ -230,6 +254,7 @@ export const fans = [
         ],
         communityCount: 94,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "24",
@@ -240,6 +265,7 @@ export const fans = [
         ],
         communityCount: 67,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "25",
@@ -250,6 +276,7 @@ export const fans = [
         ],
         communityCount: 123,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "26",
@@ -260,6 +287,7 @@ export const fans = [
         ],
         communityCount: 88,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "27",
@@ -270,6 +298,7 @@ export const fans = [
         ],
         communityCount: 145,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "28",
@@ -280,6 +309,7 @@ export const fans = [
         ],
         communityCount: 34,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "29",
@@ -290,6 +320,7 @@ export const fans = [
         ],
         communityCount: 234,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "30",
@@ -300,6 +331,7 @@ export const fans = [
         ],
         communityCount: 567,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "31",
@@ -310,6 +342,7 @@ export const fans = [
         ],
         communityCount: 298,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "32",
@@ -320,6 +353,7 @@ export const fans = [
         ],
         communityCount: 289,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "33",
@@ -330,6 +364,7 @@ export const fans = [
         ],
         communityCount: 187,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "34",
@@ -340,6 +375,7 @@ export const fans = [
         ],
         communityCount: 345,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "35",
@@ -350,6 +386,7 @@ export const fans = [
         ],
         communityCount: 412,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "36",
@@ -360,6 +397,7 @@ export const fans = [
         ],
         communityCount: 278,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "37",
@@ -370,6 +408,7 @@ export const fans = [
         ],
         communityCount: 23,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "38",
@@ -380,6 +419,7 @@ export const fans = [
         ],
         communityCount: 156,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "39",
@@ -390,6 +430,7 @@ export const fans = [
         ],
         communityCount: 67,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "40",
@@ -400,6 +441,7 @@ export const fans = [
         ],
         communityCount: 198,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "41",
@@ -410,6 +452,7 @@ export const fans = [
         ],
         communityCount: 89,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "42",
@@ -420,6 +463,7 @@ export const fans = [
         ],
         communityCount: 134,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "43",
@@ -430,6 +474,7 @@ export const fans = [
         ],
         communityCount: 78,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "44",
@@ -440,6 +485,7 @@ export const fans = [
         ],
         communityCount: 167,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "45",
@@ -450,6 +496,7 @@ export const fans = [
         ],
         communityCount: 12,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "46",
@@ -460,6 +507,7 @@ export const fans = [
         ],
         communityCount: 29,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "47",
@@ -470,6 +518,7 @@ export const fans = [
         ],
         communityCount: 45,
         isGoodsSiteExists: false,
+        tags: [],
     },
     {
         id: "48",
@@ -480,6 +529,7 @@ export const fans = [
         ],
         communityCount: 89,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "49",
@@ -490,6 +540,7 @@ export const fans = [
         ],
         communityCount: 123,
         isGoodsSiteExists: true,
+        tags: [],
     },
     {
         id: "50",
@@ -500,5 +551,6 @@ export const fans = [
         ],
         communityCount: 156,
         isGoodsSiteExists: false,
+        tags: [],
     },
 ];

@@ -1,4 +1,6 @@
-export const moments = [
+import { TypeMoment } from "@/shared/types/types";
+
+export const moments: TypeMoment[] = [
     {
         id: "1",
         title: "송하영 레전드 애교 발생",

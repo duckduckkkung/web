@@ -5,6 +5,7 @@ export interface TypeFan {
     imageUrl: string[];
     communityCount: number;
     isGoodsSiteExists: boolean;
+    tags: string[];
 }
 
 export interface TypeGoods {
