@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
             "an2-img.amz.wtchn.net",
             "www.wishbucket.io",
             "mblogthumb-phinf.pstatic.net",
+            "encrypted-tbn0.gstatic.com",
+            "parable-store.com",
         ],
     },
 };

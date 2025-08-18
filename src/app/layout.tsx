@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
     title: "덕덕쿵",
-    description: "덕질을 만들고, 굿즈를 사고, 대화하세요.",
+    description: "힘들고 지칠 때, 덕덕쿵이 있어요.",
 };
 
 export default function RootLayout({
