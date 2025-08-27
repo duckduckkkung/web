@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
             "mblogthumb-phinf.pstatic.net",
             "encrypted-tbn0.gstatic.com",
             "parable-store.com",
+            "biz.chosun.com",
         ],
     },
 };

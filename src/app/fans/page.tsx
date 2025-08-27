@@ -29,6 +29,15 @@ export default function Fans() {
         if (query?.trim?.()?.length > 0) setSearch(query);
     }, [searchParams]);
 
+    useEffect(() => {
+        const query = searchParams.get("tag") as string | string[];
+
+        if (typeof query === "string" && query?.trim?.()?.length > 0)
+            setFilters((prev) => ({ ...prev, selectedTags: [query] }));
+        else if (query?.length > 0)
+            setFilters((prev) => ({ ...prev, selectedTags: [...query] }));
+    }, [searchParams]);
+
     const [search, setSearch] = useState<string>("");
     const [filters, setFilters] = useState<FilterState>({
         selectedTags: [],

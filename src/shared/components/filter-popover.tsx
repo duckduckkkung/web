@@ -13,7 +13,7 @@ interface FilterPopoverProps {
     onFiltersChange: (filters: FilterState) => void;
 }
 
-const AVAILABLE_TAGS = ["태그하나", "태그둘", "태그셋", "태그넷", "태그다섯"];
+const AVAILABLE_TAGS = ["귀여움", "맏언니", "송하영", "개이뻐쪽쪽", "태그다섯"];
 
 export function FilterPopover({
     filters,
