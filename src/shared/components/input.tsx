@@ -18,6 +18,7 @@ interface InputProps {
     placeholder?: string;
     value: string;
     onChange: (value: string) => void;
+    onKeyUp?: (e: React.KeyboardEvent) => void;
 
     disabled?: boolean;
 }
@@ -29,6 +30,7 @@ export const Input = ({
     value,
     onChange,
     disabled,
+    onKeyUp,
 }: InputProps) => {
     return (
         <input
@@ -37,6 +39,7 @@ export const Input = ({
             placeholder={placeholder}
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            onKeyUp={onKeyUp}
             disabled={disabled}
         />
     );

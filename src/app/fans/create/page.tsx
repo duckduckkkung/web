@@ -24,8 +24,11 @@ export default function CreateFan() {
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+    const [tagName, setTagName] = useState<string>("");
+    const [tags, setTags] = useState<string[]>([]);
 
     const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [isDragOver, setIsDragOver] = useState<boolean>(false);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -33,21 +36,47 @@ export default function CreateFan() {
         if (nameParam) setName(nameParam);
     }, []);
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (!files) return;
-
+    const processFiles = (files: FileList) => {
         Array.from(files).forEach((file) => {
+            if (!file.type.startsWith('image/')) return;
+            
             const reader = new FileReader();
 
             reader.onload = (e) => {
                 const result = e.target?.result as string;
                 setUploadedImages((prev) => [...prev, result]);
-                event.target.value = "";
             };
 
             reader.readAsDataURL(file);
         });
+    };
+
+    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (!files) return;
+
+        processFiles(files);
+        event.target.value = "";
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragOver(false);
+        
+        const files = e.dataTransfer.files;
+        if (files) {
+            processFiles(files);
+        }
+    };
+
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragOver(true);
+    };
+
+    const handleDragLeave = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragOver(false);
     };
 
     const handleImageRemove = (index: number) => {
@@ -131,6 +160,68 @@ export default function CreateFan() {
                         </div>
                     )}
 
+                    {name.trim().length > 0 && (
+                        <div className="flex flex-col gap-[16px]">
+                            <span className="font-p-semibold text-[18px] text-stone-900">
+                                <span className="font-p-medium text-[18px] text-stone-400">
+                                    (최대 5개)
+                                </span>{" "}
+                                &lsquo;{name.trim()}&lsquo; 의 특징을 나열해
+                                주세요.
+                            </span>
+
+                            <div className="flex flex-col gap-[14px]">
+                                <Input
+                                    type="lg"
+                                    variants="underline"
+                                    value={tagName}
+                                    onChange={(e) => {
+                                        if (e.length > 20) return;
+                                        setTagName(e);
+                                    }}
+                                    onKeyUp={(e) => {
+                                        if (e.key === "Enter") {
+                                            if (tags.length > 4) return;
+
+                                            setTags((prev) => [
+                                                ...prev,
+                                                tagName.trim(),
+                                            ]);
+                                            setTagName("");
+                                        }
+                                    }}
+                                    placeholder="태그 입력하기"
+                                    disabled={isCreating}
+                                />
+
+                                <div className="flex flex-wrap gap-[6px]">
+                                    {tags.map((tag, index) => (
+                                        <div
+                                            key={tag}
+                                            className="p-[4px_8px] rounded-[4px] cursor-pointer flex items-center gap-[4px] bg-white border border-stone-200 hover:bg-stone-50"
+                                            onClick={() => {
+                                                setTags((prev) =>
+                                                    prev.filter(
+                                                        (_, i) => i !== index
+                                                    )
+                                                );
+                                            }}
+                                        >
+                                            <span className="font-p-regular text-[12px] text-stone-600">
+                                                {tag}
+                                            </span>
+
+                                            <XIcon
+                                                size={12}
+                                                className="stroke-stone-600"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     {name.trim().length > 0 &&
                         description.trim().length > 0 && (
                             <div className="flex flex-col gap-[16px]">
@@ -178,11 +269,18 @@ export default function CreateFan() {
 
                                     <div className="grid grid-cols-8 gap-[14px]">
                                         <div
-                                            className="aspect-square rounded-[8px] overflow-hidden border border-dashed border-stone-300 flex justify-center items-center cursor-pointer hover:border-stone-400 transition-colors"
+                                            className={`aspect-square rounded-[8px] overflow-hidden border border-dashed flex justify-center items-center cursor-pointer transition-colors ${
+                                                isDragOver
+                                                    ? 'border-stone-500 bg-stone-50'
+                                                    : 'border-stone-300 hover:border-stone-400'
+                                            }`}
                                             onClick={() => {
                                                 if (isCreating) return;
                                                 fileInputRef.current?.click();
                                             }}
+                                            onDrop={handleDrop}
+                                            onDragOver={handleDragOver}
+                                            onDragLeave={handleDragLeave}
                                         >
                                             <ArrowUpToLineIcon
                                                 size={24}

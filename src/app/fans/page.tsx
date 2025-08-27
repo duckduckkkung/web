@@ -76,7 +76,7 @@ export default function Fans() {
         <div>
             <Header />
 
-            <div className="max-w-[1280px] m-[0_auto] pt-[96px] flex flex-col gap-[24px]">
+            <div className="max-w-[1280px] m-[0_auto] py-[96px] flex flex-col gap-[24px]">
                 <div className="flex flex-col gap-[8px]">
                     <LongerTag
                         icon={
