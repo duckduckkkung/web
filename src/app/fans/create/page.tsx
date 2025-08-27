@@ -38,13 +38,17 @@ export default function CreateFan() {
 
     const processFiles = (files: FileList) => {
         Array.from(files).forEach((file) => {
-            if (!file.type.startsWith('image/')) return;
-            
+            if (!file.type.startsWith("image/")) return;
+            if (uploadedImages.length >= 4) return;
+
             const reader = new FileReader();
 
             reader.onload = (e) => {
                 const result = e.target?.result as string;
-                setUploadedImages((prev) => [...prev, result]);
+                setUploadedImages((prev) => {
+                    if (prev.length >= 4) return prev;
+                    return [...prev, result];
+                });
             };
 
             reader.readAsDataURL(file);
@@ -62,7 +66,7 @@ export default function CreateFan() {
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
         setIsDragOver(false);
-        
+
         const files = e.dataTransfer.files;
         if (files) {
             processFiles(files);
@@ -226,6 +230,9 @@ export default function CreateFan() {
                         description.trim().length > 0 && (
                             <div className="flex flex-col gap-[16px]">
                                 <span className="font-p-semibold text-[18px] text-stone-900">
+                                    <span className="font-p-medium text-[18px] text-stone-400">
+                                        (최대 4장)
+                                    </span>{" "}
                                     &lsquo;{name.trim()}&lsquo;{" "}
                                     {josa(name.trim(), "을/를").substring(
                                         name.trim().length
@@ -271,8 +278,8 @@ export default function CreateFan() {
                                         <div
                                             className={`aspect-square rounded-[8px] overflow-hidden border border-dashed flex justify-center items-center cursor-pointer transition-colors ${
                                                 isDragOver
-                                                    ? 'border-stone-500 bg-stone-50'
-                                                    : 'border-stone-300 hover:border-stone-400'
+                                                    ? "border-stone-500 bg-stone-50"
+                                                    : "border-stone-300 hover:border-stone-400"
                                             }`}
                                             onClick={() => {
                                                 if (isCreating) return;

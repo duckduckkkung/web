@@ -12,7 +12,7 @@ export default function Fan() {
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk1q1Fk5medS__SP2mw9fwJLICbzwo5_UpsA&s",
         ],
         isGoodsSiteExists: false,
-        tags: [],
+        tags: ["귀여움", "맏언니", "송하영", "개이뻐쪽쪽"],
     };
 
     return (
