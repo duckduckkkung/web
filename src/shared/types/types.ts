@@ -3,7 +3,6 @@ export interface TypeFan {
     name: string;
     description: string;
     imageUrl: string[];
-    communityCount: number;
     isGoodsSiteExists: boolean;
     tags: string[];
 }

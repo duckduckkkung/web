@@ -1,5 +1,5 @@
 export enum ButtonTypes {
-    default = "cursor-pointer outline-none font-p-medium flex items-center transition-all duration-[.1s]",
+    default = "cursor-pointer outline-none font-p-medium flex justify-center items-center transition-all duration-[.1s]",
 
     sm = `${ButtonTypes.default} p-[4px_16px] rounded-[6px] text-[12px] gap-[4px]`,
     md = `${ButtonTypes.default} p-[6px_18px] rounded-[6px] text-[14px] gap-[6px]`,
@@ -24,6 +24,8 @@ interface ButtonProps {
     children?: React.ReactNode;
 
     onClick?: () => void;
+
+    disabled?: boolean;
 }
 
 export const Button = ({
@@ -32,11 +34,13 @@ export const Button = ({
     icons,
     children,
     onClick,
+    disabled,
 }: ButtonProps) => {
     return (
         <button
             className={`${ButtonTypes[type]} ${ButtonVariants[variants]}`}
             onClick={onClick}
+            disabled={disabled}
         >
             {icons
                 ?.filter((icon) => icon.float === "left")

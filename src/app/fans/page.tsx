@@ -6,8 +6,8 @@ import {
     SearchIcon,
     SlidersHorizontalIcon,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useMemo, useEffect } from "react";
 
 import { FilterPopover, FilterState } from "@/shared/components/filter-popover";
 import { IconButton } from "@/shared/components/icon-button";
@@ -15,12 +15,19 @@ import { LongerTag } from "@/shared/components/longer-tag";
 import { FanCard } from "@/shared/components/fan-card";
 import { Popover } from "@/shared/components/popover";
 import { Header } from "@/shared/components/header";
+import { Footer } from "@/shared/components/footer";
 import { Input } from "@/shared/components/input";
 
 import { fans } from "@/mocks/fans";
 
 export default function Fans() {
+    const searchParams = useSearchParams();
     const router = useRouter();
+
+    useEffect(() => {
+        const query = searchParams.get("q") as string;
+        if (query?.trim?.()?.length > 0) setSearch(query);
+    }, [searchParams]);
 
     const [search, setSearch] = useState<string>("");
     const [filters, setFilters] = useState<FilterState>({
@@ -193,7 +200,14 @@ export default function Fans() {
 
                                 <span className="font-p-regular text-[14px] text-stone-500">
                                     찾으시는 덕질이 없나요?{" "}
-                                    <u className="text-stone-900 cursor-pointer">
+                                    <u
+                                        className="text-stone-900 cursor-pointer"
+                                        onClick={() =>
+                                            router.push(
+                                                `/fans/create?name=${search}`
+                                            )
+                                        }
+                                    >
                                         등록하러 가기
                                     </u>
                                 </span>
@@ -202,6 +216,8 @@ export default function Fans() {
                     </div>
                 </div>
             </div>
+
+            <Footer />
         </div>
     );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { XIcon } from "lucide-react";
 import { useRef } from "react";
 
@@ -10,6 +11,7 @@ export interface WideSearchProps {
 
 export const WideSearch = ({ value, onChange }: WideSearchProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
+    const router = useRouter();
 
     return (
         <div className="flex items-center gap-[8px]">
@@ -18,7 +20,12 @@ export const WideSearch = ({ value, onChange }: WideSearchProps) => {
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 className="w-[340px] p-[4px_8px] outline-none font-p-medium text-[18px] text-stone-900 placeholder:text-stone-300"
-                placeholder="덕질 · 커뮤니티 · 글 검색"
+                placeholder="덕질 검색"
+                onKeyUp={(e) => {
+                    if (e.key === "Enter") {
+                        router.push(`/fans?q=${value}`);
+                    }
+                }}
             />
 
             {value ? (

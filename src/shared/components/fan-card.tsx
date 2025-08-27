@@ -1,7 +1,7 @@
 "use client";
 
-import { SmileIcon, WarehouseIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { SmileIcon } from "lucide-react";
 import Image from "next/image";
 
 import { TypeFan } from "../types/types";
@@ -17,7 +17,7 @@ export const FanCard = ({ variants = "full", data }: FanCardProps) => {
     return (
         <div
             className="relative aspect-square rounded-[8px] overflow-hidden cursor-pointer group"
-            onClick={() => router.push(`/fans/${data.id}`)}
+            onClick={() => router.push(`/fans/${data.name}`)}
         >
             <Image
                 src={data.imageUrl[0]}
@@ -43,17 +43,6 @@ export const FanCard = ({ variants = "full", data }: FanCardProps) => {
                         </div>
 
                         <div className="flex justify-end items-center gap-[16px]">
-                            <div className="flex items-center gap-[4px]">
-                                <WarehouseIcon
-                                    size={16}
-                                    className="shrink-0 fill-white"
-                                />
-
-                                <span className="w-full font-p-regular text-[14px] text-white truncate">
-                                    {data.communityCount}
-                                </span>
-                            </div>
-
                             <div className="flex items-center gap-[4px]">
                                 <SmileIcon
                                     size={16}

@@ -9,7 +9,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk1q1Fk5medS__SP2mw9fwJLICbzwo5_UpsA&s",
         ],
-        communityCount: 7,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -20,7 +19,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://yt3.googleusercontent.com/ZqC92CDGtM19mufhDBXEUixTQ0wkzjONrhZqVJBfLiRYEaRhXfilzJX8w7Sn6K9yU8g5iETX=s900-c-k-c0x00ffffff-no-rj",
         ],
-        communityCount: 4,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -31,7 +29,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://i.namu.wiki/i/YiPDD_HksgrHwFI4iQSQ_ASpLO0RF2uat67-N3yelFBFqKyAp7kfPmF0xa-3o3_Vkx0lwpTYvsMhBAGbnhJP_A.webp",
         ],
-        communityCount: 5,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -42,7 +39,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://i.namu.wiki/i/BsXbPLjSFVBupEyhtSBPQM2aZZ9dfnXUtgDAHwrsbAcL4U4e2S8a48wz9bz4RnOg5-M2R06zOcQpf57HxvmE4g.webp",
         ],
-        communityCount: 19,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -53,7 +49,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://an2-img.amz.wtchn.net/image/v2/164OpIZTbqcYBKolTKXHbQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmFXMWhaMlV2TVRZeE5UZzNOamd4TmpNeU5qRXpORFE0T1NKOS5uRERMQV9XN2VRd3NHd2lBT0o1NnY2M3UxeTduR1FKeS1iY1JVVTlIZVJ3",
         ],
-        communityCount: 24,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -64,7 +59,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fshop-phinf.pstatic.net%2F20230805_93%2F1691163745442HIYcl_JPEG%2F2798572255786923_162918491.jpg&w=1080&q=75",
         ],
-        communityCount: 49,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -76,7 +70,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://mblogthumb-phinf.pstatic.net/MjAyMjAzMjlfMTAg/MDAxNjQ4NTU1MjIxMTM3.Wb1JRp43shYEi1X_0Q5B5mxqdnST9ov3mM_-0hBXxbYg.VENxCbTLjpz8roiXMgOFQ7mfO9fjbp_1Jk5o7_-pLfMg.JPEG.lara46/6ec33251fd64ffcf369d95fa10ddaed4dc4dc06e.jpg?type=w800",
         ],
-        communityCount: 18,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -87,7 +80,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://i.namu.wiki/i/En-boea9D8WfC0F7pRYgcvZG1Pz5QRjlbKlzs4vdLHl3od6o81PrjJ9DqczG40Z95TFdLUSZtOIajRHWsyeCjw.webp",
         ],
-        communityCount: 8,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -98,7 +90,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 156,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -109,7 +100,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 134,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -120,7 +110,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 112,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -131,7 +120,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 98,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -142,7 +130,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 187,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -153,7 +140,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 245,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -164,7 +150,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 203,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -175,7 +160,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 312,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -186,7 +170,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 189,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -197,7 +180,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 76,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -208,7 +190,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 167,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -219,7 +200,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 82,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -230,7 +210,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 45,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -241,7 +220,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 156,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -252,7 +230,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 94,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -263,7 +240,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 67,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -274,7 +250,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 123,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -285,7 +260,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 88,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -296,7 +270,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 145,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -307,7 +280,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 34,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -318,7 +290,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 234,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -329,7 +300,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 567,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -340,7 +310,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 298,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -351,7 +320,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 289,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -362,7 +330,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 187,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -373,7 +340,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 345,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -384,7 +350,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 412,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -395,7 +360,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 278,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -406,7 +370,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 23,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -417,7 +380,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 156,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -428,7 +390,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 67,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -439,7 +400,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 198,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -450,7 +410,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 89,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -461,7 +420,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 134,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -472,7 +430,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 78,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -483,7 +440,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 167,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -494,7 +450,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 12,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -505,7 +460,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 29,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -516,7 +470,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 45,
         isGoodsSiteExists: false,
         tags: [],
     },
@@ -527,7 +480,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 89,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -538,7 +490,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 123,
         isGoodsSiteExists: true,
         tags: [],
     },
@@ -549,7 +500,6 @@ export const fans: TypeFan[] = [
         imageUrl: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPelunvobTdrAM_XNl7ME6ThiVkk0yhSHyQ&s",
         ],
-        communityCount: 156,
         isGoodsSiteExists: false,
         tags: [],
     },
