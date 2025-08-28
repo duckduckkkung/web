@@ -4,12 +4,12 @@ import { ArrowUpRightIcon, BadgeCheckIcon, SparkleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import { LandingHeader } from "@/shared/components/landing-header";
 import { MomentCard } from "@/shared/components/moment-card";
 import { LongerTag } from "@/shared/components/longer-tag";
 import { GoodsCard } from "@/shared/components/goods-card";
 import { FanCard } from "@/shared/components/fan-card";
 import { Button } from "@/shared/components/button";
+import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
 
 import CircularText from "@/assets/icons/circular-text.png";
@@ -23,7 +23,7 @@ export default function Home() {
 
     return (
         <div>
-            <LandingHeader />
+            <Header />
 
             <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
                 <div className="relative w-[350px] translate-y-[100px]">

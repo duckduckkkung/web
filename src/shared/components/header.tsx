@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { LogInIcon } from "lucide-react";
+import { SparkleIcon } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 
 import { WideSearch } from "./wide-search";
+import { Button } from "./button";
 
 import Logo from "@/assets/icons/logo.png";
 
@@ -29,10 +30,25 @@ export const Header = () => {
                 <WideSearch value={search} onChange={setSearch} />
             </div>
 
-            <LogInIcon
-                size={24}
-                className="shrink-0 cursor-pointer stroke-stone-900"
-            />
+            <Button
+                type="sm"
+                variants="outline"
+                icons={[
+                    {
+                        component: (
+                            <SparkleIcon
+                                key="start"
+                                size={12}
+                                className="stroke-stone-900"
+                            />
+                        ),
+                        float: "left",
+                    },
+                ]}
+                onClick={() => router.push("/register")}
+            >
+                시작하기
+            </Button>
         </div>
     );
 };
