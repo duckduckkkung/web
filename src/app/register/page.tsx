@@ -1,13 +1,24 @@
 "use client";
 
-import { UploadIcon, PencilIcon, CheckIcon } from "lucide-react";
+import {
+    UploadIcon,
+    PencilIcon,
+    CheckIcon,
+    ArrowRightIcon,
+    ArrowUpRightIcon,
+    LoaderCircleIcon,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 
+import { FanCard } from "@/shared/components/fan-card";
 import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
 import { Button } from "@/shared/components/button";
 import { Input } from "@/shared/components/input";
+
+import { fans } from "@/mocks/fans";
 
 export default function Register() {
     const router = useRouter();
@@ -20,6 +31,11 @@ export default function Register() {
 
     const [profileImage, setProfileImage] = useState<string>("");
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const [currentCard, setCurrentCard] = useState<number>(0);
+    const [direction, setDirection] = useState<number>(0);
+
+    const [isCreating, setIsCreating] = useState<boolean>(false);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -51,20 +67,68 @@ export default function Register() {
         }
     };
 
-    return (
-        <div>
-            <Header />
+    const slideVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? "10%" : "-10%",
+            opacity: 0,
+        }),
+        center: {
+            x: 0,
+            opacity: 1,
+        },
+        exit: (direction: number) => ({
+            x: direction > 0 ? "-10%" : "10%",
+            opacity: 0,
+        }),
+    };
 
-            <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
-                <div className="flex flex-col items-center gap-[24px]">
-                    <div className="relative size-[140px] rounded-[8px] bg-stone-100 overflow-hidden">
+    const handleCardChange = (newCard: number) => {
+        const newDirection = newCard > currentCard ? 1 : -1;
+        setDirection(newDirection);
+        setCurrentCard(newCard);
+    };
+
+    const cards = [
+        {
+            step: 1,
+            title: (
+                <>
+                    덕덕쿵에 방문해 주셔서
+                    <br />
+                    감사합니다.
+                </>
+            ),
+            subtitle: (
+                <>
+                    가입을 완료하기 전에,
+                    <br />
+                    필요한 정보들을 입력해 주세요.
+                </>
+            ),
+            content: null,
+        },
+        {
+            step: 2,
+            title: (
+                <>
+                    필요한 정보들을
+                    <br />
+                    입력해 주세요.
+                </>
+            ),
+            subtitle: null,
+            content: (
+                <div className="flex items-center gap-[36px]">
+                    <div className="relative size-[140px] rounded-[8px] bg-stone-100">
                         {profileImage && (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                                src={profileImage}
-                                alt="Profile"
-                                className="w-full h-full object-cover"
-                            />
+                            <div className="size-full rounded-[8px] overflow-hidden">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src={profileImage}
+                                    alt="Profile"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
                         )}
 
                         <div
@@ -86,11 +150,11 @@ export default function Register() {
                         />
                     </div>
 
-                    <div className="flex flex-col items-center gap-[8px]">
+                    <div className="flex flex-col items-start gap-[8px]">
                         <div className="w-fit relative flex justify-center items-center gap-[6px]">
                             {isNameEditing ? (
                                 <>
-                                    <div className="w-[60px]">
+                                    <div className="w-[80px]">
                                         <Input
                                             type="md"
                                             variants="underline"
@@ -173,26 +237,177 @@ export default function Register() {
                             )}
                         </div>
                     </div>
+                </div>
+            ),
+        },
+        {
+            step: 3,
+            title: (
+                <>
+                    최애 덕질을
+                    <br />
+                    마음껏 즐겨주세요.
+                </>
+            ),
+            subtitle: null,
+            content: (
+                <div className="grid grid-cols-3 gap-[32px]">
+                    {fans.slice(0, 3).map((fan) => (
+                        <FanCard
+                            key={fan.id}
+                            variants="onlyname"
+                            data={fan}
+                            onClick={() => {}}
+                            className="!cursor-default"
+                        />
+                    ))}
+                </div>
+            ),
+        },
+    ];
 
-                    <Button
-                        type="md"
-                        variants="outline"
-                        icons={[
-                            {
-                                component: (
-                                    <CheckIcon
-                                        size={14}
-                                        className="stroke-stone-900"
+    return (
+        <div>
+            <Header />
+
+            <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center gap-[48px]">
+                <div className="w-[600px] h-[500px] p-[48px] bg-white border border-stone-400 rounded-[16px]">
+                    <div className="size-full flex flex-col justify-between">
+                        <div className="flex flex-col gap-[32px]">
+                            <div className="w-[160px] grid grid-cols-3 gap-[8px]">
+                                {[1, 2, 3].map((step) => (
+                                    <div
+                                        key={step}
+                                        className={`w-full h-[4px] rounded-[8px] transition-colors duration-300 cursor-pointer ${
+                                            cards[currentCard]?.step === step
+                                                ? "bg-stone-900"
+                                                : "bg-stone-200"
+                                        }`}
+                                        onClick={() => {
+                                            if (isCreating) return;
+                                            setCurrentCard(step - 1);
+                                        }}
                                     />
-                                ),
-                                float: "left",
-                            },
-                        ]}
-                        onClick={() => router.push("/fans")}
-                        disabled={isNameEditing || isBioEditing}
-                    >
-                        가입하기
-                    </Button>
+                                ))}
+                            </div>
+
+                            <div className="h-[300px] relative overflow-hidden">
+                                <AnimatePresence mode="wait" custom={direction}>
+                                    <motion.div
+                                        key={currentCard}
+                                        custom={direction}
+                                        variants={slideVariants}
+                                        initial="enter"
+                                        animate="center"
+                                        exit="exit"
+                                        transition={{
+                                            type: "tween",
+                                            duration: 0.15,
+                                            ease: "easeInOut",
+                                        }}
+                                        className="absolute w-full"
+                                    >
+                                        <div
+                                            className={`flex flex-col ${
+                                                cards[currentCard]?.step === 1
+                                                    ? "gap-[16px]"
+                                                    : "gap-[36px]"
+                                            }`}
+                                        >
+                                            <span
+                                                className={`font-p-semibold text-stone-900 leading-tight ${
+                                                    cards[currentCard]?.step ===
+                                                    1
+                                                        ? "text-[36px] leading-[44px]"
+                                                        : "text-[24px] leading-[32px]"
+                                                }`}
+                                            >
+                                                {cards[currentCard]?.title}
+                                            </span>
+
+                                            {cards[currentCard]?.subtitle && (
+                                                <span className="font-p-regular text-[18px] text-stone-500">
+                                                    {
+                                                        cards[currentCard]
+                                                            .subtitle
+                                                    }
+                                                </span>
+                                            )}
+
+                                            {cards[currentCard]?.content}
+                                        </div>
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-end">
+                            <AnimatePresence mode="wait" custom={direction}>
+                                <motion.div
+                                    key={currentCard}
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{
+                                        type: "tween",
+                                        duration: 0.15,
+                                        ease: "easeInOut",
+                                    }}
+                                >
+                                    {currentCard === 2 ? (
+                                        <Button
+                                            type="lg"
+                                            variants="outline"
+                                            icons={[
+                                                {
+                                                    component: isCreating ? (
+                                                        <LoaderCircleIcon
+                                                            size={16}
+                                                            className="stroke-stone-900 animate-spin"
+                                                        />
+                                                    ) : (
+                                                        <ArrowUpRightIcon
+                                                            size={16}
+                                                            className="stroke-stone-900"
+                                                        />
+                                                    ),
+                                                    float: "left",
+                                                },
+                                            ]}
+                                            onClick={async () => {
+                                                if (isCreating) return;
+
+                                                setIsCreating(true);
+                                                await new Promise((res) =>
+                                                    setTimeout(res, 1000)
+                                                );
+                                                router.push("/fans");
+                                            }}
+                                        >
+                                            덕질 시작하기
+                                        </Button>
+                                    ) : (
+                                        <ArrowRightIcon
+                                            size={24}
+                                            className="stroke-stone-900 cursor-pointer"
+                                            onClick={() => {
+                                                if (
+                                                    currentCard <
+                                                    cards.length - 1
+                                                ) {
+                                                    handleCardChange(
+                                                        currentCard + 1
+                                                    );
+                                                }
+                                            }}
+                                        />
+                                    )}
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    </div>
                 </div>
             </div>
 

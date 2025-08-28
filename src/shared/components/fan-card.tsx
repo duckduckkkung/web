@@ -9,15 +9,28 @@ import { TypeFan } from "../types/types";
 export interface FanCardProps {
     variants?: "full" | "onlyname";
     data: TypeFan;
+
+    onClick?: (e: TypeFan) => void;
+
+    className?: string;
 }
 
-export const FanCard = ({ variants = "full", data }: FanCardProps) => {
+export const FanCard = ({
+    variants = "full",
+    data,
+    onClick,
+    className = "",
+}: FanCardProps) => {
     const router = useRouter();
 
     return (
         <div
-            className="relative aspect-square rounded-[8px] overflow-hidden cursor-pointer group"
-            onClick={() => router.push(`/fans/${data.name}`)}
+            className={`relative aspect-square rounded-[8px] overflow-hidden cursor-pointer group ${className}`}
+            onClick={
+                onClick
+                    ? () => onClick(data)
+                    : () => router.push(`/fans/${data.name}`)
+            }
         >
             <Image
                 src={data.imageUrl[0]}
