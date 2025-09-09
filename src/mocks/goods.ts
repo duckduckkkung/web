@@ -8,6 +8,7 @@ export const goods: TypeGoods[] = [
         imageUrl:
             "https://parable-store.com/web/product/small/202506/7beddf16b3da9f4d2f91e091434d49b4.jpg",
         price: 49900,
+        fanName: "송하영",
     },
     {
         id: "2",
@@ -16,6 +17,7 @@ export const goods: TypeGoods[] = [
         imageUrl:
             "https://parable-store.com/web/product/small/202506/029db4ae50e11f375b2cc2d307eff9a5.jpg",
         price: 49900,
+        fanName: "송하영",
     },
     {
         id: "3",
@@ -24,6 +26,7 @@ export const goods: TypeGoods[] = [
         imageUrl:
             "https://parable-store.com/web/product/small/202505/2bef0f15decdb011fd2c5e3797809ec3.png",
         price: 42000,
+        fanName: "송하영",
     },
     {
         id: "4",
@@ -32,5 +35,6 @@ export const goods: TypeGoods[] = [
         imageUrl:
             "https://parable-store.com/web/product/small/202508/a5fb832f4da512a7757d87166fc7a485.jpg",
         price: 4900,
+        fanName: "송하영",
     },
 ];

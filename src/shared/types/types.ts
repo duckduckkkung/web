@@ -13,6 +13,7 @@ export interface TypeGoods {
     description: string;
     imageUrl: string;
     price: number;
+    fanName: string;
 }
 
 export interface TypeMoment {

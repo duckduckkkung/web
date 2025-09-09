@@ -14,7 +14,7 @@ export const GoodsCard = ({ data }: GoodsCardProps) => {
     return (
         <div
             className="aspect-3/1 rounded-[8px] overflow-hidden cursor-pointer flex group"
-            onClick={() => router.push(`/fans/${data.name}?tabs=goods`)}
+            onClick={() => router.push(`/fans/${data.fanName}?tabs=goods`)}
         >
             <div className="aspect-square shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

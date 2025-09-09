@@ -2,6 +2,7 @@
 
 import {
     ArrowUpRightIcon,
+    PlusIcon,
     RefreshCcwIcon,
     SearchIcon,
     SlidersHorizontalIcon,
@@ -105,6 +106,18 @@ export default function Fans() {
 
                 <div className="flex flex-col gap-[64px]">
                     <div className="flex items-center gap-[8px]">
+                        <IconButton
+                            type="md"
+                            variants="outline"
+                            icon={
+                                <PlusIcon
+                                    size={15}
+                                    className="stroke-stone-900"
+                                />
+                            }
+                            onClick={() => router.push("/fans/create")}
+                        />
+
                         <Popover
                             overlay={
                                 <FilterPopover
