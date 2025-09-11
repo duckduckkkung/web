@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
             "www.wishbucket.io",
             "mblogthumb-phinf.pstatic.net",
             "encrypted-tbn0.gstatic.com",
-            "parable-store.com",
+            "media.bunjang.co.kr",
             "biz.chosun.com",
         ],
     },

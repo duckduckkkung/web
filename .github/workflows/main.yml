@@ -1,0 +1,30 @@
+name: Deploy Dev Branch to Local Server
+on:
+    push:
+        branches:
+            - dev
+    workflow_dispatch:
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Setup SSH Key
+              uses: webfactory/ssh-agent@v0.7.0
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+            - name: Deploy to Server
+              env:
+                  SERVER_USER: ${{ secrets.SSH_USER_NAME }}
+                  SERVER_HOST: ${{ secrets.SSH_HOST }}
+                  APP_DIR: ${{ secrets.APP_DIR }}
+              run: |
+                  ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
+                    cd $APP_DIR &&
+                    git checkout dev &&
+                    git pull origin dev &&
+                    npm install &&
+                    npm run build &&
+                    pm2 restart app || npm start
+                  "

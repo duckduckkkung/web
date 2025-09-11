@@ -62,7 +62,7 @@ export default function Home() {
                                     float: "left",
                                 },
                             ]}
-                            onClick={() => router.push("/auth/login")}
+                            onClick={() => router.push("/register")}
                         >
                             시작하기
                         </Button>
