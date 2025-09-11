@@ -21,8 +21,8 @@ export const Header = () => {
                 <Image
                     src={Logo}
                     alt="logo"
-                    width={48}
-                    height={48}
+                    width={36}
+                    height={36}
                     className="cursor-pointer"
                     onClick={() => router.push("/")}
                 />
