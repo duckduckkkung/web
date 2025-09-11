@@ -1,6 +1,6 @@
 "use client";
 
-import { SparkleIcon, VideotapeIcon } from "lucide-react";
+import { ArrowLeftIcon, SparkleIcon, VideotapeIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -21,15 +21,24 @@ export const FanHeader = ({ fan }: FanHeaderProps) => {
     return (
         <div className="max-w-[1280px] h-[80px] m-[0_auto] flex justify-between items-center">
             <div className="flex items-center gap-[16px]">
-                <div
-                    className="p-[6px_12px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
-                    onClick={() => router.push("/fans")}
-                >
-                    <VideotapeIcon size={16} className="stroke-stone-900" />
+                <div className="flex items-center gap-[4px]">
+                    <div
+                        className="p-[8px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
+                        onClick={() => router.push("/fans")}
+                    >
+                        <ArrowLeftIcon size={16} className="stroke-stone-900" />
+                    </div>
 
-                    <span className="font-p-semibold text-[18px] text-stone-900">
-                        {fan.name}
-                    </span>
+                    <div
+                        className="p-[6px_12px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
+                        onClick={() => router.push(`/fans/${fan.name}`)}
+                    >
+                        <VideotapeIcon size={16} className="stroke-stone-900" />
+
+                        <span className="font-p-semibold text-[18px] text-stone-900">
+                            {fan.name}
+                        </span>
+                    </div>
                 </div>
 
                 <WideSearch value={search} onChange={setSearch} />
