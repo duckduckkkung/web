@@ -16,7 +16,6 @@ import { FanCard } from "@/shared/components/fan-card";
 import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
 import { Button } from "@/shared/components/button";
-import { Input } from "@/shared/components/input";
 
 import { fans } from "@/mocks/fans";
 
@@ -154,14 +153,14 @@ export default function Register() {
                         <div className="w-fit relative flex justify-center items-center gap-[6px]">
                             {isNameEditing ? (
                                 <>
-                                    <div className="w-[80px]">
-                                        <Input
-                                            type="md"
-                                            variants="underline"
+                                    <div className="w-[120px]">
+                                        <input
+                                            className="border-b border-b-stone-900 outline-none w-full font-p-semibold text-[20px] text-stone-900"
                                             value={name}
                                             onChange={(e) => {
-                                                if (e.length > 16) return;
-                                                setName(e);
+                                                const text = e.target.value;
+                                                if (text.length > 16) return;
+                                                setName(text);
                                             }}
                                             onKeyUp={(e) =>
                                                 handleKeyPress(
@@ -198,14 +197,14 @@ export default function Register() {
                         <div className="w-fit relative flex justify-center items-center gap-[6px]">
                             {isBioEditing ? (
                                 <>
-                                    <div className="w-[240px]">
-                                        <Input
-                                            type="md"
-                                            variants="underline"
+                                    <div className="w-[200px]">
+                                        <input
+                                            className="border-b border-b-stone-900 outline-none font-p-regular text-[16px] text-stone-800"
                                             value={bio}
                                             onChange={(e) => {
-                                                if (e.length > 40) return;
-                                                setBio(e);
+                                                const text = e.target.value;
+                                                if (text.length > 16) return;
+                                                setBio(text);
                                             }}
                                             onKeyUp={(e) =>
                                                 handleKeyPress(
@@ -271,7 +270,7 @@ export default function Register() {
             <Header />
 
             <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center gap-[48px]">
-                <div className="w-[600px] h-[500px] p-[48px] bg-white border border-stone-200 rounded-[16px]">
+                <div className="w-[600px] h-[500px] p-[48px] bg-white rounded-[16px]">
                     <div className="size-full flex flex-col justify-between">
                         <div className="flex flex-col gap-[32px]">
                             <div className="w-[160px] grid grid-cols-3 gap-[8px]">
@@ -318,7 +317,7 @@ export default function Register() {
                                                 className={`font-p-semibold text-stone-900 leading-tight ${
                                                     cards[currentCard]?.step ===
                                                     1
-                                                        ? "text-[36px] leading-[44px]"
+                                                        ? "text-[32px] leading-[40px]"
                                                         : "text-[24px] leading-[32px]"
                                                 }`}
                                             >
@@ -326,7 +325,7 @@ export default function Register() {
                                             </span>
 
                                             {cards[currentCard]?.subtitle && (
-                                                <span className="font-p-regular text-[18px] text-stone-500">
+                                                <span className="font-p-regular text-[18px] text-stone-900">
                                                     {
                                                         cards[currentCard]
                                                             .subtitle
