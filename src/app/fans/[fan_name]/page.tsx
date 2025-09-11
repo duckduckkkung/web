@@ -161,23 +161,21 @@ export default function Fan() {
                     </div>
 
                     <div className="flex flex-col gap-[24px]">
-                        {
-                            <div className="flex flex-wrap gap-[6px]">
-                                {fan.tags.map((tag) => (
-                                    <div
-                                        key={tag}
-                                        className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50"
-                                        onClick={() =>
-                                            router.push(`/fans?tag=${tag}`)
-                                        }
-                                    >
-                                        <span className="font-p-regular text-[12px] text-stone-600">
-                                            #{tag}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        }
+                        <div className="flex flex-wrap gap-[6px]">
+                            {fan.tags.map((tag) => (
+                                <div
+                                    key={tag}
+                                    className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50"
+                                    onClick={() =>
+                                        router.push(`/fans?tag=${tag}`)
+                                    }
+                                >
+                                    <span className="font-p-regular text-[12px] text-stone-600">
+                                        #{tag}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
 
                         <div className="flex flex-col gap-[8px]">
                             <span className="font-p-bold text-[24px] text-stone-900 break-all">
