@@ -4,6 +4,8 @@ import {
     ArrowUpRightIcon,
     BotMessageSquareIcon,
     HardDriveDownloadIcon,
+    LoaderCircleIcon,
+    PinIcon,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,6 +34,16 @@ export default function Fan() {
     const [dragStartX, setDragStartX] = useState<number>(0);
     const [dragOffset, setDragOffset] = useState<number>(0);
     const imageContainerRef = useRef<HTMLDivElement>(null);
+
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [isRegisterd, setIsRegisterd] = useState<boolean>(false);
+
+    const handleRegister = async () => {
+        setIsCreating(true);
+        await new Promise((res) => setTimeout(res, 3000));
+        setIsCreating(false);
+        setIsRegisterd(true);
+    };
 
     useEffect(() => {
         const query = searchParams.get("tabs") as string;
@@ -311,56 +323,154 @@ export default function Fan() {
                                     className="w-full"
                                 >
                                     {tab === "커뮤니티" && (
-                                        <div className="py-[24px] pr-[32px] grid grid-cols-3 gap-[16px]">
-                                            {Array(9)
-                                                .fill(0)
-                                                .map((_, i) => (
-                                                    <div
-                                                        key={i}
-                                                        className="border border-stone-200 rounded-[8px] flex flex-col cursor-pointer"
-                                                    >
-                                                        <div className="p-[12px_16px]">
-                                                            <div className="flex flex-col gap-[6px]">
-                                                                <span className="font-p-semibold text-[14px] text-stone-400">
-                                                                    공지사항
+                                        <div className="relative">
+                                            {!isRegisterd && (
+                                                <div className="z-[10] absolute top-0 left-0 w-full h-full cursor-default flex justify-center">
+                                                    <div className="w-full h-[600px] flex justify-center items-center bg-radial from-white/80 to-transparent from-30% to-100%">
+                                                        <div className="flex flex-col gap-[24px] items-center">
+                                                            <div className="flex flex-col gap-[4px] items-center">
+                                                                <span className="font-p-medium text-[16px] text-stone-900">
+                                                                    커뮤니티를
+                                                                    보려면
+                                                                    가입이
+                                                                    필요해요!
                                                                 </span>
 
-                                                                <div className="flex flex-col gap-[2px]">
-                                                                    <span className="font-p-medium text-[16px] text-stone-900">
-                                                                        [필독]
-                                                                        2025
-                                                                        커뮤니티
-                                                                        규칙
+                                                                <span className="font-p-regular text-[14px] text-stone-900">
+                                                                    아래 버튼을
+                                                                    눌러 가입해
+                                                                    주세요.
+                                                                </span>
+                                                            </div>
+
+                                                            <Button
+                                                                type="md"
+                                                                variants="black"
+                                                                icons={[
+                                                                    {
+                                                                        component:
+                                                                            isCreating ? (
+                                                                                <LoaderCircleIcon
+                                                                                    size={
+                                                                                        14
+                                                                                    }
+                                                                                    className="stroke-white animate-spin"
+                                                                                />
+                                                                            ) : (
+                                                                                <ArrowUpRightIcon
+                                                                                    size={
+                                                                                        16
+                                                                                    }
+                                                                                    className="stroke-white"
+                                                                                />
+                                                                            ),
+                                                                        float: "left",
+                                                                    },
+                                                                ]}
+                                                                onClick={() => {
+                                                                    if (
+                                                                        isCreating
+                                                                    )
+                                                                        return;
+                                                                    handleRegister();
+                                                                }}
+                                                                disabled={
+                                                                    isCreating
+                                                                }
+                                                            >
+                                                                덕질 가입하기
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div
+                                                className={`py-[24px] pr-[32px] grid grid-cols-3 gap-[16px] transition-all duration-[.2s] ${
+                                                    isRegisterd
+                                                        ? ""
+                                                        : "blur-[12px]"
+                                                }`}
+                                            >
+                                                {Array(24)
+                                                    .fill(0)
+                                                    .map((_, i) => (
+                                                        <div
+                                                            key={i}
+                                                            className="border border-stone-200 rounded-[8px] flex flex-col cursor-pointer"
+                                                            onClick={() =>
+                                                                router.push(
+                                                                    `/fans/${fan.name}/board/${i}`
+                                                                )
+                                                            }
+                                                        >
+                                                            <div className="p-[12px_16px]">
+                                                                <div className="flex flex-col gap-[6px]">
+                                                                    <div className="flex justify-between items-center">
+                                                                        {i %
+                                                                            2 ===
+                                                                        0 ? (
+                                                                            <span className="font-p-semibold text-[14px] text-blue-800">
+                                                                                공지사항
+                                                                            </span>
+                                                                        ) : (
+                                                                            <span className="font-p-semibold text-[14px] text-stone-400">
+                                                                                일반
+                                                                            </span>
+                                                                        )}
+
+                                                                        {i %
+                                                                            2 ===
+                                                                            0 && (
+                                                                            <PinIcon
+                                                                                size={
+                                                                                    16
+                                                                                }
+                                                                                className="stroke-stone-300 rotate-[45deg]"
+                                                                            />
+                                                                        )}
+                                                                    </div>
+
+                                                                    <div className="flex flex-col gap-[2px]">
+                                                                        <span className="font-p-medium text-[16px] text-stone-900 truncate">
+                                                                            [필독]
+                                                                            2025
+                                                                            커뮤니티
+                                                                            규칙
+                                                                        </span>
+
+                                                                        <span className="font-p-medium text-[14px] text-stone-500 truncate">
+                                                                            제
+                                                                            1조.
+                                                                            대화
+                                                                            에티켓
+                                                                            이를
+                                                                            지키지
+                                                                            못할
+                                                                            시
+                                                                            밴
+                                                                            또는
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="w-full h-[1px] bg-stone-200" />
+
+                                                            <div className="p-[12px_16px]">
+                                                                <div className="flex justify-between items-center gap-[6px]">
+                                                                    <span className="font-p-medium text-[12px] text-stone-400">
+                                                                        9개월 전
                                                                     </span>
 
-                                                                    <span className="font-p-medium text-[14px] text-stone-500 truncate">
-                                                                        제 1조.
-                                                                        대화
-                                                                        에티켓
-                                                                        이를
-                                                                        지키지
-                                                                        못할 시
-                                                                        밴 또는
+                                                                    <span className="font-p-medium text-[12px] text-stone-700">
+                                                                        극악무도한송하영사랑꾼
                                                                     </span>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <div className="w-full h-[1px] bg-stone-200" />
-
-                                                        <div className="p-[12px_16px]">
-                                                            <div className="flex justify-between items-center gap-[6px]">
-                                                                <span className="font-p-medium text-[12px] text-stone-400">
-                                                                    9개월 전
-                                                                </span>
-
-                                                                <span className="font-p-medium text-[12px] text-stone-700">
-                                                                    극악무도한송하영사랑꾼
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))}
+                                                    ))}
+                                            </div>
                                         </div>
                                     )}
 

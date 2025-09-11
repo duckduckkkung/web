@@ -1,5 +1,5 @@
 export enum ButtonTypes {
-    default = "cursor-pointer outline-none font-p-medium flex justify-center items-center transition-all duration-[.1s]",
+    default = "cursor-pointer outline-none font-p-medium flex justify-center items-center transition-all duration-[.1s] active:scale-95",
 
     sm = `${ButtonTypes.default} p-[4px_16px] rounded-[6px] text-[12px] gap-[4px]`,
     md = `${ButtonTypes.default} p-[6px_18px] rounded-[6px] text-[14px] gap-[6px]`,
@@ -8,6 +8,7 @@ export enum ButtonTypes {
 
 export enum ButtonVariants {
     primary = "bg-c-primary hover:bg-c-primary active:bg-c-primary text-white",
+    black = "bg-stone-900 hover:bg-stone-800 active:bg-stone-700 text-white",
     outline = "bg-white border border-stone-200 hover:bg-stone-50 active:bg-stone-100 text-stone-900",
 }
 
@@ -38,7 +39,9 @@ export const Button = ({
 }: ButtonProps) => {
     return (
         <button
-            className={`${ButtonTypes[type]} ${ButtonVariants[variants]}`}
+            className={`${ButtonTypes[type]} ${ButtonVariants[variants]} ${
+                disabled ? "active:!scale-100 !cursor-not-allowed" : ""
+            }`}
             onClick={onClick}
             disabled={disabled}
         >

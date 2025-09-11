@@ -45,6 +45,14 @@
     src: url("/fonts/Paperlogy-1Thin.ttf");
 }
 
+@font-face {
+    font-family: "GyeonggiMillenniumBackground";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Batang_Regular.woff")
+        format("woff");
+    font-weight: 400;
+    font-display: swap;
+}
+
 @theme {
     --color-c-primary: #563c2f;
 
@@ -57,6 +65,8 @@
     --font-p-regular: "p-regular";
     --font-p-semibold: "p-semibold";
     --font-p-thin: "p-thin";
+
+    --font-p-mj: "GyeonggiMillenniumBackground";
 }
 
 ::-webkit-scrollbar {
