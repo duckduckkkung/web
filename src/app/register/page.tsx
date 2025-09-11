@@ -271,7 +271,7 @@ export default function Register() {
             <Header />
 
             <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center gap-[48px]">
-                <div className="w-[600px] h-[500px] p-[48px] bg-white border border-stone-400 rounded-[16px]">
+                <div className="w-[600px] h-[500px] p-[48px] bg-white border border-stone-200 rounded-[16px]">
                     <div className="size-full flex flex-col justify-between">
                         <div className="flex flex-col gap-[32px]">
                             <div className="w-[160px] grid grid-cols-3 gap-[8px]">
