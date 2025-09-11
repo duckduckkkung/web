@@ -4,7 +4,7 @@ import {
     ArrowUpRightIcon,
     ArrowUpToLineIcon,
     LoaderCircleIcon,
-    PlusIcon,
+    BookPlusIcon,
     XIcon,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
@@ -139,212 +139,203 @@ export default function CreateFan() {
                         />
                     </div>
 
-                    {name.trim().length > 0 && (
-                        <div className="flex flex-col gap-[16px]">
-                            <div className="flex gap-[6px]">
-                                <div className="size-[4px] bg-red-600 rounded-full" />
+                    <div className="flex flex-col gap-[16px]">
+                        <div className="flex gap-[6px]">
+                            <div className="size-[4px] bg-red-600 rounded-full" />
 
-                                <span className="font-p-semibold text-[18px] text-stone-900">
-                                    &lsquo;{name.trim()}&lsquo; 에 대해 짧게
-                                    소개해 주세요.
-                                </span>
-                            </div>
+                            <span className="font-p-semibold text-[18px] text-stone-900">
+                                &lsquo;{name.trim() || "-"}&lsquo; 에 대해 짧게
+                                소개해 주세요.
+                            </span>
+                        </div>
 
+                        <Input
+                            type="lg"
+                            variants="underline"
+                            value={description}
+                            onChange={(e) => {
+                                if (e.length > 100) return;
+                                setDescription(e);
+                            }}
+                            placeholder="설명 입력하기"
+                            disabled={isCreating}
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-[16px]">
+                        <span className="font-p-semibold text-[18px] text-stone-900">
+                            <span className="font-p-medium text-[18px] text-stone-400">
+                                (최대 5개)
+                            </span>{" "}
+                            &lsquo;{name.trim() || "-"}&lsquo; 의 특징을 나열해
+                            주세요.
+                        </span>
+
+                        <div className="flex flex-col gap-[14px]">
                             <Input
                                 type="lg"
                                 variants="underline"
-                                value={description}
+                                value={tagName}
                                 onChange={(e) => {
-                                    if (e.length > 100) return;
-                                    setDescription(e);
+                                    if (e.length > 20) return;
+                                    setTagName(e);
                                 }}
-                                placeholder="설명 입력하기"
+                                onKeyUp={(e) => {
+                                    if (e.key === "Enter") {
+                                        if (tags.length > 4) return;
+
+                                        setTags((prev) => [
+                                            ...prev,
+                                            tagName.trim(),
+                                        ]);
+                                        setTagName("");
+                                    }
+                                }}
+                                placeholder="태그 입력하기"
                                 disabled={isCreating}
                             />
+
+                            <div className="flex flex-wrap gap-[6px]">
+                                {tags.map((tag, index) => (
+                                    <div
+                                        key={tag}
+                                        className="p-[4px_8px] rounded-[4px] cursor-pointer flex items-center gap-[4px] bg-white border border-stone-200 hover:bg-stone-50"
+                                        onClick={() => {
+                                            setTags((prev) =>
+                                                prev.filter(
+                                                    (_, i) => i !== index
+                                                )
+                                            );
+                                        }}
+                                    >
+                                        <span className="font-p-regular text-[12px] text-stone-600">
+                                            {tag}
+                                        </span>
+
+                                        <XIcon
+                                            size={12}
+                                            className="stroke-stone-600"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    )}
+                    </div>
 
-                    {name.trim().length > 0 && (
-                        <div className="flex flex-col gap-[16px]">
-                            <span className="font-p-semibold text-[18px] text-stone-900">
-                                <span className="font-p-medium text-[18px] text-stone-400">
-                                    (최대 5개)
-                                </span>{" "}
-                                &lsquo;{name.trim()}&lsquo; 의 특징을 나열해
-                                주세요.
-                            </span>
+                    <div className="flex flex-col gap-[16px]">
+                        <span className="font-p-semibold text-[18px] text-stone-900">
+                            <span className="font-p-medium text-[18px] text-stone-400">
+                                (최대 4장)
+                            </span>{" "}
+                            &lsquo;{name.trim() || "-"}&lsquo;{" "}
+                            {josa(name.trim(), "을/를").substring(
+                                name.trim().length
+                            )}{" "}
+                            상징하는 사진을 올려주세요.
+                        </span>
 
-                            <div className="flex flex-col gap-[14px]">
-                                <Input
-                                    type="lg"
-                                    variants="underline"
-                                    value={tagName}
-                                    onChange={(e) => {
-                                        if (e.length > 20) return;
-                                        setTagName(e);
-                                    }}
-                                    onKeyUp={(e) => {
-                                        if (e.key === "Enter") {
-                                            if (tags.length > 4) return;
-
-                                            setTags((prev) => [
-                                                ...prev,
-                                                tagName.trim(),
-                                            ]);
-                                            setTagName("");
-                                        }
-                                    }}
-                                    placeholder="태그 입력하기"
-                                    disabled={isCreating}
+                        <div className="flex flex-col gap-[14px]">
+                            <div className="w-fit">
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    onChange={handleImageUpload}
+                                    className="hidden"
                                 />
 
-                                <div className="flex flex-wrap gap-[6px]">
-                                    {tags.map((tag, index) => (
-                                        <div
-                                            key={tag}
-                                            className="p-[4px_8px] rounded-[4px] cursor-pointer flex items-center gap-[4px] bg-white border border-stone-200 hover:bg-stone-50"
-                                            onClick={() => {
-                                                setTags((prev) =>
-                                                    prev.filter(
-                                                        (_, i) => i !== index
-                                                    )
-                                                );
-                                            }}
-                                        >
-                                            <span className="font-p-regular text-[12px] text-stone-600">
-                                                {tag}
-                                            </span>
-
-                                            <XIcon
-                                                size={12}
-                                                className="stroke-stone-600"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
+                                <Button
+                                    type="md"
+                                    variants="outline"
+                                    icons={[
+                                        {
+                                            component: (
+                                                <ArrowUpToLineIcon
+                                                    size={14}
+                                                    className="stroke-stone-900"
+                                                />
+                                            ),
+                                            float: "left",
+                                        },
+                                    ]}
+                                    onClick={() =>
+                                        fileInputRef.current?.click()
+                                    }
+                                    disabled={isCreating}
+                                >
+                                    사진 업로드
+                                </Button>
                             </div>
-                        </div>
-                    )}
 
-                    {name.trim().length > 0 &&
-                        description.trim().length > 0 && (
-                            <div className="flex flex-col gap-[16px]">
-                                <span className="font-p-semibold text-[18px] text-stone-900">
-                                    <span className="font-p-medium text-[18px] text-stone-400">
-                                        (최대 4장)
-                                    </span>{" "}
-                                    &lsquo;{name.trim()}&lsquo;{" "}
-                                    {josa(name.trim(), "을/를").substring(
-                                        name.trim().length
-                                    )}{" "}
-                                    상징하는 사진을 올려주세요.
-                                </span>
+                            <div className="grid grid-cols-8 gap-[14px]">
+                                <div
+                                    className={`aspect-square rounded-[8px] overflow-hidden border border-dashed flex justify-center items-center cursor-pointer transition-colors ${
+                                        isDragOver
+                                            ? "border-stone-500 bg-stone-50"
+                                            : "border-stone-300 hover:border-stone-400"
+                                    }`}
+                                    onClick={() => {
+                                        if (isCreating) return;
+                                        fileInputRef.current?.click();
+                                    }}
+                                    onDrop={handleDrop}
+                                    onDragOver={handleDragOver}
+                                    onDragLeave={handleDragLeave}
+                                >
+                                    <ArrowUpToLineIcon
+                                        size={24}
+                                        className="stroke-stone-500"
+                                    />
+                                </div>
 
-                                <div className="flex flex-col gap-[14px]">
-                                    <div className="w-fit">
-                                        <input
-                                            ref={fileInputRef}
-                                            type="file"
-                                            accept="image/*"
-                                            multiple
-                                            onChange={handleImageUpload}
-                                            className="hidden"
+                                {uploadedImages.map((image, index) => (
+                                    <div
+                                        key={index}
+                                        className="relative aspect-square rounded-[8px] overflow-hidden group"
+                                    >
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={image}
+                                            alt={`upload_${index + 1}`}
+                                            className="size-full object-cover"
                                         />
 
-                                        <Button
-                                            type="md"
-                                            variants="outline"
-                                            icons={[
-                                                {
-                                                    component: (
-                                                        <ArrowUpToLineIcon
-                                                            size={14}
-                                                            className="stroke-stone-900"
-                                                        />
-                                                    ),
-                                                    float: "left",
-                                                },
-                                            ]}
-                                            onClick={() =>
-                                                fileInputRef.current?.click()
-                                            }
-                                            disabled={isCreating}
-                                        >
-                                            사진 업로드
-                                        </Button>
-                                    </div>
-
-                                    <div className="grid grid-cols-8 gap-[14px]">
                                         <div
-                                            className={`aspect-square rounded-[8px] overflow-hidden border border-dashed flex justify-center items-center cursor-pointer transition-colors ${
-                                                isDragOver
-                                                    ? "border-stone-500 bg-stone-50"
-                                                    : "border-stone-300 hover:border-stone-400"
-                                            }`}
+                                            className="absolute top-0 left-0 size-full group-hover:opacity-100 opacity-0 bg-stone-900/60 flex justify-center items-center cursor-pointer transition-all duration-[.1s]"
                                             onClick={() => {
                                                 if (isCreating) return;
-                                                fileInputRef.current?.click();
+                                                handleImageRemove(index);
                                             }}
-                                            onDrop={handleDrop}
-                                            onDragOver={handleDragOver}
-                                            onDragLeave={handleDragLeave}
                                         >
-                                            <ArrowUpToLineIcon
+                                            <XIcon
                                                 size={24}
-                                                className="stroke-stone-500"
+                                                className="stroke-white"
                                             />
                                         </div>
-
-                                        {uploadedImages.map((image, index) => (
-                                            <div
-                                                key={index}
-                                                className="relative aspect-square rounded-[8px] overflow-hidden group"
-                                            >
-                                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                <img
-                                                    src={image}
-                                                    alt={`upload_${index + 1}`}
-                                                    className="size-full object-cover"
-                                                />
-
-                                                <div
-                                                    className="absolute top-0 left-0 size-full group-hover:opacity-100 opacity-0 bg-stone-900/60 flex justify-center items-center cursor-pointer transition-all duration-[.1s]"
-                                                    onClick={() => {
-                                                        if (isCreating) return;
-                                                        handleImageRemove(
-                                                            index
-                                                        );
-                                                    }}
-                                                >
-                                                    <XIcon
-                                                        size={24}
-                                                        className="stroke-white"
-                                                    />
-                                                </div>
-                                            </div>
-                                        ))}
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                        )}
+                        </div>
+                    </div>
                 </div>
 
                 {name.trim().length > 0 && description.trim().length > 0 && (
                     <div className="w-fit">
                         <Button
-                            type="lg"
-                            variants="primary"
+                            type="md"
+                            variants="outline"
                             icons={[
                                 {
                                     component: isCreating ? (
                                         <LoaderCircleIcon
-                                            size={16}
-                                            className="stroke-white animate-spin"
+                                            size={14}
+                                            className="stroke-stone-900 animate-spin"
                                         />
                                     ) : (
-                                        <PlusIcon
-                                            size={16}
-                                            className="stroke-white"
+                                        <BookPlusIcon
+                                            size={14}
+                                            className="stroke-stone-900"
                                         />
                                     ),
                                     float: "left",
