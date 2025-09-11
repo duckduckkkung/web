@@ -39,7 +39,9 @@ export const Button = ({
 }: ButtonProps) => {
     return (
         <button
-            className={`${ButtonTypes[type]} ${ButtonVariants[variants]}`}
+            className={`${ButtonTypes[type]} ${ButtonVariants[variants]} ${
+                disabled ? "active:!scale-100 !cursor-not-allowed" : ""
+            }`}
             onClick={onClick}
             disabled={disabled}
         >
