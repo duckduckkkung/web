@@ -1,13 +1,18 @@
 "use client";
 
-import { EyeIcon, HeartIcon, MessageCircleMoreIcon } from "lucide-react";
+import {
+    ArrowUpRightIcon,
+    BotMessageSquareIcon,
+    HardDriveDownloadIcon,
+} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
 import { MomentCard } from "@/shared/components/moment-card";
+import { FanHeader } from "@/shared/components/fan-header";
 import { GoodsCard } from "@/shared/components/goods-card";
-import { Header } from "@/shared/components/header";
+import { Button } from "@/shared/components/button";
 import { Footer } from "@/shared/components/footer";
 import { Tab } from "@/shared/components/tab";
 
@@ -108,257 +113,283 @@ export default function Fan() {
 
     return (
         <div>
-            <Header />
+            <FanHeader fan={fan} />
 
-            <div className="max-w-[1280px] m-[0_auto] py-[48px] pb-[96px] flex gap-[48px]">
-                <div className="shrink-0 w-[300px] flex flex-col gap-[24px]">
-                    <div className="w-[300px] flex flex-col gap-[16px]">
-                        <div
-                            ref={imageContainerRef}
-                            className="relative size-[300px] overflow-hidden rounded-[8px] cursor-grab select-none"
-                            onMouseDown={handleMouseDown}
-                            onMouseMove={handleMouseMove}
-                            onMouseUp={handleMouseUp}
-                            onMouseLeave={handleMouseLeave}
-                            style={{ cursor: isDragging ? "grabbing" : "grab" }}
-                        >
-                            <div
-                                className="flex transition-transform duration-300 ease-out h-full"
-                                style={{
-                                    transform: `translateX(${
-                                        -currentImageIndex * 300 + dragOffset
-                                    }px)`,
-                                    transitionDuration: isDragging
-                                        ? "0ms"
-                                        : "300ms",
-                                }}
-                            >
-                                {fan.imageUrl.map((url, index) => (
-                                    /* eslint-disable-next-line @next/next/no-img-element */
-                                    <img
-                                        key={index}
-                                        src={url}
-                                        alt={`fan_image_${index + 1}`}
-                                        className="size-[300px] object-cover shrink-0"
-                                        draggable={false}
-                                    />
-                                ))}
+            <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[48px]">
+                <div className="flex gap-[48px]">
+                    <div className="shrink-0 w-[300px] flex flex-col gap-[24px]">
+                        <div className="w-[300px] flex flex-col gap-[48px]">
+                            <div className="flex flex-col gap-[24px]">
+                                <div className="flex justify-between items-center">
+                                    <span className="font-p-semibold text-[20px] text-stone-900">
+                                        🖼️ 사진첩
+                                    </span>
+
+                                    <div className="p-[8px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]">
+                                        <HardDriveDownloadIcon
+                                            size={18}
+                                            className="stroke-stone-900"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col gap-[16px]">
+                                    <div
+                                        ref={imageContainerRef}
+                                        className="relative size-[300px] overflow-hidden rounded-[8px] cursor-grab select-none"
+                                        onMouseDown={handleMouseDown}
+                                        onMouseMove={handleMouseMove}
+                                        onMouseUp={handleMouseUp}
+                                        onMouseLeave={handleMouseLeave}
+                                        style={{
+                                            cursor: isDragging
+                                                ? "grabbing"
+                                                : "grab",
+                                        }}
+                                    >
+                                        <div
+                                            className="flex transition-transform duration-300 ease-out h-full"
+                                            style={{
+                                                transform: `translateX(${
+                                                    -currentImageIndex * 300 +
+                                                    dragOffset
+                                                }px)`,
+                                                transitionDuration: isDragging
+                                                    ? "0ms"
+                                                    : "300ms",
+                                            }}
+                                        >
+                                            {fan.imageUrl.map((url, index) => (
+                                                /* eslint-disable-next-line @next/next/no-img-element */
+                                                <img
+                                                    key={index}
+                                                    src={url}
+                                                    alt={`fan_image_${
+                                                        index + 1
+                                                    }`}
+                                                    className="size-[300px] object-cover shrink-0"
+                                                    draggable={false}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-4 gap-[16px]">
+                                        {fan.imageUrl.map((_, index) => (
+                                            <div
+                                                key={index}
+                                                className={`w-full h-[4px] rounded-[8px] ${
+                                                    index === currentImageIndex
+                                                        ? "bg-stone-900"
+                                                        : "bg-stone-200"
+                                                }`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="grid grid-cols-4 gap-[16px]">
-                            {fan.imageUrl.map((_, index) => (
-                                <div
-                                    key={index}
-                                    className={`w-full h-[4px] rounded-[8px] ${
-                                        index === currentImageIndex
-                                            ? "bg-stone-900"
-                                            : "bg-stone-200"
-                                    }`}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                            <div className="flex flex-col gap-[16px]">
+                                <div className="flex flex-col gap-[6px]">
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                            본명
+                                        </span>
 
-                    <div className="flex flex-col gap-[24px]">
-                        <div className="flex flex-wrap gap-[6px]">
-                            {fan.tags.map((tag) => (
-                                <div
-                                    key={tag}
-                                    className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50"
-                                    onClick={() =>
-                                        router.push(`/fans?tag=${tag}`)
-                                    }
-                                >
+                                        <span className="font-p-regular text-[14px] text-stone-900">
+                                            송하영
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                            나이
+                                        </span>
+
+                                        <span className="font-p-regular text-[14px] text-stone-900">
+                                            27살
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                            생일
+                                        </span>
+
+                                        <span className="font-p-regular text-[14px] text-stone-900">
+                                            09. 29.
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                            그룹
+                                        </span>
+
+                                        <div
+                                            className="p-[4px_8px] flex items-center gap-[4px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
+                                            onClick={() => router.push("/fans")}
+                                        >
+                                            <span className="font-p-regular text-[14px] text-stone-900">
+                                                프로미스나인
+                                            </span>
+
+                                            <ArrowUpRightIcon
+                                                size={12}
+                                                className="stroke-stone-900"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col gap-[8px]">
+                                    <Button
+                                        type="md"
+                                        variants="outline"
+                                        icons={[
+                                            {
+                                                float: "left",
+                                                component: (
+                                                    <BotMessageSquareIcon
+                                                        size={16}
+                                                        className="stroke-stone-900"
+                                                    />
+                                                ),
+                                            },
+                                        ]}
+                                    >
+                                        정보 업데이트 요청하기
+                                    </Button>
+
                                     <span className="font-p-regular text-[12px] text-stone-600">
-                                        #{tag}
+                                        마지막 요청: 2025. 8. 11. 18:03:47
                                     </span>
                                 </div>
-                            ))}
-                        </div>
-
-                        <div className="flex flex-col gap-[8px]">
-                            <span className="font-p-bold text-[24px] text-stone-900 break-all">
-                                {fan.name}
-                            </span>
-
-                            <span className="font-p-regular text-[16px] text-stone-700 break-all">
-                                {fan.description}
-                            </span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="flex-1">
-                    <Tab
-                        options={["커뮤니티", "모먼트", "굿즈"]}
-                        tab={tab}
-                        onChange={handleTabChange}
-                    />
+                    <div className="flex-1">
+                        <div className="flex flex-col gap-[24px]">
+                            <div className="flex flex-wrap gap-[6px]">
+                                {fan.tags.map((tag) => (
+                                    <div
+                                        key={tag}
+                                        className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50"
+                                        onClick={() =>
+                                            router.push(`/fans?tag=${tag}`)
+                                        }
+                                    >
+                                        <span className="font-p-regular text-[12px] text-stone-600">
+                                            #{tag}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
 
-                    <div className="relative overflow-hidden h-full overflow-y-auto">
-                        <AnimatePresence mode="wait" custom={direction}>
-                            <motion.div
-                                key={tab}
-                                custom={direction}
-                                variants={slideVariants}
-                                initial="enter"
-                                animate="center"
-                                exit="exit"
-                                transition={{
-                                    type: "tween",
-                                    duration: 0.15,
-                                    ease: "easeInOut",
-                                }}
-                                className="absolute w-full"
-                            >
-                                {tab === "커뮤니티" && (
-                                    <div className="py-[32px] pr-[32px] flex flex-col gap-[24px]">
-                                        <div className="flex justify-between items-center gap-[24px]">
-                                            <div className="w-full flex items-center gap-[8px]">
-                                                <div className="shrink-0 p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50">
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
-                                                        공지사항
-                                                    </span>
-                                                </div>
+                            <Tab
+                                options={["커뮤니티", "모먼트", "굿즈"]}
+                                tab={tab}
+                                onChange={handleTabChange}
+                            />
+                        </div>
 
-                                                <span className="block w-full font-p-medium text-[16px] text-stone-900 truncate cursor-pointer hover:underline">
-                                                    이거 한번만 읽고 활동
-                                                    부탁드립니다!
-                                                </span>
-                                            </div>
+                        <div className="relative overflow-hidden">
+                            <AnimatePresence mode="wait" custom={direction}>
+                                <motion.div
+                                    key={tab}
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{
+                                        type: "tween",
+                                        duration: 0.15,
+                                        ease: "easeInOut",
+                                    }}
+                                    className="w-full"
+                                >
+                                    {tab === "커뮤니티" && (
+                                        <div className="py-[24px] pr-[32px] grid grid-cols-3 gap-[16px]">
+                                            {Array(9)
+                                                .fill(0)
+                                                .map((_, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="border border-stone-200 rounded-[8px] flex flex-col cursor-pointer"
+                                                    >
+                                                        <div className="p-[12px_16px]">
+                                                            <div className="flex flex-col gap-[6px]">
+                                                                <span className="font-p-semibold text-[14px] text-stone-400">
+                                                                    공지사항
+                                                                </span>
 
-                                            <div className="flex items-center gap-[16px]">
-                                                <div className="flex items-center gap-[4px]">
-                                                    <EyeIcon
-                                                        size={14}
-                                                        className="stroke-stone-900"
-                                                    />
+                                                                <div className="flex flex-col gap-[2px]">
+                                                                    <span className="font-p-medium text-[16px] text-stone-900">
+                                                                        [필독]
+                                                                        2025
+                                                                        커뮤니티
+                                                                        규칙
+                                                                    </span>
 
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
-                                                        {Math.floor(
-                                                            Math.random() * 100
-                                                        )}
-                                                    </span>
-                                                </div>
+                                                                    <span className="font-p-medium text-[14px] text-stone-500 truncate">
+                                                                        제 1조.
+                                                                        대화
+                                                                        에티켓
+                                                                        이를
+                                                                        지키지
+                                                                        못할 시
+                                                                        밴 또는
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                <div className="flex items-center gap-[4px]">
-                                                    <MessageCircleMoreIcon
-                                                        size={14}
-                                                        className="stroke-stone-900"
-                                                    />
+                                                        <div className="w-full h-[1px] bg-stone-200" />
 
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
-                                                        {Math.floor(
-                                                            Math.random() * 100
-                                                        )}
-                                                    </span>
-                                                </div>
+                                                        <div className="p-[12px_16px]">
+                                                            <div className="flex justify-between items-center gap-[6px]">
+                                                                <span className="font-p-medium text-[12px] text-stone-400">
+                                                                    9개월 전
+                                                                </span>
 
-                                                <div className="flex items-center gap-[4px]">
-                                                    <HeartIcon
-                                                        size={14}
-                                                        className="stroke-stone-900"
-                                                    />
-
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
-                                                        {Math.floor(
-                                                            Math.random() * 100
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            </div>
+                                                                <span className="font-p-medium text-[12px] text-stone-700">
+                                                                    극악무도한송하영사랑꾼
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                         </div>
+                                    )}
 
-                                        {[
-                                            "송하영 존나 귀엽다고 생각하면 들어오셈",
-                                            "아 진짜 이건 아니다...",
-                                            "으흐흐",
-                                            "오늘 본방 뭐시기 한다는데",
-                                            "송하영 짤.jpg",
-                                            "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
-                                            "마루 귀엽다",
-                                            "배경화면 구합니다",
-                                        ].map((_, i) => (
-                                            <div
-                                                key={i}
-                                                className="flex justify-between items-center gap-[24px]"
-                                            >
-                                                <span className="block w-full font-p-medium text-[16px] text-stone-900 truncate cursor-pointer hover:underline">
-                                                    {_}
-                                                </span>
+                                    {tab === "모먼트" && (
+                                        <div className="py-[24px] pr-[32px] grid grid-cols-4 gap-[32px]">
+                                            {moments
+                                                .slice(0, 4)
+                                                .map((moment) => (
+                                                    <MomentCard
+                                                        key={moment.id}
+                                                        data={moment}
+                                                    />
+                                                ))}
+                                        </div>
+                                    )}
 
-                                                <div className="flex items-center gap-[16px]">
-                                                    <div className="flex items-center gap-[4px]">
-                                                        <EyeIcon
-                                                            size={14}
-                                                            className="stroke-stone-900"
-                                                        />
-
-                                                        <span className="font-p-medium text-[12px] text-stone-900">
-                                                            {Math.floor(
-                                                                Math.random() *
-                                                                    100
-                                                            )}
-                                                        </span>
-                                                    </div>
-
-                                                    <div className="flex items-center gap-[4px]">
-                                                        <MessageCircleMoreIcon
-                                                            size={14}
-                                                            className="stroke-stone-900"
-                                                        />
-
-                                                        <span className="font-p-medium text-[12px] text-stone-900">
-                                                            {Math.floor(
-                                                                Math.random() *
-                                                                    100
-                                                            )}
-                                                        </span>
-                                                    </div>
-
-                                                    <div className="flex items-center gap-[4px]">
-                                                        <HeartIcon
-                                                            size={14}
-                                                            className="stroke-stone-900"
-                                                        />
-
-                                                        <span className="font-p-medium text-[12px] text-stone-900">
-                                                            {Math.floor(
-                                                                Math.random() *
-                                                                    100
-                                                            )}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {tab === "모먼트" && (
-                                    <div className="py-[32px] pr-[32px] grid grid-cols-4 gap-[32px]">
-                                        {moments.slice(0, 4).map((moment) => (
-                                            <MomentCard
-                                                key={moment.id}
-                                                data={moment}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-
-                                {tab === "굿즈" && (
-                                    <div className="py-[32px] pr-[32px] grid grid-cols-2 gap-[32px]">
-                                        {goods.map((goods) => (
-                                            <GoodsCard
-                                                key={goods.id}
-                                                data={goods}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-                            </motion.div>
-                        </AnimatePresence>
+                                    {tab === "굿즈" && (
+                                        <div className="py-[24px] pr-[32px] grid grid-cols-2 gap-[32px]">
+                                            {goods.map((goods) => (
+                                                <GoodsCard
+                                                    key={goods.id}
+                                                    data={goods}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
                     </div>
                 </div>
             </div>
