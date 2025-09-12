@@ -274,7 +274,7 @@ export default function Fan() {
                                     </Button>
 
                                     <span className="font-p-regular text-[12px] text-stone-600">
-                                        마지막 요청: 2025. 8. 11. 18:03:47
+                                        마지막 요청: 2025. 08. 11. 18:03:47
                                     </span>
                                 </div>
                             </div>

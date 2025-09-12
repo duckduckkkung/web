@@ -2,11 +2,12 @@
 
 import { useRouter } from "next/navigation";
 
+import { BoardSidebar } from "@/shared/components/board-sidebar";
 import { FanHeader } from "@/shared/components/fan-header";
+import { Button } from "@/shared/components/button";
 import { Footer } from "@/shared/components/footer";
 
 import { TypeFan } from "@/shared/types/types";
-import { Button } from "@/shared/components/button";
 
 export default function Board() {
     const router = useRouter();
@@ -30,55 +31,12 @@ export default function Board() {
         <div>
             <FanHeader fan={fan} />
 
-            <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[64px] flex gap-[48px]">
-                <div className="shrink-0 w-[300px] flex flex-col gap-[8px]">
-                    <div className="flex justify-between items-center">
-                        <span className="font-p-semibold text-[16px] text-stone-900">
-                            작성자
-                        </span>
-
-                        <div
-                            className="w-fit p-[4px_10px] hover:bg-stone-100 rounded-[6px] cursor-pointer transition-all duration-[.1s]"
-                            onClick={() => router.push("/엄준식")}
-                        >
-                            <span className="font-p-medium text-[16px] text-stone-900">
-                                엄준식
-                            </span>
-                        </div>
-                    </div>
-                </div>
+            <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[64px] flex gap-[98px]">
+                <BoardSidebar fan={fan} />
 
                 <div className="flex-1 shrink-0 flex flex-col gap-[128px]">
                     <div className="flex flex-col gap-[48px]">
                         <div className="flex flex-col gap-[16px]">
-                            <div className="flex items-center gap-[8px]">
-                                <div
-                                    className="p-[4px_10px] bg-blue-50 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
-                                    onClick={() =>
-                                        router.push(
-                                            `/fans/${fan.name}/board?q=notice`
-                                        )
-                                    }
-                                >
-                                    <span className="font-p-semibold text-[14px] text-blue-800">
-                                        공지사항
-                                    </span>
-                                </div>
-
-                                <div
-                                    className="p-[4px_10px] bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
-                                    onClick={() =>
-                                        router.push(
-                                            `/fans/${fan.name}/board?q=필독`
-                                        )
-                                    }
-                                >
-                                    <span className="font-p-semibold text-[14px] text-stone-900">
-                                        필독
-                                    </span>
-                                </div>
-                            </div>
-
                             <span className="font-p-bold text-[24px] text-stone-900 truncate">
                                 2025 커뮤니티 규칙
                             </span>
