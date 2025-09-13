@@ -1,13 +1,9 @@
-import {
-    ArrowUpRightIcon,
-    PencilIcon,
-    PlusIcon,
-    Trash2Icon,
-} from "lucide-react";
+import { ArrowUpRightIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { TypeFan } from "../types/types";
 import { Button } from "./button";
+
+import { TypeFan } from "../types/types";
 
 interface BoardSidebarProps {
     fan?: TypeFan;
