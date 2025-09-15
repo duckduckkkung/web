@@ -1,8 +1,8 @@
 name: Deploy Dev Branch to Local Server
+
 on:
     push:
-        branches:
-            - dev
+        branches: [dev]
     workflow_dispatch:
 
 jobs:
@@ -22,15 +22,26 @@ jobs:
                   APP_DIR: ${{ secrets.APP_DIR }}
               run: |
                   ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
-                      set -e
-                      if [ ! -d \"$APP_DIR/.git\" ]; then
-                          git clone git@github.com:duckduckkkung/web.git $APP_DIR
-                      fi
-                      cd $APP_DIR
-                      git fetch origin
-                      git checkout dev
-                      git pull origin dev
-                      npm install
-                      npm run build
-                      pm2 restart app || pm2 start npm --name app -- start
+                    set -e
+
+                    # 1) 최초 배포가 아니면 클론 대신 업데이트
+                    if [ ! -d \"$APP_DIR/.git\" ]; then
+                      git clone git@github.com:duckduckkkung/web.git $APP_DIR
+                    fi
+
+                    cd $APP_DIR
+
+                    # 2) 최신 커밋만 **가져오고(fetch)** 로컬 변경은 폐기
+                    git fetch origin dev
+
+                    # 로컬을 원격 상태로 강제 동기화
+                    git reset --hard origin/dev
+                    git clean -fdx      # 추적 안 된 파일, node_modules 등 삭제
+
+                    # 3) 의존성 & 빌드
+                    npm ci              # package-lock.json 기반 설치
+                    npm run build
+
+                    # 4) 애플리케이션 재시작
+                    pm2 restart app || pm2 start npm --name app -- start
                   "
