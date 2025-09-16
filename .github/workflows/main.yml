@@ -26,6 +26,10 @@ jobs:
 
                     export NVM_DIR="$HOME/.nvm"
                     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    
+                    if ! command -v pm2 >/dev/null 2>&1; then
+                      export PATH="$HOME/.nvm/versions/node/$(nvm current)/bin:$PATH"
+                    fi
 
                     # 1) 최초 배포가 아니면 클론 대신 업데이트
                     if [ ! -d \"$APP_DIR/.git\" ]; then
