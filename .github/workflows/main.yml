@@ -24,6 +24,9 @@ jobs:
                   ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
                     set -e
 
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
                     # 1) 최초 배포가 아니면 클론 대신 업데이트
                     if [ ! -d \"$APP_DIR/.git\" ]; then
                       git clone git@github.com:duckduckkkung/web.git $APP_DIR
