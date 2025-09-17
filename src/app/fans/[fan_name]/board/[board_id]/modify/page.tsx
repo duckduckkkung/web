@@ -1,31 +1,33 @@
 "use client";
 
-import { PlusIcon, LoaderCircleIcon } from "lucide-react";
+import { PencilLineIcon, LoaderCircleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { BoardSidebar } from "@/shared/components/board-sidebar";
 import { FanHeader } from "@/shared/components/fan-header";
+import { Checkbox } from "@/shared/components/checkbox";
 import { Button } from "@/shared/components/button";
 import { Footer } from "@/shared/components/footer";
 import { Select } from "@/shared/components/select";
 
 import { TypeFan } from "@/shared/types/types";
-import { Checkbox } from "@/shared/components/checkbox";
 
-export default function CreateBoard() {
+export default function ModifyBoard() {
     const router = useRouter();
 
-    const [title, setTitle] = useState<string>("");
-    const [content, setContent] = useState<string>("");
-    const [selectedCategory, setSelectedCategory] = useState<string>("");
+    const [title, setTitle] = useState<string>("테스트 제목입니다.");
+    const [content, setContent] = useState<string>(
+        "제 생각에는 이걸 이렇게 해야할 것 같은데...\n어떻게 생각하세요들?"
+    );
+    const [selectedCategory, setSelectedCategory] = useState<string>("1");
 
     const [isPined, setIsPined] = useState<boolean>(false);
     const [isNotice, setIsNotice] = useState<boolean>(false);
 
     const [isPosting, setIsPosting] = useState<boolean>(false);
 
-    const handlePostCreate = async () => {
+    const handlePostModify = async () => {
         if (!title.trim() || !content.trim() || !selectedCategory) return;
 
         setIsPosting(true);
@@ -122,7 +124,7 @@ export default function CreateBoard() {
                                             className="stroke-white animate-spin"
                                         />
                                     ) : (
-                                        <PlusIcon
+                                        <PencilLineIcon
                                             size={16}
                                             className="stroke-white"
                                         />
@@ -131,11 +133,11 @@ export default function CreateBoard() {
                             ]}
                             onClick={() => {
                                 if (isPosting) return;
-                                handlePostCreate();
+                                handlePostModify();
                             }}
                             disabled={isPosting}
                         >
-                            게시
+                            수정
                         </Button>
                     </div>
                 </div>

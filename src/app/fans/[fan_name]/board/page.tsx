@@ -9,7 +9,7 @@ import { Footer } from "@/shared/components/footer";
 
 import { TypeFan } from "@/shared/types/types";
 
-export default function Board() {
+export default function BoardMain() {
     const router = useRouter();
 
     const fan: TypeFan = {

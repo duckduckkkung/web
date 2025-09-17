@@ -138,6 +138,11 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                         ),
                                     },
                                 ]}
+                                onClick={() =>
+                                    router.push(
+                                        `/fans/${fan.name}/board/1/modify`
+                                    )
+                                }
                             >
                                 수정하기
                             </Button>
