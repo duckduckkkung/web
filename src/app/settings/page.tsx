@@ -57,7 +57,7 @@ export default function Settings() {
         <div>
             <Header />
 
-            <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[48px]">
+            <div className="max-w-[640px] min-h-[100dvh] m-[0_auto] py-[48px]">
                 <Tab
                     options={["프로필", "보안", "기타"]}
                     tab={tab}
