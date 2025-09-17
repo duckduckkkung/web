@@ -203,7 +203,7 @@ export default function Register() {
                                             value={bio}
                                             onChange={(e) => {
                                                 const text = e.target.value;
-                                                if (text.length > 16) return;
+                                                if (text.length > 30) return;
                                                 setBio(text);
                                             }}
                                             onKeyUp={(e) =>
