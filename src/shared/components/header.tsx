@@ -1,12 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { SparkleIcon } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 
+import { GlobalHeaderInteractions } from "./global-header-interactions";
 import { WideSearch } from "./wide-search";
-import { Button } from "./button";
 
 import Logo from "@/assets/icons/logo.png";
 
@@ -30,25 +29,7 @@ export const Header = () => {
                 <WideSearch value={search} onChange={setSearch} />
             </div>
 
-            <Button
-                type="sm"
-                variants="outline"
-                icons={[
-                    {
-                        component: (
-                            <SparkleIcon
-                                key="start"
-                                size={12}
-                                className="stroke-stone-900"
-                            />
-                        ),
-                        float: "left",
-                    },
-                ]}
-                onClick={() => router.push("/register")}
-            >
-                시작하기
-            </Button>
+            <GlobalHeaderInteractions />
         </div>
     );
 };

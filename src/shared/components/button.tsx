@@ -14,6 +14,7 @@ export enum ButtonVariants {
     primary = "bg-c-primary hover:bg-c-primary active:bg-c-primary text-white",
     black = "bg-stone-900 hover:bg-stone-800 active:bg-stone-700 text-white",
     outline = "bg-white border border-stone-200 hover:bg-stone-50 active:bg-stone-100 text-stone-900",
+    warning = "bg-red-50 border border-red-200 hover:bg-red-100 active:bg-red-200 text-red-700",
 }
 
 export interface Icon {

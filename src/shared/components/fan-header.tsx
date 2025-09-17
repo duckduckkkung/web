@@ -1,11 +1,11 @@
 "use client";
 
-import { ArrowLeftIcon, SparkleIcon, VideotapeIcon } from "lucide-react";
+import { ArrowLeftIcon, VideotapeIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { GlobalHeaderInteractions } from "./global-header-interactions";
 import { WideSearch } from "./wide-search";
-import { Button } from "./button";
 
 import { TypeFan } from "../types/types";
 
@@ -45,25 +45,7 @@ export const FanHeader = ({ href, fan }: FanHeaderProps) => {
                 <WideSearch value={search} onChange={setSearch} />
             </div>
 
-            <Button
-                type="sm"
-                variants="outline"
-                icons={[
-                    {
-                        component: (
-                            <SparkleIcon
-                                key="start"
-                                size={12}
-                                className="stroke-stone-900"
-                            />
-                        ),
-                        float: "left",
-                    },
-                ]}
-                onClick={() => router.push("/register")}
-            >
-                시작하기
-            </Button>
+            <GlobalHeaderInteractions />
         </div>
     );
 };
