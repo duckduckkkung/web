@@ -214,17 +214,9 @@ export default function Settings() {
                             {tab === "기타" && (
                                 <div className="py-[48px]">
                                     <div className="flex flex-col gap-[16px]">
-                                        <div className="flex flex-col gap-[6px]">
-                                            <span className="font-p-medium text-[16px] text-stone-900">
-                                                계정 탈퇴
-                                            </span>
-
-                                            <span className="font-p-medium text-[14px] text-stone-500">
-                                                탈퇴하면 복구할 수 없어요.
-                                                <br />
-                                                현명하게 생각하고 눌러주세요.
-                                            </span>
-                                        </div>
+                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                            탈퇴
+                                        </span>
 
                                         <div className="w-fit">
                                             <Button
