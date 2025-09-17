@@ -124,7 +124,7 @@ export default function Fan() {
 
     return (
         <div>
-            <FanHeader href="/fan" fan={fan} />
+            <FanHeader href="/fans" fan={fan} />
 
             <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[48px]">
                 <div className="flex gap-[48px]">
