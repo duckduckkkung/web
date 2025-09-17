@@ -116,7 +116,9 @@ export default function Board() {
                         </div>
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="flex justify-end items-center gap-[48px]">
+                        <div className="flex-1 h-[1px] bg-stone-200" />
+
                         <Button
                             type="md"
                             variants="outline"
