@@ -29,7 +29,7 @@ export default function BoardMain() {
 
     return (
         <div>
-            <FanHeader fan={fan} />
+            <FanHeader href={`/fan/${fan.name}`} fan={fan} />
 
             <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[64px] flex gap-[98px]">
                 <BoardSidebar type="boards" fan={fan} />
