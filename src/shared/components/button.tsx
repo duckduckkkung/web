@@ -4,6 +4,10 @@ export enum ButtonTypes {
     sm = `${ButtonTypes.default} p-[4px_16px] rounded-[6px] text-[12px] gap-[4px]`,
     md = `${ButtonTypes.default} p-[6px_18px] rounded-[6px] text-[14px] gap-[6px]`,
     lg = `${ButtonTypes.default} p-[8px_20px] rounded-[6px] text-[16px] gap-[8px]`,
+
+    sm_icon = `${ButtonTypes.default} p-[4px] rounded-[6px]`,
+    md_icon = `${ButtonTypes.default} p-[6px] rounded-[6px]`,
+    lg_icon = `${ButtonTypes.default} p-[8px] rounded-[6px]`,
 }
 
 export enum ButtonVariants {
