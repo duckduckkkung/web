@@ -1,4 +1,9 @@
-import { ArrowUpRightIcon, PencilIcon, Trash2Icon } from "lucide-react";
+import {
+    ArrowUpRightIcon,
+    PencilIcon,
+    PlusIcon,
+    Trash2Icon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "./button";
@@ -156,37 +161,57 @@ export const BoardSidebar = ({ fan }: BoardSidebarProps) => {
                         </div>
                     </>
                 ) : (
-                    <div className="flex flex-col gap-[12px]">
-                        <div className="flex justify-between items-center">
-                            <span className="font-p-semibold text-[16px] text-stone-900">
-                                관리자
-                            </span>
-
-                            <div
-                                className="w-fit p-[4px_10px] flex items-center gap-[4px] hover:bg-stone-100 rounded-[6px] cursor-pointer transition-all duration-[.1s]"
-                                onClick={() => router.push("/고서온")}
-                            >
-                                <span className="font-p-medium text-[16px] text-stone-900">
-                                    고서온
+                    <>
+                        <div className="flex flex-col gap-[12px]">
+                            <div className="flex justify-between items-center">
+                                <span className="font-p-semibold text-[16px] text-stone-900">
+                                    관리자
                                 </span>
 
-                                <ArrowUpRightIcon
-                                    size={14}
-                                    className="stroke-stone-900"
-                                />
+                                <div
+                                    className="w-fit p-[4px_10px] flex items-center gap-[4px] hover:bg-stone-100 rounded-[6px] cursor-pointer transition-all duration-[.1s]"
+                                    onClick={() => router.push("/고서온")}
+                                >
+                                    <span className="font-p-medium text-[16px] text-stone-900">
+                                        고서온
+                                    </span>
+
+                                    <ArrowUpRightIcon
+                                        size={14}
+                                        className="stroke-stone-900"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex justify-between items-center">
+                                <span className="font-p-semibold text-[16px] text-stone-900">
+                                    게시글 수
+                                </span>
+
+                                <span className="font-p-medium text-[16px] text-stone-900">
+                                    32,874,315
+                                </span>
                             </div>
                         </div>
 
-                        <div className="flex justify-between items-center">
-                            <span className="font-p-semibold text-[16px] text-stone-900">
-                                게시글 수
-                            </span>
-
-                            <span className="font-p-medium text-[16px] text-stone-900">
-                                32,874,315
-                            </span>
-                        </div>
-                    </div>
+                        <Button
+                            type="lg"
+                            variants="black"
+                            icons={[
+                                {
+                                    float: "left",
+                                    component: (
+                                        <PlusIcon
+                                            size={16}
+                                            className="stroke-white"
+                                        />
+                                    ),
+                                },
+                            ]}
+                        >
+                            새 게시글
+                        </Button>
+                    </>
                 )}
             </div>
 
