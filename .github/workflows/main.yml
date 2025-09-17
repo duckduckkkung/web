@@ -21,34 +21,74 @@ jobs:
                   SERVER_HOST: ${{ secrets.SSH_HOST }}
                   APP_DIR: ${{ secrets.APP_DIR }}
               run: |
-                  ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
-                    set -e
-
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                    
-                    if ! command -v pm2 >/dev/null 2>&1; then
-                      export PATH="$HOME/.nvm/versions/node/$(nvm current)/bin:$PATH"
-                    fi
-
-                    # 1) 최초 배포가 아니면 클론 대신 업데이트
-                    if [ ! -d \"$APP_DIR/.git\" ]; then
-                      git clone git@github.com:duckduckkkung/web.git $APP_DIR
-                    fi
-
-                    cd $APP_DIR
-
-                    # 2) 최신 커밋만 **가져오고(fetch)** 로컬 변경은 폐기
-                    git fetch origin dev
-
-                    # 로컬을 원격 상태로 강제 동기화
-                    git reset --hard origin/dev
-                    git clean -fdx      # 추적 안 된 파일, node_modules 등 삭제
-
-                    # 3) 의존성 & 빌드
-                    npm ci              # package-lock.json 기반 설치
-                    npm run build
-
-                    # 4) 애플리케이션 재시작
-                    pm2 restart app || pm2 start npm --name app -- start
-                  "
+                  ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" <<EOF
+                      set -e
+                      
+                      # 환경변수 설정
+                      SERVER_USER="$SERVER_USER"
+                      APP_DIR="$APP_DIR"
+                      
+                      # 강제 nvm 초기화
+                      export NVM_DIR="/home/\$SERVER_USER/.nvm"
+                      
+                      # nvm 존재 확인
+                      if [ ! -d "\$NVM_DIR" ]; then
+                        echo "ERROR: NVM directory not found at \$NVM_DIR"
+                        exit 1
+                      fi
+                      
+                      # nvm 스크립트 강제 로드
+                      if [ -s "\$NVM_DIR/nvm.sh" ]; then
+                        . "\$NVM_DIR/nvm.sh"
+                      else
+                        echo "ERROR: nvm.sh not found"
+                        exit 1
+                      fi
+                      
+                      # 기본 node 버전 사용 설정
+                      nvm use default || nvm use node || nvm use stable
+                      
+                      # 디버그 정보
+                      # echo "NVM_DIR: \$NVM_DIR"
+                      # echo "NVM version: \$(nvm current)"
+                      # echo "Node version: \$(node --version)"
+                      # echo "NPM version: \$(npm --version)"
+                      # echo "PATH: \$PATH"
+                      
+                      # pm2 경로 직접 확인
+                      if [ -d "\$NVM_DIR/versions/node" ]; then
+                        ls -la "\$NVM_DIR/versions/node/"
+                        NODE_VERSION=\$(nvm current)
+                        if [ "\$NODE_VERSION" != "" ] && [ "\$NODE_VERSION" != "system" ]; then
+                          PM2_PATH="\$NVM_DIR/versions/node/\$NODE_VERSION/bin/pm2"
+                          echo "Expected PM2 path: \$PM2_PATH"
+                          ls -la "\$PM2_PATH" || echo "PM2 not found at expected path"
+                        fi
+                      fi
+                      
+                      # pm2 설치 확인 및 설치
+                      if ! command -v pm2 >/dev/null 2>&1; then
+                        echo "Installing PM2..."
+                        npm install -g pm2
+                      fi
+                      
+                      # 이제 배포 진행
+                      if [ ! -d "\$APP_DIR/.git" ]; then
+                        git clone git@github.com:duckduckkkung/web.git "\$APP_DIR"
+                      fi
+                      
+                      cd "\$APP_DIR"
+                      git fetch origin dev
+                      git reset --hard origin/dev
+                      git clean -fdx
+                      
+                      if [ ! -f "\$APP_DIR/package-lock.json" ]; then
+                        npm install --package-lock-only
+                      fi
+                      
+                      npm ci
+                      npm run build
+                      
+                      # pm2 재시작
+                      pm2 restart app || pm2 start npm --name app -- start
+                  EOF
