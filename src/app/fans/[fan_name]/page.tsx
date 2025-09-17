@@ -385,118 +385,145 @@ export default function Fan() {
                                             )}
 
                                             <div
-                                                className={`py-[24px] pr-[32px] grid grid-cols-3 gap-[16px] transition-all duration-[.2s] ${
+                                                className={`py-[24px] flex flex-col gap-[24px] ${
                                                     isRegisterd
                                                         ? ""
                                                         : "blur-[12px]"
                                                 }`}
                                             >
-                                                {Array(24)
-                                                    .fill(0)
-                                                    .map((_, i) => (
-                                                        <div
-                                                            key={i}
-                                                            className="border border-stone-200 rounded-[8px] flex flex-col cursor-pointer"
-                                                            onClick={() =>
-                                                                router.push(
-                                                                    `/fans/${fan.name}/board/${i}`
-                                                                )
-                                                            }
-                                                        >
-                                                            <div className="p-[12px_16px]">
-                                                                <div className="flex flex-col gap-[6px]">
-                                                                    <div className="flex justify-between items-center">
-                                                                        {i %
-                                                                            2 ===
-                                                                        0 ? (
-                                                                            <span className="font-p-semibold text-[14px] text-stone-900">
-                                                                                공지사항
-                                                                            </span>
-                                                                        ) : (
-                                                                            <span className="font-p-semibold text-[14px] text-stone-400">
-                                                                                일반
-                                                                            </span>
-                                                                        )}
+                                                <div
+                                                    className="flex justify-between items-center cursor-pointer"
+                                                    onClick={() =>
+                                                        router.push(
+                                                            `/fans/${fan.name}/board`
+                                                        )
+                                                    }
+                                                >
+                                                    <span className="font-p-semibold text-[16px] text-stone-900">
+                                                        커뮤니티 홈
+                                                    </span>
 
-                                                                        {i %
-                                                                            2 ===
-                                                                            0 && (
-                                                                            <svg
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                width="16"
-                                                                                height="16"
-                                                                                viewBox="0 0 41 41"
-                                                                                fill="none"
-                                                                            >
-                                                                                <g clip-path="url(#clip0_2_145)">
-                                                                                    <path
-                                                                                        d="M10.5572 39.9072C10.2882 39.9072 10.0152 39.8382 9.76518 39.6932C9.00518 39.2552 8.74418 38.2842 9.18418 37.5242L16.6022 24.6752C17.0402 23.9162 18.0102 23.6542 18.7712 24.0942C19.5312 24.5322 19.7922 25.5032 19.3522 26.2632L11.9342 39.1122C11.6402 39.6222 11.1072 39.9072 10.5572 39.9072Z"
-                                                                                        fill="#4B596A"
-                                                                                    />
-                                                                                    <path
-                                                                                        d="M35.6252 10.1892L22.3872 2.54619C21.2652 1.89819 19.8632 2.70819 19.8632 4.00319V6.36019C19.8632 9.36619 18.2602 12.1432 15.6572 13.6462L5.91621 19.2702C4.79421 19.9182 4.79421 21.5372 5.91621 22.1842L26.8532 34.2722C27.9752 34.9202 29.3772 34.1102 29.3772 32.8152V21.5672C29.3772 18.5612 30.9802 15.7842 33.5832 14.2812L35.6252 13.1022C36.7472 12.4542 36.7472 10.8352 35.6252 10.1882V10.1892Z"
-                                                                                        fill="#EF4452"
-                                                                                    />
-                                                                                </g>
-                                                                                <defs>
-                                                                                    <clipPath id="clip0_2_145">
-                                                                                        <rect
-                                                                                            width="40"
-                                                                                            height="40"
-                                                                                            fill="white"
-                                                                                            transform="translate(0.770264 0.318237)"
+                                                    <ArrowUpRightIcon
+                                                        size={16}
+                                                        className="stroke-stone-900"
+                                                    />
+                                                </div>
+
+                                                <div
+                                                    className={`grid grid-cols-3 gap-[16px] transition-all duration-[.2s] ${
+                                                        isRegisterd
+                                                            ? ""
+                                                            : "blur-[12px]"
+                                                    }`}
+                                                >
+                                                    {Array(24)
+                                                        .fill(0)
+                                                        .map((_, i) => (
+                                                            <div
+                                                                key={i}
+                                                                className="border border-stone-200 rounded-[8px] flex flex-col cursor-pointer"
+                                                                onClick={() =>
+                                                                    router.push(
+                                                                        `/fans/${fan.name}/board/${i}`
+                                                                    )
+                                                                }
+                                                            >
+                                                                <div className="p-[12px_16px]">
+                                                                    <div className="flex flex-col gap-[6px]">
+                                                                        <div className="flex justify-between items-center">
+                                                                            {i %
+                                                                                2 ===
+                                                                            0 ? (
+                                                                                <span className="font-p-semibold text-[14px] text-stone-900">
+                                                                                    공지사항
+                                                                                </span>
+                                                                            ) : (
+                                                                                <span className="font-p-semibold text-[14px] text-stone-400">
+                                                                                    일반
+                                                                                </span>
+                                                                            )}
+
+                                                                            {i %
+                                                                                2 ===
+                                                                                0 && (
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="16"
+                                                                                    height="16"
+                                                                                    viewBox="0 0 41 41"
+                                                                                    fill="none"
+                                                                                >
+                                                                                    <g clip-path="url(#clip0_2_145)">
+                                                                                        <path
+                                                                                            d="M10.5572 39.9072C10.2882 39.9072 10.0152 39.8382 9.76518 39.6932C9.00518 39.2552 8.74418 38.2842 9.18418 37.5242L16.6022 24.6752C17.0402 23.9162 18.0102 23.6542 18.7712 24.0942C19.5312 24.5322 19.7922 25.5032 19.3522 26.2632L11.9342 39.1122C11.6402 39.6222 11.1072 39.9072 10.5572 39.9072Z"
+                                                                                            fill="#4B596A"
                                                                                         />
-                                                                                    </clipPath>
-                                                                                </defs>
-                                                                            </svg>
-                                                                        )}
-                                                                    </div>
+                                                                                        <path
+                                                                                            d="M35.6252 10.1892L22.3872 2.54619C21.2652 1.89819 19.8632 2.70819 19.8632 4.00319V6.36019C19.8632 9.36619 18.2602 12.1432 15.6572 13.6462L5.91621 19.2702C4.79421 19.9182 4.79421 21.5372 5.91621 22.1842L26.8532 34.2722C27.9752 34.9202 29.3772 34.1102 29.3772 32.8152V21.5672C29.3772 18.5612 30.9802 15.7842 33.5832 14.2812L35.6252 13.1022C36.7472 12.4542 36.7472 10.8352 35.6252 10.1882V10.1892Z"
+                                                                                            fill="#EF4452"
+                                                                                        />
+                                                                                    </g>
+                                                                                    <defs>
+                                                                                        <clipPath id="clip0_2_145">
+                                                                                            <rect
+                                                                                                width="40"
+                                                                                                height="40"
+                                                                                                fill="white"
+                                                                                                transform="translate(0.770264 0.318237)"
+                                                                                            />
+                                                                                        </clipPath>
+                                                                                    </defs>
+                                                                                </svg>
+                                                                            )}
+                                                                        </div>
 
-                                                                    <div className="flex flex-col gap-[2px]">
-                                                                        <span className="font-p-medium text-[16px] text-stone-900 truncate">
-                                                                            [필독]
-                                                                            2025
-                                                                            커뮤니티
-                                                                            규칙
+                                                                        <div className="flex flex-col gap-[2px]">
+                                                                            <span className="font-p-medium text-[16px] text-stone-900 truncate">
+                                                                                [필독]
+                                                                                2025
+                                                                                커뮤니티
+                                                                                규칙
+                                                                            </span>
+
+                                                                            <span className="font-p-medium text-[14px] text-stone-500 truncate">
+                                                                                제
+                                                                                1조.
+                                                                                대화
+                                                                                에티켓
+                                                                                이를
+                                                                                지키지
+                                                                                못할
+                                                                                시
+                                                                                밴
+                                                                                또는
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="w-full h-[1px] bg-stone-200" />
+
+                                                                <div className="p-[12px_16px]">
+                                                                    <div className="flex justify-between items-center gap-[6px]">
+                                                                        <span className="font-p-medium text-[12px] text-stone-400">
+                                                                            9개월
+                                                                            전
                                                                         </span>
 
-                                                                        <span className="font-p-medium text-[14px] text-stone-500 truncate">
-                                                                            제
-                                                                            1조.
-                                                                            대화
-                                                                            에티켓
-                                                                            이를
-                                                                            지키지
-                                                                            못할
-                                                                            시
-                                                                            밴
-                                                                            또는
+                                                                        <span className="font-p-medium text-[12px] text-stone-700">
+                                                                            극악무도한송하영사랑꾼
                                                                         </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                            <div className="w-full h-[1px] bg-stone-200" />
-
-                                                            <div className="p-[12px_16px]">
-                                                                <div className="flex justify-between items-center gap-[6px]">
-                                                                    <span className="font-p-medium text-[12px] text-stone-400">
-                                                                        9개월 전
-                                                                    </span>
-
-                                                                    <span className="font-p-medium text-[12px] text-stone-700">
-                                                                        극악무도한송하영사랑꾼
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
+                                                        ))}
+                                                </div>
                                             </div>
                                         </div>
                                     )}
 
                                     {tab === "모먼트" && (
-                                        <div className="py-[24px] pr-[32px] grid grid-cols-4 gap-[32px]">
+                                        <div className="py-[24px] grid grid-cols-4 gap-[32px]">
                                             {moments
                                                 .slice(0, 4)
                                                 .map((moment) => (
@@ -509,7 +536,7 @@ export default function Fan() {
                                     )}
 
                                     {tab === "굿즈" && (
-                                        <div className="py-[24px] pr-[32px] grid grid-cols-2 gap-[32px]">
+                                        <div className="py-[24px] grid grid-cols-2 gap-[32px]">
                                             {goods.map((goods) => (
                                                 <GoodsCard
                                                     key={goods.id}
