@@ -76,7 +76,7 @@ export const Popover = ({ overlay, children }: PopoverProps) => {
 
             {isOpen && (
                 <div
-                    className={`absolute top-[100%] left-0 translate-y-[10px] bg-white border border-stone-300 rounded-[6px] overflow-hidden z-50 transition-all duration-200 ease-out transform-gpu ${
+                    className={`absolute top-[100%] left-0 translate-y-[10px] bg-white border border-stone-200 rounded-[6px] overflow-hidden z-50 transition-all duration-200 ease-out transform-gpu ${
                         isAnimating
                             ? "opacity-100 scale-100 translate-y-[10px]"
                             : "opacity-0 scale-95 translate-y-[5px]"
@@ -84,6 +84,7 @@ export const Popover = ({ overlay, children }: PopoverProps) => {
                     style={{
                         transformOrigin: "top left",
                     }}
+                    onClick={() => closePopover()}
                 >
                     {overlay}
                 </div>

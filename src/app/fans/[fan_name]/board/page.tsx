@@ -32,7 +32,7 @@ export default function Board() {
             <FanHeader fan={fan} />
 
             <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[64px] flex gap-[98px]">
-                <BoardSidebar />
+                <BoardSidebar type="boards" fan={fan} />
 
                 <div className="flex-1 shrink-0 flex flex-col gap-[96px]">
                     <div className="flex flex-col gap-[16px] cursor-pointer">

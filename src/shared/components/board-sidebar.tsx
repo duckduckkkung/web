@@ -11,16 +11,17 @@ import { Button } from "./button";
 import { TypeFan } from "../types/types";
 
 interface BoardSidebarProps {
-    fan?: TypeFan;
+    type: "boards" | "board";
+    fan: TypeFan;
 }
 
-export const BoardSidebar = ({ fan }: BoardSidebarProps) => {
+export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
     const router = useRouter();
 
     return (
         <div className="shrink-0 w-[240px] flex flex-col gap-[96px]">
             <div className="flex flex-col gap-[24px]">
-                {fan ? (
+                {type === "board" ? (
                     <>
                         <div className="flex flex-col gap-[12px]">
                             <div className="flex justify-between items-center h-[32px]">
@@ -208,6 +209,9 @@ export const BoardSidebar = ({ fan }: BoardSidebarProps) => {
                                     ),
                                 },
                             ]}
+                            onClick={() =>
+                                router.push(`/fans/${fan.name}/board/create`)
+                            }
                         >
                             새 게시글
                         </Button>
