@@ -8,6 +8,7 @@ import { Button } from "@/shared/components/button";
 import { Footer } from "@/shared/components/footer";
 
 import { TypeFan } from "@/shared/types/types";
+import { HeartIcon } from "lucide-react";
 
 export default function Board() {
     const router = useRouter();
@@ -37,9 +38,40 @@ export default function Board() {
                 <div className="flex-1 shrink-0 flex flex-col gap-[128px]">
                     <div className="flex flex-col gap-[48px]">
                         <div className="flex flex-col gap-[16px]">
-                            <span className="font-p-bold text-[24px] text-stone-900 truncate">
-                                2025 커뮤니티 규칙
-                            </span>
+                            <div className="flex justify-between items-center gap-[8px]">
+                                <span className="font-p-bold text-[24px] text-stone-900 truncate">
+                                    2025 커뮤니티 규칙
+                                </span>
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 41 41"
+                                    fill="none"
+                                >
+                                    <g clip-path="url(#clip0_2_145)">
+                                        <path
+                                            d="M10.5572 39.9072C10.2882 39.9072 10.0152 39.8382 9.76518 39.6932C9.00518 39.2552 8.74418 38.2842 9.18418 37.5242L16.6022 24.6752C17.0402 23.9162 18.0102 23.6542 18.7712 24.0942C19.5312 24.5322 19.7922 25.5032 19.3522 26.2632L11.9342 39.1122C11.6402 39.6222 11.1072 39.9072 10.5572 39.9072Z"
+                                            fill="#4B596A"
+                                        />
+                                        <path
+                                            d="M35.6252 10.1892L22.3872 2.54619C21.2652 1.89819 19.8632 2.70819 19.8632 4.00319V6.36019C19.8632 9.36619 18.2602 12.1432 15.6572 13.6462L5.91621 19.2702C4.79421 19.9182 4.79421 21.5372 5.91621 22.1842L26.8532 34.2722C27.9752 34.9202 29.3772 34.1102 29.3772 32.8152V21.5672C29.3772 18.5612 30.9802 15.7842 33.5832 14.2812L35.6252 13.1022C36.7472 12.4542 36.7472 10.8352 35.6252 10.1882V10.1892Z"
+                                            fill="#EF4452"
+                                        />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_2_145">
+                                            <rect
+                                                width="40"
+                                                height="40"
+                                                fill="white"
+                                                transform="translate(0.770264 0.318237)"
+                                            />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </div>
 
                             <div className="w-full h-[1px] bg-stone-200" />
                         </div>
@@ -82,6 +114,28 @@ export default function Board() {
                                 읽어주셔서 감사합니다! 활기찬 새해 되세요 ;)
                             </span>
                         </div>
+                    </div>
+
+                    <div className="flex justify-end items-center gap-[48px]">
+                        <div className="flex-1 h-[1px] bg-stone-200" />
+
+                        <Button
+                            type="md"
+                            variants="outline"
+                            icons={[
+                                {
+                                    float: "left",
+                                    component: (
+                                        <HeartIcon
+                                            size={14}
+                                            className="stroke-stone-900"
+                                        />
+                                    ),
+                                },
+                            ]}
+                        >
+                            좋아요
+                        </Button>
                     </div>
 
                     <div className="flex flex-col gap-[24px]">
