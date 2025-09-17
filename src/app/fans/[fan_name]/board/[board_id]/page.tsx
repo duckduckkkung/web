@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { HeartIcon } from "lucide-react";
 
 import { BoardSidebar } from "@/shared/components/board-sidebar";
 import { FanHeader } from "@/shared/components/fan-header";
@@ -8,7 +9,6 @@ import { Button } from "@/shared/components/button";
 import { Footer } from "@/shared/components/footer";
 
 import { TypeFan } from "@/shared/types/types";
-import { HeartIcon } from "lucide-react";
 
 export default function Board() {
     const router = useRouter();
@@ -30,10 +30,10 @@ export default function Board() {
 
     return (
         <div>
-            <FanHeader fan={fan} />
+            <FanHeader href={`/fans/${fan.name}/board`} fan={fan} />
 
             <div className="max-w-[1280px] min-h-[100dvh] m-[0_auto] py-[64px] flex gap-[98px]">
-                <BoardSidebar fan={fan} />
+                <BoardSidebar type="board" fan={fan} />
 
                 <div className="flex-1 shrink-0 flex flex-col gap-[128px]">
                     <div className="flex flex-col gap-[48px]">

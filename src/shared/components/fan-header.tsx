@@ -10,10 +10,11 @@ import { Button } from "./button";
 import { TypeFan } from "../types/types";
 
 interface FanHeaderProps {
+    href: string;
     fan: TypeFan;
 }
 
-export const FanHeader = ({ fan }: FanHeaderProps) => {
+export const FanHeader = ({ href, fan }: FanHeaderProps) => {
     const router = useRouter();
 
     const [search, setSearch] = useState<string>("");
@@ -24,7 +25,7 @@ export const FanHeader = ({ fan }: FanHeaderProps) => {
                 <div className="flex items-center gap-[4px]">
                     <div
                         className="p-[8px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
-                        onClick={() => router.push("/fans")}
+                        onClick={() => router.push(href)}
                     >
                         <ArrowLeftIcon size={16} className="stroke-stone-900" />
                     </div>
