@@ -132,6 +132,7 @@ export default function User() {
                                                 float: "left",
                                                 component: (
                                                     <PencilLineIcon
+                                                        key="edit-profile"
                                                         size={16}
                                                         className="stroke-stone-900"
                                                     />

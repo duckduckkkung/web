@@ -158,6 +158,7 @@ export default function Settings() {
                                                     float: "left",
                                                     component: (
                                                         <PencilLineIcon
+                                                            key="modify-profile"
                                                             size={16}
                                                             className="stroke-white"
                                                         />
@@ -197,6 +198,7 @@ export default function Settings() {
                                                         float: "left",
                                                         component: (
                                                             <KeySquareIcon
+                                                                key="two-factor"
                                                                 size={16}
                                                                 className="stroke-stone-900"
                                                             />
@@ -227,6 +229,7 @@ export default function Settings() {
                                                         float: "left",
                                                         component: (
                                                             <LogOutIcon
+                                                                key="secession"
                                                                 size={16}
                                                                 className="stroke-red-700"
                                                             />

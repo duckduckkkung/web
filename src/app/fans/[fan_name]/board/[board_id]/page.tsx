@@ -127,6 +127,7 @@ export default function Board() {
                                     float: "left",
                                     component: (
                                         <HeartIcon
+                                            key="heart"
                                             size={14}
                                             className="stroke-stone-900"
                                         />

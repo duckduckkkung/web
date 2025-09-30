@@ -225,6 +225,7 @@ export const Notifications = ({}: NotificationsProps) => {
                                     float: "left",
                                     component: (
                                         <BellIcon
+                                            key="read-all"
                                             size={16}
                                             className="stroke-stone-900"
                                         />

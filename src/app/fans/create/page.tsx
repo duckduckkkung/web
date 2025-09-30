@@ -252,6 +252,7 @@ export default function CreateFan() {
                                         {
                                             component: (
                                                 <ArrowUpToLineIcon
+                                                    key="upload-image"
                                                     size={14}
                                                     className="stroke-stone-900"
                                                 />
@@ -329,11 +330,13 @@ export default function CreateFan() {
                                 {
                                     component: isCreating ? (
                                         <LoaderCircleIcon
+                                            key="loader-cirlce"
                                             size={14}
                                             className="stroke-stone-900 animate-spin"
                                         />
                                     ) : (
                                         <BookPlusIcon
+                                            key="create-fan"
                                             size={14}
                                             className="stroke-stone-900"
                                         />

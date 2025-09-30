@@ -262,6 +262,7 @@ export default function Fan() {
                                                 float: "left",
                                                 component: (
                                                     <BotMessageSquareIcon
+                                                        key="update-information"
                                                         size={16}
                                                         className="stroke-stone-900"
                                                     />
@@ -350,6 +351,7 @@ export default function Fan() {
                                                                         component:
                                                                             isCreating ? (
                                                                                 <LoaderCircleIcon
+                                                                                    key="loader-circle"
                                                                                     size={
                                                                                         14
                                                                                     }
@@ -357,6 +359,7 @@ export default function Fan() {
                                                                                 />
                                                                             ) : (
                                                                                 <ArrowUpRightIcon
+                                                                                    key="fan-register"
                                                                                     size={
                                                                                         16
                                                                                     }

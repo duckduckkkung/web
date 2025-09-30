@@ -118,11 +118,13 @@ export default function CreateBoard() {
                                     float: "left",
                                     component: isPosting ? (
                                         <LoaderCircleIcon
+                                            key="loader-cirlce"
                                             size={16}
                                             className="stroke-white animate-spin"
                                         />
                                     ) : (
                                         <PlusIcon
+                                            key="upload-post"
                                             size={16}
                                             className="stroke-white"
                                         />

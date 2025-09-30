@@ -120,11 +120,13 @@ export default function ModifyBoard() {
                                     float: "left",
                                     component: isPosting ? (
                                         <LoaderCircleIcon
+                                            key="loader-cirlce"
                                             size={16}
                                             className="stroke-white animate-spin"
                                         />
                                     ) : (
                                         <PencilLineIcon
+                                            key="modify"
                                             size={16}
                                             className="stroke-white"
                                         />

@@ -49,7 +49,7 @@ export const GlobalHeaderInteractions = () => {
                     {
                         component: (
                             <SparkleIcon
-                                key="start"
+                                key="header-start"
                                 size={12}
                                 className="stroke-stone-900"
                             />
