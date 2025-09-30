@@ -173,7 +173,6 @@ export const Popover = ({ overlay, children }: PopoverProps) => {
                         maxWidth: "calc(100vw - 20px)",
                         maxHeight: "calc(100vh - 40px)",
                     }}
-                    onClick={() => closePopover()}
                 >
                     {overlay}
                 </div>
