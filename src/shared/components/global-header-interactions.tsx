@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    BadgeDollarSignIcon,
     ChevronDownIcon,
     Settings2Icon,
     SparkleIcon,
@@ -28,13 +29,24 @@ export const GlobalHeaderInteractions = () => {
             </div>
 
             <div
-                className="px-3 py-2 cursor-pointer hover:bg-stone-50 flex items-center gap-[6px]"
+                className="px-3 py-2 cursor-pointer hover:bg-stone-50 border-b border-b-stone-200 flex items-center gap-[6px]"
                 onClick={() => router.push("/settings")}
             >
                 <Settings2Icon size={14} className="stroke-stone-900" />
 
                 <span className="font-p-medium text-[14px] text-stone-900">
                     설정
+                </span>
+            </div>
+
+            <div
+                className="px-3 py-2 cursor-pointer hover:bg-stone-50 flex items-center gap-[6px]"
+                onClick={() => router.push("/billing")}
+            >
+                <BadgeDollarSignIcon size={14} className="stroke-stone-900" />
+
+                <span className="font-p-medium text-[14px] text-stone-900">
+                    요금제
                 </span>
             </div>
         </div>

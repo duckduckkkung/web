@@ -120,7 +120,7 @@ export default function Settings() {
 
             <div className="max-w-[640px] min-h-[100dvh] m-[0_auto] py-[48px]">
                 <Tab
-                    options={["프로필", "보안", "기타"]}
+                    options={["프로필", "보안", "청구", "기타"]}
                     tab={tab}
                     onChange={handleTabChange}
                 />
@@ -268,6 +268,65 @@ export default function Settings() {
                                                 ]}
                                             >
                                                 Two-Factor 설정
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {tab === "청구" && (
+                                <div className="py-[48px]">
+                                    <div className="flex flex-col gap-[24px]">
+                                        <div className="flex flex-col gap-[12px]">
+                                            <div className="flex items-center gap-[6px]">
+                                                <span className="w-[140px] font-p-medium text-[16px] text-stone-900">
+                                                    현재 플랜
+                                                </span>
+
+                                                <span className="font-p-medium text-[14px] text-stone-500">
+                                                    덕질
+                                                </span>
+                                            </div>
+
+                                            <div className="flex items-center gap-[6px]">
+                                                <span className="w-[140px] font-p-medium text-[16px] text-stone-900">
+                                                    다음 청구 날짜
+                                                </span>
+
+                                                <span className="font-p-medium text-[14px] text-stone-500">
+                                                    2025. 10. 10.
+                                                </span>
+                                            </div>
+
+                                            <div className="flex items-center gap-[6px]">
+                                                <span className="w-[140px] font-p-medium text-[16px] text-stone-900">
+                                                    청구 금액
+                                                </span>
+
+                                                <span className="font-p-medium text-[14px] text-red-600">
+                                                    ₩1,400
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="w-[140px] flex flex-col">
+                                            <Button
+                                                type="md"
+                                                variants="warning"
+                                                icons={[
+                                                    {
+                                                        float: "left",
+                                                        component: (
+                                                            <LogOutIcon
+                                                                key="billing"
+                                                                size={16}
+                                                                className="stroke-red-700"
+                                                            />
+                                                        ),
+                                                    },
+                                                ]}
+                                            >
+                                                구독 해지
                                             </Button>
                                         </div>
                                     </div>

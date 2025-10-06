@@ -17,7 +17,9 @@ import { FanHeader } from "@/shared/components/fan-header";
 import { TypeFan } from "@/shared/types/types";
 
 export default function Moments() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const searchParams = useSearchParams();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const router = useRouter();
 
     const [isOpenCommentWindow, setIsOpenCommentWindow] = useState(false);
