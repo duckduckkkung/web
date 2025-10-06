@@ -526,15 +526,35 @@ export default function Fan() {
                                     )}
 
                                     {tab === "모먼트" && (
-                                        <div className="py-[24px] grid grid-cols-4 gap-[32px]">
-                                            {moments
-                                                .slice(0, 4)
-                                                .map((moment) => (
-                                                    <MomentCard
-                                                        key={moment.id}
-                                                        data={moment}
-                                                    />
-                                                ))}
+                                        <div className="py-[24px] flex flex-col gap-[24px]">
+                                            <div
+                                                className="flex justify-between items-center cursor-pointer"
+                                                onClick={() =>
+                                                    router.push(
+                                                        `/fans/${fan.name}/moments/create`
+                                                    )
+                                                }
+                                            >
+                                                <span className="font-p-semibold text-[16px] text-stone-900">
+                                                    모먼트 업로드
+                                                </span>
+
+                                                <ArrowUpRightIcon
+                                                    size={16}
+                                                    className="stroke-stone-900"
+                                                />
+                                            </div>
+
+                                            <div className="grid grid-cols-4 gap-[32px]">
+                                                {moments
+                                                    .slice(0, 4)
+                                                    .map((moment) => (
+                                                        <MomentCard
+                                                            key={moment.id}
+                                                            data={moment}
+                                                        />
+                                                    ))}
+                                            </div>
                                         </div>
                                     )}
 
