@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { Button } from "./button";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface NotificationsProps {}
 
 export const Notifications = ({}: NotificationsProps) => {
