@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
 
-export default function Home() {
+export default function Release() {
     const router = useRouter();
 
     return (

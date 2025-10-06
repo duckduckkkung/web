@@ -15,7 +15,7 @@ export const MomentCard = ({ data }: MomentCardProps) => {
     return (
         <div
             className="relative aspect-9/19 rounded-[8px] overflow-hidden cursor-pointer flex flex-col group"
-            onClick={() => router.push(`/moment/${data.id}`)}
+            onClick={() => router.push(`/fans/asdf/moments?q=${data.id}`)}
         >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
