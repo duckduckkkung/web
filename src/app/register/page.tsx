@@ -363,11 +363,13 @@ export default function Register() {
                                                 {
                                                     component: isCreating ? (
                                                         <LoaderCircleIcon
+                                                            key="loader-cirlce"
                                                             size={16}
                                                             className="stroke-stone-900 animate-spin"
                                                         />
                                                     ) : (
                                                         <ArrowUpRightIcon
+                                                            key="register"
                                                             size={16}
                                                             className="stroke-stone-900"
                                                         />

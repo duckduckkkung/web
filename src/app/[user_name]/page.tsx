@@ -1,6 +1,10 @@
 "use client";
 
-import { ArrowUpRightIcon, PencilLineIcon } from "lucide-react";
+import {
+    ArrowUpRightIcon,
+    CassetteTapeIcon,
+    PencilLineIcon,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -128,6 +132,7 @@ export default function User() {
                                                 float: "left",
                                                 component: (
                                                     <PencilLineIcon
+                                                        key="edit-profile"
                                                         size={16}
                                                         className="stroke-stone-900"
                                                     />
@@ -150,18 +155,28 @@ export default function User() {
                         <div className="flex flex-col gap-[24px]">
                             <div className="flex flex-wrap gap-[6px]">
                                 <div
-                                    className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50"
+                                    className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50 flex justify-center items-center gap-[4px]"
                                     onClick={() => router.push(`/fans/송하영`)}
                                 >
+                                    <CassetteTapeIcon
+                                        size={12}
+                                        className="stroke-stone-900"
+                                    />
+
                                     <span className="font-p-regular text-[12px] text-stone-600">
                                         송하영
                                     </span>
                                 </div>
 
                                 <div
-                                    className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50"
+                                    className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50 flex justify-center items-center gap-[4px]"
                                     onClick={() => router.push(`/fans/릴파`)}
                                 >
+                                    <CassetteTapeIcon
+                                        size={12}
+                                        className="stroke-stone-900"
+                                    />
+
                                     <span className="font-p-regular text-[12px] text-stone-600">
                                         릴파
                                     </span>

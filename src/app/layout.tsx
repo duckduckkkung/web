@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
+import { Provider } from "./provider";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,7 +18,9 @@ export default function RootLayout({
     return (
         <html lang="ko">
             <body>
-                <Suspense>{children}</Suspense>
+                <Suspense>
+                    <Provider>{children}</Provider>
+                </Suspense>
             </body>
         </html>
     );

@@ -52,6 +52,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                     float: "left",
                                     component: (
                                         <Trash2Icon
+                                            key="delete-post"
                                             size={16}
                                             className="stroke-white"
                                         />
@@ -71,6 +72,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                     float: "left",
                                     component: (
                                         <XIcon
+                                            key="delete-post-cancel"
                                             size={16}
                                             className="stroke-stone-900"
                                         />
@@ -197,6 +199,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                             float: "left",
                                             component: (
                                                 <PencilIcon
+                                                    key="modify-post"
                                                     size={16}
                                                     className="stroke-stone-900"
                                                 />
@@ -220,6 +223,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                             float: "left",
                                             component: (
                                                 <Trash2Icon
+                                                    key="delete-post"
                                                     size={16}
                                                     className="stroke-white"
                                                 />
@@ -274,6 +278,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                         float: "left",
                                         component: (
                                             <PlusIcon
+                                                key="create-post"
                                                 size={16}
                                                 className="stroke-white"
                                             />

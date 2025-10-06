@@ -1,19 +1,21 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import {
     KeySquareIcon,
     LogOutIcon,
     PencilLineIcon,
     UploadIcon,
+    XIcon,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 
 import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
-import { Input } from "@/shared/components/input";
-import { Tab } from "@/shared/components/tab";
 import { Button } from "@/shared/components/button";
+import { Input } from "@/shared/components/input";
+import { Modal } from "@/shared/components/modal";
+import { Tab } from "@/shared/components/tab";
 
 export default function Settings() {
     const [tab, setTab] = useState<string>("프로필");
@@ -53,9 +55,68 @@ export default function Settings() {
         }
     };
 
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
     return (
         <div>
             <Header />
+
+            <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+                <div className="bg-white rounded-[16px] flex flex-col">
+                    <div className="p-[36px] flex flex-col items-center gap-[8px]">
+                        <span className="font-p-semibold text-[18px] text-stone-900">
+                            정말 탈퇴하시겠어요?
+                        </span>
+
+                        <span className="font-p-medium text-[16px] text-stone-600">
+                            탈퇴하면 다시 복구할 수 없어요.
+                        </span>
+                    </div>
+
+                    <div className="w-full h-[1px] bg-stone-200" />
+
+                    <div className="p-[24px] grid grid-cols-2 gap-[16px]">
+                        <Button
+                            type="lg"
+                            variants="black"
+                            icons={[
+                                {
+                                    float: "left",
+                                    component: (
+                                        <LogOutIcon
+                                            key="delete-account"
+                                            size={16}
+                                            className="stroke-white"
+                                        />
+                                    ),
+                                },
+                            ]}
+                        >
+                            탈퇴
+                        </Button>
+
+                        <Button
+                            type="lg"
+                            variants="outline"
+                            onClick={() => setIsOpen(false)}
+                            icons={[
+                                {
+                                    float: "left",
+                                    component: (
+                                        <XIcon
+                                            key="delete-account-cancel"
+                                            size={16}
+                                            className="stroke-stone-900"
+                                        />
+                                    ),
+                                },
+                            ]}
+                        >
+                            취소
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
 
             <div className="max-w-[640px] min-h-[100dvh] m-[0_auto] py-[48px]">
                 <Tab
@@ -158,6 +219,7 @@ export default function Settings() {
                                                     float: "left",
                                                     component: (
                                                         <PencilLineIcon
+                                                            key="modify-profile"
                                                             size={16}
                                                             className="stroke-white"
                                                         />
@@ -197,6 +259,7 @@ export default function Settings() {
                                                         float: "left",
                                                         component: (
                                                             <KeySquareIcon
+                                                                key="two-factor"
                                                                 size={16}
                                                                 className="stroke-stone-900"
                                                             />
@@ -227,12 +290,14 @@ export default function Settings() {
                                                         float: "left",
                                                         component: (
                                                             <LogOutIcon
+                                                                key="secession"
                                                                 size={16}
                                                                 className="stroke-red-700"
                                                             />
                                                         ),
                                                     },
                                                 ]}
+                                                onClick={() => setIsOpen(true)}
                                             >
                                                 계정 탈퇴
                                             </Button>
