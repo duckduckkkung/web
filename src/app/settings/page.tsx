@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    HashIcon,
     KeySquareIcon,
     LogOutIcon,
     PencilLineIcon,
@@ -234,7 +235,64 @@ export default function Settings() {
                             )}
 
                             {tab === "보안" && (
-                                <div className="py-[48px]">
+                                <div className="py-[48px] flex flex-col gap-[48px]">
+                                    <div className="flex flex-col gap-[16px]">
+                                        <div className="flex flex-col gap-[6px]">
+                                            <span className="font-p-medium text-[16px] text-stone-900">
+                                                소셜 연동
+                                            </span>
+
+                                            <span className="font-p-medium text-[14px] text-stone-500">
+                                                덕덕쿵은 2개의 소셜 연동을
+                                                지원해요.
+                                                <br />
+                                                원하는 소셜을 선택해서, 손쉽게
+                                                계정을 연동해 보세요.
+                                            </span>
+                                        </div>
+
+                                        <div className="w-fit flex gap-[8px]">
+                                            <Button
+                                                type="md"
+                                                variants="black"
+                                                icons={[
+                                                    {
+                                                        float: "left",
+                                                        component: (
+                                                            <HashIcon
+                                                                key="kakao"
+                                                                size={16}
+                                                                className="stroke-white"
+                                                            />
+                                                        ),
+                                                    },
+                                                ]}
+                                            >
+                                                카카오
+                                            </Button>
+
+                                            <Button
+                                                type="md"
+                                                variants="outline"
+                                                icons={[
+                                                    {
+                                                        float: "left",
+                                                        component: (
+                                                            <HashIcon
+                                                                key="google"
+                                                                size={16}
+                                                                className="stroke-stone-900"
+                                                            />
+                                                        ),
+                                                    },
+                                                ]}
+                                                disabled
+                                            >
+                                                구글
+                                            </Button>
+                                        </div>
+                                    </div>
+
                                     <div className="flex flex-col gap-[16px]">
                                         <div className="flex flex-col gap-[6px]">
                                             <span className="font-p-medium text-[16px] text-stone-900">
