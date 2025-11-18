@@ -9,17 +9,20 @@ import {
     LoaderCircleIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useState, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
 
 import { FanCard } from "@/shared/components/fan-card";
 import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
 import { Button } from "@/shared/components/button";
 
+import { register } from "@/features/oauth2/api";
+
 import { fans } from "@/mocks/fans";
 
 export default function Register() {
+    const searchParams = useSearchParams();
     const router = useRouter();
 
     const [name, setName] = useState<string>("고서온");
@@ -35,6 +38,14 @@ export default function Register() {
     const [direction, setDirection] = useState<number>(0);
 
     const [isCreating, setIsCreating] = useState<boolean>(false);
+
+    useEffect(() => {
+        const url = searchParams.get("image") as string;
+        setProfileImage(url || "");
+
+        const name = searchParams.get("name") as string;
+        setName(name || "");
+    }, [searchParams]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -380,10 +391,42 @@ export default function Register() {
                                             onClick={async () => {
                                                 if (isCreating) return;
 
+                                                let profileImage: File;
+                                                if (
+                                                    fileInputRef.current?.files
+                                                ) {
+                                                    profileImage =
+                                                        fileInputRef.current
+                                                            .files[0];
+                                                } else {
+                                                    const url =
+                                                        searchParams.get(
+                                                            "image"
+                                                        ) as string;
+                                                    const blob = await (
+                                                        await fetch(url)
+                                                    ).blob();
+                                                    profileImage = new File(
+                                                        [blob],
+                                                        "image.png"
+                                                    );
+                                                }
+
                                                 setIsCreating(true);
-                                                await new Promise((res) =>
-                                                    setTimeout(res, 1000)
-                                                );
+                                                await register({
+                                                    username: name,
+                                                    email: "",
+                                                    introduction: bio,
+                                                    provider_name:
+                                                        searchParams.get(
+                                                            "provider"
+                                                        ) as string,
+                                                    oauth2_user_id:
+                                                        searchParams.get(
+                                                            "id"
+                                                        ) as string,
+                                                    profileImage,
+                                                });
                                                 router.push("/fans");
                                             }}
                                         >
