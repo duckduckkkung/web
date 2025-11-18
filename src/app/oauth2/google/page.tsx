@@ -3,10 +3,10 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-import { signWithKakao } from "@/features/oauth2/api";
+import { signWithGoogle } from "@/features/oauth2/api";
 import axios from "axios";
 
-export default function Oauth2Kakao() {
+export default function Oauth2Google() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -16,7 +16,7 @@ export default function Oauth2Kakao() {
 
             if (code) {
                 try {
-                    const response = await signWithKakao({ code });
+                    const response = await signWithGoogle({ code });
                     const kakaoResponse = await axios.get(
                         "https://kapi.kakao.com/v2/user/me",
                         {
