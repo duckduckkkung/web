@@ -20,74 +20,66 @@ jobs:
                   SERVER_USER: ${{ secrets.SSH_USER_NAME }}
                   SERVER_HOST: ${{ secrets.SSH_HOST }}
                   APP_DIR: ${{ secrets.APP_DIR }}
-                  NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
-                  NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY }}
-                  NEXT_PUBLIC_KAKAO_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI }}
-                  NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
-                  NEXT_PUBLIC_GOOGLE_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }}
               run: |
-                  ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" <<EOF
-                      set -e
-                      
-                      # 환경변수 설정
-                      SERVER_USER="$SERVER_USER"
-                      APP_DIR="$APP_DIR"
-                      
-                      # 강제 nvm 초기화
-                      export NVM_DIR="/home/\$SERVER_USER/.nvm"
-                      
-                      # nvm 존재 확인
-                      if [ ! -d "\$NVM_DIR" ]; then
-                        echo "ERROR: NVM directory not found at \$NVM_DIR"
-                        exit 1
-                      fi
-                      
-                      # nvm 스크립트 강제 로드
-                      if [ -s "\$NVM_DIR/nvm.sh" ]; then
-                        . "\$NVM_DIR/nvm.sh"
-                      else
-                        echo "ERROR: nvm.sh not found"
-                        exit 1
-                      fi
-                      
-                      # 기본 node 버전 사용 설정
-                      nvm use default || nvm use node || nvm use stable
-                      
-                      # pm2 설치 확인 및 설치
-                      if ! command -v pm2 >/dev/null 2>&1; then
-                        echo "Installing PM2..."
-                        npm install -g pm2
-                      fi
-                      
-                      # 이제 배포 진행
-                      if [ ! -d "\$APP_DIR/.git" ]; then
-                        git clone git@github.com:duckduckkkung/web.git "\$APP_DIR"
-                      fi
-                      
-                      cd "\$APP_DIR"
-                      git fetch origin dev
-                      git reset --hard origin/dev
-                      git clean -fdx
-                      
-                      # .env 파일 생성
-                      echo "Creating .env file..."
-                      cat > .env << 'ENVEOF'
-                      NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
-                      NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY=$NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY
-                      NEXT_PUBLIC_KAKAO_REDIRECT_URI=$NEXT_PUBLIC_KAKAO_REDIRECT_URI
-                      NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID
-                      NEXT_PUBLIC_GOOGLE_REDIRECT_URI=$NEXT_PUBLIC_GOOGLE_REDIRECT_URI
-                      ENVEOF
-                      
-                      echo ".env file created successfully"
-                      
-                      if [ ! -f "\$APP_DIR/package-lock.json" ]; then
-                        npm install --package-lock-only
-                      fi
-                      
-                      npm ci
-                      npm run build
-                      
-                      # pm2 재시작
-                      pm2 restart app || pm2 start npm --name app -- start
-                  EOF
+                  ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" 'bash -s' <<'ENDSSH'
+                    set -e
+                    
+                    # 환경변수 받기
+                    SERVER_USER="${{ secrets.SSH_USER_NAME }}"
+                    APP_DIR="${{ secrets.APP_DIR }}"
+                    
+                    # NVM 설정
+                    export NVM_DIR="/home/$SERVER_USER/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    
+                    nvm use default || nvm use node || nvm use stable
+                    
+                    # PM2 설치 확인
+                    if ! command -v pm2 >/dev/null 2>&1; then
+                      echo "Installing PM2..."
+                      npm install -g pm2
+                    fi
+                    
+                    # Git 작업
+                    if [ ! -d "$APP_DIR/.git" ]; then
+                      git clone git@github.com:duckduckkkung/server.git "$APP_DIR"
+                    fi
+                    
+                    cd "$APP_DIR"
+                    git fetch origin dev
+                    git reset --hard origin/dev
+                    git clean -fdx
+                    
+                    # 의존성 설치
+                    [ ! -f "package-lock.json" ] && npm install --package-lock-only
+                    npm ci
+                    
+                    # 빌드 (상세 로그 출력)
+                    echo "Starting build process..."
+                    npm run build
+                    echo "Build process completed"
+                    
+                    # .env 파일 생성 (.env 내용을 별도로 처리)
+                    touch .env
+                    echo SERVERUSERID=${{ secrets.ENV_SERVERUSERID }} >> .env
+                    echo SERVERPASSWD=${{ secrets.ENV_SERVERPASSWD }} >> .env
+                    echo JWT_KEY=${{ secrets.ENV_JWT_KEY }} >> .env
+                    echo JWT_REFRESH_KEY=${{ secrets.ENV_JWT_REFRESH_KEY }} >> .env
+                    echo JWT_EXPIRATION=${{ secrets.ENV_JWT_EXPIRATION }} >> .env
+                    echo KAKAO_REST_KEY=${{ secrets.ENV_KAKAO_REST_KEY }} >> .env
+                    echo KAKAO_REDIRECT_URI=${{ secrets.ENV_KAKAO_REDIRECT_URI }} >> .env
+                    echo GOOGLE_REST_KEY=${{ secrets.ENV_GOOGLE_REST_KEY }} >> .env
+                    echo GOOGLE_REDIRECT_URI=${{ secrets.ENV_GOOGLE_REDIRECT_URI }} >> .env
+                    echo GOOGLE_REST_SECRET=${{ secrets.ENV_GOOGLE_REST_SECRET }} >> .env
+                    echo ALLOW_DOMAIN=${{ secrets.ENV_ALLOW_DOMAIN }} >> .env
+                    echo PORT=${{ secrets.ENV_PORT }} >> .env
+                    
+                    chmod 600 .env
+                    echo ".env file created"
+                    
+                    # PM2 재시작
+                    echo "Restarting PM2..."
+                    pm2 restart app || pm2 start npm --name app -- start
+                    echo "PM2 restart completed"
+                    
+                  ENDSSH
