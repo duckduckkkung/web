@@ -26,7 +26,12 @@ export const signWithGoogle = async (
 export const register = async (
     credentials: RegisterRequest
 ): Promise<Response> => {
-    return await apiClient.post<Response>("/api/user", credentials, {
+    const fromData = new FormData();
+    Object.entries(credentials).forEach(([key, value]) => {
+        fromData.append(key, value);
+    });
+
+    return await apiClient.postFormData<Response>("/api/user", fromData, {
         headers: { skipAuth: true },
     });
 };
