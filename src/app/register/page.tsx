@@ -25,6 +25,8 @@ export default function Register() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
+    const [email, setEmail] = useState<string>("");
+
     const [name, setName] = useState<string>("고서온");
     const [isNameEditing, setIsNameEditing] = useState<boolean>(false);
 
@@ -45,6 +47,9 @@ export default function Register() {
 
         const name = searchParams.get("name") as string;
         setName(name || "");
+
+        const email = searchParams.get("email") as string;
+        setEmail(email || "");
     }, [searchParams]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -415,7 +420,7 @@ export default function Register() {
                                                 setIsCreating(true);
                                                 await register({
                                                     username: name,
-                                                    email: "",
+                                                    email,
                                                     introduction: bio,
                                                     provider_name:
                                                         searchParams.get(
