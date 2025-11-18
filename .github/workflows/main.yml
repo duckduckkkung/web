@@ -20,6 +20,11 @@ jobs:
                   SERVER_USER: ${{ secrets.SSH_USER_NAME }}
                   SERVER_HOST: ${{ secrets.SSH_HOST }}
                   APP_DIR: ${{ secrets.APP_DIR }}
+                  NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+                  NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY }}
+                  NEXT_PUBLIC_KAKAO_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI }}
+                  NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
+                  NEXT_PUBLIC_GOOGLE_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }}
               run: |
                   ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" <<EOF
                       set -e
@@ -48,24 +53,6 @@ jobs:
                       # 기본 node 버전 사용 설정
                       nvm use default || nvm use node || nvm use stable
                       
-                      # 디버그 정보
-                      # echo "NVM_DIR: \$NVM_DIR"
-                      # echo "NVM version: \$(nvm current)"
-                      # echo "Node version: \$(node --version)"
-                      # echo "NPM version: \$(npm --version)"
-                      # echo "PATH: \$PATH"
-                      
-                      # pm2 경로 직접 확인
-                      if [ -d "\$NVM_DIR/versions/node" ]; then
-                        ls -la "\$NVM_DIR/versions/node/"
-                        NODE_VERSION=\$(nvm current)
-                        if [ "\$NODE_VERSION" != "" ] && [ "\$NODE_VERSION" != "system" ]; then
-                          PM2_PATH="\$NVM_DIR/versions/node/\$NODE_VERSION/bin/pm2"
-                          echo "Expected PM2 path: \$PM2_PATH"
-                          ls -la "\$PM2_PATH" || echo "PM2 not found at expected path"
-                        fi
-                      fi
-                      
                       # pm2 설치 확인 및 설치
                       if ! command -v pm2 >/dev/null 2>&1; then
                         echo "Installing PM2..."
@@ -81,6 +68,18 @@ jobs:
                       git fetch origin dev
                       git reset --hard origin/dev
                       git clean -fdx
+                      
+                      # .env 파일 생성
+                      echo "Creating .env file..."
+                      cat > .env << 'ENVEOF'
+                      NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+                      NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY=$NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY
+                      NEXT_PUBLIC_KAKAO_REDIRECT_URI=$NEXT_PUBLIC_KAKAO_REDIRECT_URI
+                      NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID
+                      NEXT_PUBLIC_GOOGLE_REDIRECT_URI=$NEXT_PUBLIC_GOOGLE_REDIRECT_URI
+                      ENVEOF
+                      
+                      echo ".env file created successfully"
                       
                       if [ ! -f "\$APP_DIR/package-lock.json" ]; then
                         npm install --package-lock-only
