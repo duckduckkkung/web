@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 import { signWithGoogle } from "@/features/oauth2/api";
-import axios from "axios";
+import { Storage } from "@/shared/services/storage";
 
 export default function Oauth2Google() {
     const searchParams = useSearchParams();
@@ -17,17 +17,15 @@ export default function Oauth2Google() {
             if (code) {
                 try {
                     const response = await signWithGoogle({ code });
-                    const kakaoResponse = await axios.get(
-                        "https://kapi.kakao.com/v2/user/me",
-                        {
-                            headers: {
-                                Authorization: `Bearer ${response.access_token}`,
-                                "Content-Type":
-                                    "application/x-www-form-urlencoded;charset=utf-8",
-                            },
-                        }
-                    );
-                    router.push(`/register?id=${kakaoResponse.data.id}`);
+
+                    if (response.type === "register")
+                        router.push(
+                            `/register?id=${response.kakaoId}&provider=google&image=${response.profileImage}`
+                        );
+                    else {
+                        Storage.setAccessToken(response.access_token);
+                        router.push("/fans");
+                    }
 
                     return;
                 } catch {
