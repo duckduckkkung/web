@@ -1,16 +1,23 @@
 import { apiClient } from "@/shared/api/client";
 
-import { SignWithKakaoRequest, SignWithKakaoResponse } from "./types";
+import { SignRequest, SignResponse } from "./types";
 
 // 카카오 로그인 api
 export const signWithKakao = async (
-    credentials: SignWithKakaoRequest
-): Promise<SignWithKakaoResponse> => {
-    return await apiClient.get<SignWithKakaoResponse>(
-        "/social/callback/kakao",
-        {
-            params: credentials,
-            headers: { skipAuth: true },
-        }
-    );
+    credentials: SignRequest
+): Promise<SignResponse> => {
+    return await apiClient.get<SignResponse>("/social/callback/kakao", {
+        params: credentials,
+        headers: { skipAuth: true },
+    });
+};
+
+// 구글 로그인 api
+export const signWithGoogle = async (
+    credentials: SignRequest
+): Promise<SignResponse> => {
+    return await apiClient.get<SignResponse>("/social/callback/google", {
+        params: credentials,
+        headers: { skipAuth: true },
+    });
 };

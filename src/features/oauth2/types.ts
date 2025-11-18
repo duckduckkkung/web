@@ -1,9 +1,9 @@
-// 카카오 로그인 req, res
-export interface SignWithKakaoRequest {
+// 로그인 req, res
+export interface SignRequest {
     code: string;
 }
 
-export interface SignWithKakaoResponse {
+export interface SignResponse {
     access_token: string;
     token_type: string;
     refresh_token: string;
