@@ -46,24 +46,24 @@ export default function Moments() {
             <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
                 <div className="max-h-[800px] flex gap-[16px]">
                     <div className="relative min-w-[480px] aspect-9/15">
-                        <div className="size-full bg-stone-900 rounded-[16px]" />
+                        <div className="size-full bg-gray-900 rounded-[16px]" />
 
                         <div className="absolute inset-0 size-full p-[24px] flex items-end">
                             <div className="flex flex-col gap-[16px]">
                                 <div className="flex items-center gap-[8px] cursor-pointer w-fit">
                                     <div className="bg-white rounded-[6px] size-[24px]" />
 
-                                    <span className="font-p-medium text-[16px] text-white text-shadow-lg text-shadow-stone-900/60">
+                                    <span className="font-p-medium text-[16px] text-white text-shadow-lg text-shadow-gray-900/60">
                                         고서온
                                     </span>
                                 </div>
 
                                 <div className="flex flex-col gap-[4px]">
-                                    <span className="font-p-medium text-[18px] text-white text-shadow-lg text-shadow-stone-900/60">
+                                    <span className="font-p-medium text-[18px] text-white text-shadow-lg text-shadow-gray-900/60">
                                         송하영 레전드 애교 발생
                                     </span>
 
-                                    <span className="font-p-medium text-[16px] text-white/80 text-shadow-lg text-shadow-stone-900/40">
+                                    <span className="font-p-medium text-[16px] text-white/80 text-shadow-lg text-shadow-gray-900/40">
                                         진짜 너무 귀엽다 하영이.. ❤️❤️
                                     </span>
                                 </div>
@@ -81,14 +81,14 @@ export default function Moments() {
                             </div>
 
                             <div
-                                className="group size-[48px] rounded-[6px] bg-stone-100 cursor-pointer flex justify-center items-center"
+                                className="group size-[48px] rounded-[6px] bg-gray-100 cursor-pointer flex justify-center items-center"
                                 onClick={() =>
                                     setIsOpenCommentWindow((p) => !p)
                                 }
                             >
                                 <MessageCircleMoreIcon
                                     size={24}
-                                    className="stroke-stone-500 group-hover:stroke-stone-600 transition-all duration-[.1s] group-active:fill-stone-600 group-active:stroke-stone-100"
+                                    className="stroke-gray-500 group-hover:stroke-gray-600 transition-all duration-[.1s] group-active:fill-gray-600 group-active:stroke-gray-100"
                                 />
                             </div>
                         </div>
@@ -108,21 +108,21 @@ export default function Moments() {
                                 : "w-0 opacity-0"
                         }`}
                     >
-                        <div className="w-[480px] h-full rounded-[16px] border border-stone-200 flex flex-col gap-[48px]">
+                        <div className="w-[480px] h-full rounded-[16px] border border-gray-200 flex flex-col gap-[48px]">
                             <div className="flex justify-between items-center p-[24px] pb-0">
-                                <span className="font-p-semibold text-[18px] text-stone-900">
+                                <span className="font-p-semibold text-[18px] text-gray-900">
                                     댓글
                                 </span>
 
                                 <div
-                                    className="p-[8px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
+                                    className="p-[8px] flex items-center gap-[8px] hover:bg-gray-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
                                     onClick={() =>
                                         setIsOpenCommentWindow(false)
                                     }
                                 >
                                     <XIcon
                                         size={16}
-                                        className="stroke-stone-900"
+                                        className="stroke-gray-900"
                                     />
                                 </div>
                             </div>
@@ -131,20 +131,20 @@ export default function Moments() {
                                 <div className="flex flex-col gap-[16px]">
                                     <div className="flex flex-col gap-[12px]">
                                         <div className="flex items-center gap-[8px] cursor-pointer w-fit">
-                                            <div className="bg-stone-100 rounded-[6px] size-[24px]" />
+                                            <div className="bg-gray-100 rounded-[6px] size-[24px]" />
 
-                                            <span className="font-p-medium text-[14px] text-stone-900">
+                                            <span className="font-p-medium text-[14px] text-gray-900">
                                                 고서온
                                             </span>
                                         </div>
 
-                                        <span className="font-p-medium text-[14px] text-stone-900">
+                                        <span className="font-p-medium text-[14px] text-gray-900">
                                             송하영 너무 귀여워서 죽을 것 같ㅇ
                                         </span>
                                     </div>
 
                                     <div className="flex justify-between items-center">
-                                        <span className="font-p-medium text-[12px] text-stone-300 cursor-pointer">
+                                        <span className="font-p-medium text-[12px] text-gray-300 cursor-pointer">
                                             4시간 전
                                         </span>
 
@@ -156,45 +156,45 @@ export default function Moments() {
                                 </div>
 
                                 <div className="flex items-center">
-                                    <div className="flex-1 h-[1px] bg-stone-200" />
+                                    <div className="flex-1 h-[1px] bg-gray-200" />
 
-                                    <div className="shrink-0 p-[1px_12px] pb-[2px] border border-stone-200 rounded-full cursor-pointer flex items-center gap-[4px]">
+                                    <div className="shrink-0 p-[1px_12px] pb-[2px] border border-gray-200 rounded-full cursor-pointer flex items-center gap-[4px]">
                                         <ChevronUpIcon
                                             size={12}
-                                            className="stroke-stone-500"
+                                            className="stroke-gray-500"
                                         />
 
-                                        <span className="font-p-medium text-[12px] text-stone-500">
+                                        <span className="font-p-medium text-[12px] text-gray-500">
                                             접기
                                         </span>
                                     </div>
 
-                                    <div className="flex-1 h-[1px] bg-stone-200" />
+                                    <div className="flex-1 h-[1px] bg-gray-200" />
                                 </div>
 
                                 <div className="flex items-start gap-[24px]">
                                     <ArrowDownRightIcon
                                         size={24}
-                                        className="stroke-stone-400 shrink-0"
+                                        className="stroke-gray-400 shrink-0"
                                     />
 
                                     <div className="flex-1 flex flex-col gap-[16px]">
                                         <div className="flex flex-col gap-[12px]">
                                             <div className="flex items-center gap-[8px] cursor-pointer w-fit">
-                                                <div className="bg-stone-100 rounded-[6px] size-[24px]" />
+                                                <div className="bg-gray-100 rounded-[6px] size-[24px]" />
 
-                                                <span className="font-p-medium text-[14px] text-stone-900">
+                                                <span className="font-p-medium text-[14px] text-gray-900">
                                                     극악무도한하영사랑꾼
                                                 </span>
                                             </div>
 
-                                            <span className="font-p-medium text-[14px] text-stone-900">
+                                            <span className="font-p-medium text-[14px] text-gray-900">
                                                 이분 돌아가셨습니다.
                                             </span>
                                         </div>
 
                                         <div className="flex justify-between items-center">
-                                            <span className="font-p-medium text-[12px] text-stone-300 cursor-pointer">
+                                            <span className="font-p-medium text-[12px] text-gray-300 cursor-pointer">
                                                 3시간 전
                                             </span>
 
@@ -206,25 +206,25 @@ export default function Moments() {
                                     </div>
                                 </div>
 
-                                <div className="w-full h-[1px] bg-stone-200" />
+                                <div className="w-full h-[1px] bg-gray-200" />
 
                                 <div className="flex flex-col gap-[16px]">
                                     <div className="flex flex-col gap-[12px]">
                                         <div className="flex items-center gap-[8px] cursor-pointer w-fit">
-                                            <div className="bg-stone-100 rounded-[6px] size-[24px]" />
+                                            <div className="bg-gray-100 rounded-[6px] size-[24px]" />
 
-                                            <span className="font-p-medium text-[14px] text-stone-900">
+                                            <span className="font-p-medium text-[14px] text-gray-900">
                                                 송송난하영
                                             </span>
                                         </div>
 
-                                        <span className="font-p-medium text-[14px] text-stone-900">
+                                        <span className="font-p-medium text-[14px] text-gray-900">
                                             이거 라이브 어디서보나요?
                                         </span>
                                     </div>
 
                                     <div className="flex justify-between items-center">
-                                        <span className="font-p-medium text-[12px] text-stone-300 cursor-pointer">
+                                        <span className="font-p-medium text-[12px] text-gray-300 cursor-pointer">
                                             10분 전
                                         </span>
 
@@ -236,39 +236,39 @@ export default function Moments() {
                                 </div>
 
                                 <div className="flex items-center">
-                                    <div className="flex-1 h-[1px] bg-stone-200" />
+                                    <div className="flex-1 h-[1px] bg-gray-200" />
 
-                                    <div className="shrink-0 p-[1px_12px] pb-[2px] border border-stone-200 rounded-full cursor-pointer flex items-center gap-[4px]">
+                                    <div className="shrink-0 p-[1px_12px] pb-[2px] border border-gray-200 rounded-full cursor-pointer flex items-center gap-[4px]">
                                         <ChevronDownIcon
                                             size={12}
-                                            className="stroke-stone-500"
+                                            className="stroke-gray-500"
                                         />
 
-                                        <span className="font-p-medium text-[12px] text-stone-500">
+                                        <span className="font-p-medium text-[12px] text-gray-500">
                                             펼치기
                                         </span>
                                     </div>
 
-                                    <div className="flex-1 h-[1px] bg-stone-200" />
+                                    <div className="flex-1 h-[1px] bg-gray-200" />
                                 </div>
 
                                 <div className="flex flex-col gap-[16px]">
                                     <div className="flex flex-col gap-[12px]">
                                         <div className="flex items-center gap-[8px] cursor-pointer w-fit">
-                                            <div className="bg-stone-100 rounded-[6px] size-[24px]" />
+                                            <div className="bg-gray-100 rounded-[6px] size-[24px]" />
 
-                                            <span className="font-p-medium text-[14px] text-stone-900">
+                                            <span className="font-p-medium text-[14px] text-gray-900">
                                                 고길동
                                             </span>
                                         </div>
 
-                                        <span className="font-p-medium text-[14px] text-stone-900">
+                                        <span className="font-p-medium text-[14px] text-gray-900">
                                             와시
                                         </span>
                                     </div>
 
                                     <div className="flex justify-between items-center">
-                                        <span className="font-p-medium text-[12px] text-stone-300 cursor-pointer">
+                                        <span className="font-p-medium text-[12px] text-gray-300 cursor-pointer">
                                             1분 전
                                         </span>
 
@@ -279,7 +279,7 @@ export default function Moments() {
                                     </div>
                                 </div>
 
-                                <div className="w-full h-[1px] bg-stone-200" />
+                                <div className="w-full h-[1px] bg-gray-200" />
                             </div>
                         </div>
                     </div>

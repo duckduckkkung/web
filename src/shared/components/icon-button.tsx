@@ -7,8 +7,8 @@ export enum IconButtonTypes {
 }
 
 export enum IconButtonVariants {
-    outline = "bg-white border border-stone-200 hover:border-stone-300",
-    bg = "bg-stone-900 hover:bg-stone-800",
+    outline = "bg-white border border-gray-200 hover:border-gray-300",
+    bg = "bg-gray-900 hover:bg-gray-800",
 }
 
 interface IconButtonProps {

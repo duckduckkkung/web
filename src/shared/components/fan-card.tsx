@@ -42,7 +42,7 @@ export const FanCard = ({
 
             <div className="absolute z-[1] top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-[.2s] backdrop-blur-[4px]" />
 
-            <div className="absolute z-[2] top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-[.2s] bg-linear-to-b from-transparent to-stone-900 flex items-end p-[24px]">
+            <div className="absolute z-[2] top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-[.2s] bg-linear-to-b from-transparent to-gray-900 flex items-end p-[24px]">
                 {variants === "full" ? (
                     <div className="w-full flex flex-col gap-[16px] group-hover:translate-y-0 translate-y-[10px] transition-all duration-[.2s]">
                         <div className="flex flex-col gap-[4px]">

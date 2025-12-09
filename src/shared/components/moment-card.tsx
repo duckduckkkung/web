@@ -24,7 +24,7 @@ export const MomentCard = ({ data }: MomentCardProps) => {
                 className="aspect-9/15 object-cover rounded-[8px]"
             />
 
-            <div className="group-hover:opacity-100 opacity-0 transition-all duration-[.2s] absolute z-[1] top-0 left-0 w-full h-fit bg-linear-to-b from-stone-900 to-transparent flex justify-end items-center p-[16px]">
+            <div className="group-hover:opacity-100 opacity-0 transition-all duration-[.2s] absolute z-[1] top-0 left-0 w-full h-fit bg-linear-to-b from-gray-900 to-transparent flex justify-end items-center p-[16px]">
                 <div className="flex items-center gap-[6px]">
                     <PlayIcon size={14} className="stroke-white" />
 
@@ -35,15 +35,15 @@ export const MomentCard = ({ data }: MomentCardProps) => {
             </div>
 
             <div className="h-full flex flex-col gap-[8px] p-[16px_8px]">
-                <span className="font-p-semibold text-[16px] text-stone-900 truncate">
+                <span className="font-p-semibold text-[16px] text-gray-900 truncate">
                     {data.title}
                 </span>
 
                 <div className="flex justify-end items-center gap-[8px]">
                     <div className="flex items-center gap-[4px]">
-                        <HeartIcon size={12} className="stroke-stone-600" />
+                        <HeartIcon size={12} className="stroke-gray-600" />
 
-                        <span className="font-p-medium text-[12px] text-stone-600">
+                        <span className="font-p-medium text-[12px] text-gray-600">
                             {data.likeCount.toLocaleString()}
                         </span>
                     </div>
@@ -51,10 +51,10 @@ export const MomentCard = ({ data }: MomentCardProps) => {
                     <div className="flex items-center gap-[4px]">
                         <MessageCircleMoreIcon
                             size={12}
-                            className="stroke-stone-600"
+                            className="stroke-gray-600"
                         />
 
-                        <span className="font-p-medium text-[12px] text-stone-600">
+                        <span className="font-p-medium text-[12px] text-gray-600">
                             {data.commentCount.toLocaleString()}
                         </span>
                     </div>

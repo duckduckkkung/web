@@ -9,11 +9,11 @@ interface TabProps {
 export const Tab = ({ options, tab, onChange }: TabProps) => {
     const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
     const tabRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-    
+
     const getTabIndex = (tabName: string) => {
         return options.indexOf(tabName);
     };
-    
+
     const handleTabClick = (newTab: string) => {
         const currentIndex = getTabIndex(tab);
         const newIndex = getTabIndex(newTab);
@@ -39,14 +39,14 @@ export const Tab = ({ options, tab, onChange }: TabProps) => {
                     ref={(el) => {
                         tabRefs.current[option] = el;
                     }}
-                    className={`shrink-0 w-fit p-[8px_12px] flex justify-center items-center border-b border-b-stone-300 transition-all duration-[.1s] cursor-pointer group`}
+                    className={`shrink-0 w-fit p-[8px_12px] flex justify-center items-center border-b border-b-gray-300 transition-all duration-[.1s] cursor-pointer group`}
                     onClick={() => handleTabClick(option)}
                 >
                     <span
                         className={`text-[16px] transition-all duration-[.1s] ${
                             option === tab
-                                ? "font-p-medium text-stone-900"
-                                : "font-p-regular text-stone-400"
+                                ? "font-p-medium text-gray-900"
+                                : "font-p-regular text-gray-400"
                         }`}
                     >
                         {option}
@@ -54,10 +54,10 @@ export const Tab = ({ options, tab, onChange }: TabProps) => {
                 </div>
             ))}
 
-            <div className="w-full p-[8px_12px] border-b border-b-stone-300" />
+            <div className="w-full p-[8px_12px] border-b border-b-gray-300" />
 
             <div
-                className="absolute bottom-0 h-[2px] bg-stone-900 transition-all duration-300 ease-in-out"
+                className="absolute bottom-0 h-[2px] bg-gray-900 transition-all duration-300 ease-in-out"
                 style={{
                     width: `${indicatorStyle.width}px`,
                     left: `${indicatorStyle.left}px`,

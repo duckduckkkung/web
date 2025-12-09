@@ -65,16 +65,16 @@ export default function Settings() {
             <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
                 <div className="bg-white rounded-[16px] flex flex-col">
                     <div className="p-[36px] flex flex-col items-center gap-[8px]">
-                        <span className="font-p-semibold text-[18px] text-stone-900">
+                        <span className="font-p-semibold text-[18px] text-gray-900">
                             정말 탈퇴하시겠어요?
                         </span>
 
-                        <span className="font-p-medium text-[16px] text-stone-600">
+                        <span className="font-p-medium text-[16px] text-gray-600">
                             탈퇴하면 다시 복구할 수 없어요.
                         </span>
                     </div>
 
-                    <div className="w-full h-[1px] bg-stone-200" />
+                    <div className="w-full h-[1px] bg-gray-200" />
 
                     <div className="p-[24px] grid grid-cols-2 gap-[16px]">
                         <Button
@@ -107,7 +107,7 @@ export default function Settings() {
                                         <XIcon
                                             key="delete-account-cancel"
                                             size={16}
-                                            className="stroke-stone-900"
+                                            className="stroke-gray-900"
                                         />
                                     ),
                                 },
@@ -145,11 +145,11 @@ export default function Settings() {
                             {tab === "프로필" && (
                                 <div className="py-[48px] flex flex-col gap-[48px]">
                                     <div className="flex flex-col gap-[8px]">
-                                        <span className="font-p-semibold text-[16px] text-stone-900">
+                                        <span className="font-p-semibold text-[16px] text-gray-900">
                                             프로필 사진
                                         </span>
 
-                                        <div className="relative size-[140px] rounded-[8px] bg-stone-100">
+                                        <div className="relative size-[140px] rounded-[8px] bg-gray-100">
                                             {profileImage && (
                                                 <div className="size-full rounded-[8px] overflow-hidden">
                                                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -162,14 +162,14 @@ export default function Settings() {
                                             )}
 
                                             <div
-                                                className="absolute size-[32px] rounded-full bg-white border border-stone-300 top-full left-full -translate-x-[75%] -translate-y-[75%] flex justify-center items-center cursor-pointer"
+                                                className="absolute size-[32px] rounded-full bg-white border border-gray-300 top-full left-full -translate-x-[75%] -translate-y-[75%] flex justify-center items-center cursor-pointer"
                                                 onClick={() =>
                                                     fileInputRef.current?.click()
                                                 }
                                             >
                                                 <UploadIcon
                                                     size={16}
-                                                    className="stroke-stone-900"
+                                                    className="stroke-gray-900"
                                                 />
                                             </div>
 
@@ -184,7 +184,7 @@ export default function Settings() {
                                     </div>
 
                                     <div className="flex flex-col gap-[8px]">
-                                        <span className="font-p-semibold text-[16px] text-stone-900">
+                                        <span className="font-p-semibold text-[16px] text-gray-900">
                                             닉네임
                                         </span>
 
@@ -198,7 +198,7 @@ export default function Settings() {
                                     </div>
 
                                     <div className="flex flex-col gap-[8px]">
-                                        <span className="font-p-semibold text-[16px] text-stone-900">
+                                        <span className="font-p-semibold text-[16px] text-gray-900">
                                             자기소개
                                         </span>
 
@@ -238,11 +238,11 @@ export default function Settings() {
                                 <div className="py-[48px] flex flex-col gap-[48px]">
                                     <div className="flex flex-col gap-[16px]">
                                         <div className="flex flex-col gap-[6px]">
-                                            <span className="font-p-medium text-[16px] text-stone-900">
+                                            <span className="font-p-medium text-[16px] text-gray-900">
                                                 소셜 연동
                                             </span>
 
-                                            <span className="font-p-medium text-[14px] text-stone-500">
+                                            <span className="font-p-medium text-[14px] text-gray-500">
                                                 덕덕쿵은 2개의 소셜 연동을
                                                 지원해요.
                                                 <br />
@@ -281,7 +281,7 @@ export default function Settings() {
                                                             <HashIcon
                                                                 key="google"
                                                                 size={16}
-                                                                className="stroke-stone-900"
+                                                                className="stroke-gray-900"
                                                             />
                                                         ),
                                                     },
@@ -295,11 +295,11 @@ export default function Settings() {
 
                                     <div className="flex flex-col gap-[16px]">
                                         <div className="flex flex-col gap-[6px]">
-                                            <span className="font-p-medium text-[16px] text-stone-900">
+                                            <span className="font-p-medium text-[16px] text-gray-900">
                                                 2차 인증 등록
                                             </span>
 
-                                            <span className="font-p-medium text-[14px] text-stone-500">
+                                            <span className="font-p-medium text-[14px] text-gray-500">
                                                 아직 2차 인증이 설정되어 있지
                                                 않아요.
                                                 <br />
@@ -319,7 +319,7 @@ export default function Settings() {
                                                             <KeySquareIcon
                                                                 key="two-factor"
                                                                 size={16}
-                                                                className="stroke-stone-900"
+                                                                className="stroke-gray-900"
                                                             />
                                                         ),
                                                     },
@@ -337,27 +337,27 @@ export default function Settings() {
                                     <div className="flex flex-col gap-[24px]">
                                         <div className="flex flex-col gap-[12px]">
                                             <div className="flex items-center gap-[6px]">
-                                                <span className="w-[140px] font-p-medium text-[16px] text-stone-900">
+                                                <span className="w-[140px] font-p-medium text-[16px] text-gray-900">
                                                     현재 플랜
                                                 </span>
 
-                                                <span className="font-p-medium text-[14px] text-stone-500">
+                                                <span className="font-p-medium text-[14px] text-gray-500">
                                                     덕질
                                                 </span>
                                             </div>
 
                                             <div className="flex items-center gap-[6px]">
-                                                <span className="w-[140px] font-p-medium text-[16px] text-stone-900">
+                                                <span className="w-[140px] font-p-medium text-[16px] text-gray-900">
                                                     다음 청구 날짜
                                                 </span>
 
-                                                <span className="font-p-medium text-[14px] text-stone-500">
+                                                <span className="font-p-medium text-[14px] text-gray-500">
                                                     2025. 10. 10.
                                                 </span>
                                             </div>
 
                                             <div className="flex items-center gap-[6px]">
-                                                <span className="w-[140px] font-p-medium text-[16px] text-stone-900">
+                                                <span className="w-[140px] font-p-medium text-[16px] text-gray-900">
                                                     청구 금액
                                                 </span>
 
@@ -394,7 +394,7 @@ export default function Settings() {
                             {tab === "기타" && (
                                 <div className="py-[48px]">
                                     <div className="flex flex-col gap-[16px]">
-                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                        <span className="font-p-medium text-[16px] text-gray-900">
                                             탈퇴
                                         </span>
 

@@ -134,7 +134,7 @@ export default function Register() {
             subtitle: null,
             content: (
                 <div className="flex items-center gap-[36px]">
-                    <div className="relative size-[140px] rounded-[8px] bg-stone-100">
+                    <div className="relative size-[140px] rounded-[8px] bg-gray-100">
                         {profileImage && (
                             <div className="size-full rounded-[8px] overflow-hidden">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -147,13 +147,10 @@ export default function Register() {
                         )}
 
                         <div
-                            className="absolute size-[32px] rounded-full bg-white border border-stone-300 top-full left-full -translate-x-[75%] -translate-y-[75%] flex justify-center items-center cursor-pointer"
+                            className="absolute size-[32px] rounded-full bg-white border border-gray-300 top-full left-full -translate-x-[75%] -translate-y-[75%] flex justify-center items-center cursor-pointer"
                             onClick={() => fileInputRef.current?.click()}
                         >
-                            <UploadIcon
-                                size={16}
-                                className="stroke-stone-900"
-                            />
+                            <UploadIcon size={16} className="stroke-gray-900" />
                         </div>
 
                         <input
@@ -171,7 +168,7 @@ export default function Register() {
                                 <>
                                     <div className="w-[120px]">
                                         <input
-                                            className="border-b border-b-stone-900 outline-none w-full font-p-semibold text-[20px] text-stone-900"
+                                            className="border-b border-b-gray-900 outline-none w-full font-p-semibold text-[20px] text-gray-900"
                                             value={name}
                                             onChange={(e) => {
                                                 const text = e.target.value;
@@ -189,13 +186,13 @@ export default function Register() {
 
                                     <CheckIcon
                                         size={16}
-                                        className="absolute stroke-stone-900 cursor-pointer -right-[24px]"
+                                        className="absolute stroke-gray-900 cursor-pointer -right-[24px]"
                                         onClick={handleNameSubmit}
                                     />
                                 </>
                             ) : (
                                 <>
-                                    <span className="font-p-semibold text-[20px] text-stone-900">
+                                    <span className="font-p-semibold text-[20px] text-gray-900">
                                         {name.trim() === ""
                                             ? "이름 입력"
                                             : name.trim()}
@@ -203,7 +200,7 @@ export default function Register() {
 
                                     <PencilIcon
                                         size={16}
-                                        className="absolute stroke-stone-400 cursor-pointer -right-[24px]"
+                                        className="absolute stroke-gray-400 cursor-pointer -right-[24px]"
                                         onClick={() => setIsNameEditing(true)}
                                     />
                                 </>
@@ -215,7 +212,7 @@ export default function Register() {
                                 <>
                                     <div className="w-[200px]">
                                         <input
-                                            className="border-b border-b-stone-900 outline-none font-p-regular text-[16px] text-stone-800"
+                                            className="border-b border-b-gray-900 outline-none font-p-regular text-[16px] text-gray-800"
                                             value={bio}
                                             onChange={(e) => {
                                                 const text = e.target.value;
@@ -233,19 +230,19 @@ export default function Register() {
 
                                     <CheckIcon
                                         size={16}
-                                        className="absolute stroke-stone-900 cursor-pointer -right-[24px]"
+                                        className="absolute stroke-gray-900 cursor-pointer -right-[24px]"
                                         onClick={handleBioSubmit}
                                     />
                                 </>
                             ) : (
                                 <>
-                                    <span className="font-p-regular text-[16px] text-stone-800">
+                                    <span className="font-p-regular text-[16px] text-gray-800">
                                         {bio.trim() || "(자기소개 없음)"}
                                     </span>
 
                                     <PencilIcon
                                         size={16}
-                                        className="absolute stroke-stone-400 cursor-pointer -right-[24px]"
+                                        className="absolute stroke-gray-400 cursor-pointer -right-[24px]"
                                         onClick={() => setIsBioEditing(true)}
                                     />
                                 </>
@@ -295,8 +292,8 @@ export default function Register() {
                                         key={step}
                                         className={`w-full h-[4px] rounded-[8px] transition-colors duration-300 cursor-pointer ${
                                             cards[currentCard]?.step === step
-                                                ? "bg-stone-900"
-                                                : "bg-stone-200"
+                                                ? "bg-gray-900"
+                                                : "bg-gray-200"
                                         }`}
                                         onClick={() => {
                                             if (isCreating) return;
@@ -330,7 +327,7 @@ export default function Register() {
                                             }`}
                                         >
                                             <span
-                                                className={`font-p-semibold text-stone-900 leading-tight ${
+                                                className={`font-p-semibold text-gray-900 leading-tight ${
                                                     cards[currentCard]?.step ===
                                                     1
                                                         ? "text-[32px] leading-[40px]"
@@ -341,7 +338,7 @@ export default function Register() {
                                             </span>
 
                                             {cards[currentCard]?.subtitle && (
-                                                <span className="font-p-regular text-[18px] text-stone-900">
+                                                <span className="font-p-regular text-[18px] text-gray-900">
                                                     {
                                                         cards[currentCard]
                                                             .subtitle
@@ -381,13 +378,13 @@ export default function Register() {
                                                         <LoaderCircleIcon
                                                             key="loader-cirlce"
                                                             size={16}
-                                                            className="stroke-stone-900 animate-spin"
+                                                            className="stroke-gray-900 animate-spin"
                                                         />
                                                     ) : (
                                                         <ArrowUpRightIcon
                                                             key="register"
                                                             size={16}
-                                                            className="stroke-stone-900"
+                                                            className="stroke-gray-900"
                                                         />
                                                     ),
                                                     float: "left",
@@ -440,7 +437,7 @@ export default function Register() {
                                     ) : (
                                         <ArrowRightIcon
                                             size={24}
-                                            className="stroke-stone-900 cursor-pointer"
+                                            className="stroke-gray-900 cursor-pointer"
                                             onClick={() => {
                                                 if (
                                                     currentCard <

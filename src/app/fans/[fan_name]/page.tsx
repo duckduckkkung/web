@@ -132,14 +132,14 @@ export default function Fan() {
                         <div className="w-[300px] flex flex-col gap-[48px]">
                             <div className="flex flex-col gap-[24px]">
                                 <div className="flex justify-between items-center">
-                                    <span className="font-p-semibold text-[20px] text-stone-900">
+                                    <span className="font-p-semibold text-[20px] text-gray-900">
                                         🖼️ 사진첩
                                     </span>
 
-                                    <div className="p-[8px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]">
+                                    <div className="p-[8px] flex items-center gap-[8px] hover:bg-gray-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]">
                                         <HardDriveDownloadIcon
                                             size={18}
-                                            className="stroke-stone-900"
+                                            className="stroke-gray-900"
                                         />
                                     </div>
                                 </div>
@@ -191,8 +191,8 @@ export default function Fan() {
                                                 key={index}
                                                 className={`w-full h-[4px] rounded-[8px] ${
                                                     index === currentImageIndex
-                                                        ? "bg-stone-900"
-                                                        : "bg-stone-200"
+                                                        ? "bg-gray-900"
+                                                        : "bg-gray-200"
                                                 }`}
                                             />
                                         ))}
@@ -203,51 +203,51 @@ export default function Fan() {
                             <div className="flex flex-col gap-[16px]">
                                 <div className="flex flex-col gap-[6px]">
                                     <div className="flex justify-between items-center h-[29px]">
-                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                        <span className="font-p-medium text-[16px] text-gray-900">
                                             본명
                                         </span>
 
-                                        <span className="font-p-regular text-[14px] text-stone-900">
+                                        <span className="font-p-regular text-[14px] text-gray-900">
                                             송하영
                                         </span>
                                     </div>
 
                                     <div className="flex justify-between items-center h-[29px]">
-                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                        <span className="font-p-medium text-[16px] text-gray-900">
                                             나이
                                         </span>
 
-                                        <span className="font-p-regular text-[14px] text-stone-900">
+                                        <span className="font-p-regular text-[14px] text-gray-900">
                                             27살
                                         </span>
                                     </div>
 
                                     <div className="flex justify-between items-center h-[29px]">
-                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                        <span className="font-p-medium text-[16px] text-gray-900">
                                             생일
                                         </span>
 
-                                        <span className="font-p-regular text-[14px] text-stone-900">
+                                        <span className="font-p-regular text-[14px] text-gray-900">
                                             09. 29.
                                         </span>
                                     </div>
 
                                     <div className="flex justify-between items-center h-[29px]">
-                                        <span className="font-p-medium text-[16px] text-stone-900">
+                                        <span className="font-p-medium text-[16px] text-gray-900">
                                             그룹
                                         </span>
 
                                         <div
-                                            className="p-[4px_8px] flex items-center gap-[4px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
+                                            className="p-[4px_8px] flex items-center gap-[4px] hover:bg-gray-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
                                             onClick={() => router.push("/fans")}
                                         >
-                                            <span className="font-p-regular text-[14px] text-stone-900">
+                                            <span className="font-p-regular text-[14px] text-gray-900">
                                                 프로미스나인
                                             </span>
 
                                             <ArrowUpRightIcon
                                                 size={12}
-                                                className="stroke-stone-900"
+                                                className="stroke-gray-900"
                                             />
                                         </div>
                                     </div>
@@ -264,7 +264,7 @@ export default function Fan() {
                                                     <BotMessageSquareIcon
                                                         key="update-information"
                                                         size={16}
-                                                        className="stroke-stone-900"
+                                                        className="stroke-gray-900"
                                                     />
                                                 ),
                                             },
@@ -273,7 +273,7 @@ export default function Fan() {
                                         정보 업데이트 요청하기
                                     </Button>
 
-                                    <span className="font-p-regular text-[12px] text-stone-600">
+                                    <span className="font-p-regular text-[12px] text-gray-600">
                                         마지막 요청: 2025. 08. 11. 18:03:47
                                     </span>
                                 </div>
@@ -287,12 +287,12 @@ export default function Fan() {
                                 {fan.tags.map((tag) => (
                                     <div
                                         key={tag}
-                                        className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-stone-200 hover:bg-stone-50"
+                                        className="p-[2px_8px] rounded-[4px] cursor-pointer bg-white border border-gray-200 hover:bg-gray-50"
                                         onClick={() =>
                                             router.push(`/fans?tag=${tag}`)
                                         }
                                     >
-                                        <span className="font-p-regular text-[12px] text-stone-600">
+                                        <span className="font-p-regular text-[12px] text-gray-600">
                                             #{tag}
                                         </span>
                                     </div>
@@ -329,14 +329,14 @@ export default function Fan() {
                                                     <div className="w-full h-[600px] flex justify-center items-center bg-radial from-white/80 to-transparent from-30% to-100%">
                                                         <div className="flex flex-col gap-[24px] items-center">
                                                             <div className="flex flex-col gap-[4px] items-center">
-                                                                <span className="font-p-medium text-[16px] text-stone-900">
+                                                                <span className="font-p-medium text-[16px] text-gray-900">
                                                                     커뮤니티를
                                                                     보려면
                                                                     가입이
                                                                     필요해요!
                                                                 </span>
 
-                                                                <span className="font-p-regular text-[14px] text-stone-900">
+                                                                <span className="font-p-regular text-[14px] text-gray-900">
                                                                     아래 버튼을
                                                                     눌러 가입해
                                                                     주세요.
@@ -402,13 +402,13 @@ export default function Fan() {
                                                         )
                                                     }
                                                 >
-                                                    <span className="font-p-semibold text-[16px] text-stone-900">
+                                                    <span className="font-p-semibold text-[16px] text-gray-900">
                                                         커뮤니티 홈
                                                     </span>
 
                                                     <ArrowUpRightIcon
                                                         size={16}
-                                                        className="stroke-stone-900"
+                                                        className="stroke-gray-900"
                                                     />
                                                 </div>
 
@@ -424,7 +424,7 @@ export default function Fan() {
                                                         .map((_, i) => (
                                                             <div
                                                                 key={i}
-                                                                className="border border-stone-200 rounded-[8px] flex flex-col cursor-pointer"
+                                                                className="border border-gray-200 rounded-[8px] flex flex-col cursor-pointer"
                                                                 onClick={() =>
                                                                     router.push(
                                                                         `/fans/${fan.name}/board/${i}`
@@ -437,11 +437,11 @@ export default function Fan() {
                                                                             {i %
                                                                                 2 ===
                                                                             0 ? (
-                                                                                <span className="font-p-semibold text-[14px] text-stone-900">
+                                                                                <span className="font-p-semibold text-[14px] text-gray-900">
                                                                                     공지사항
                                                                                 </span>
                                                                             ) : (
-                                                                                <span className="font-p-semibold text-[14px] text-stone-400">
+                                                                                <span className="font-p-semibold text-[14px] text-gray-400">
                                                                                     일반
                                                                                 </span>
                                                                             )}
@@ -481,14 +481,14 @@ export default function Fan() {
                                                                         </div>
 
                                                                         <div className="flex flex-col gap-[2px]">
-                                                                            <span className="font-p-medium text-[16px] text-stone-900 truncate">
+                                                                            <span className="font-p-medium text-[16px] text-gray-900 truncate">
                                                                                 [필독]
                                                                                 2025
                                                                                 커뮤니티
                                                                                 규칙
                                                                             </span>
 
-                                                                            <span className="font-p-medium text-[14px] text-stone-500 truncate">
+                                                                            <span className="font-p-medium text-[14px] text-gray-500 truncate">
                                                                                 제
                                                                                 1조.
                                                                                 대화
@@ -504,16 +504,16 @@ export default function Fan() {
                                                                     </div>
                                                                 </div>
 
-                                                                <div className="w-full h-[1px] bg-stone-200" />
+                                                                <div className="w-full h-[1px] bg-gray-200" />
 
                                                                 <div className="p-[12px_16px]">
                                                                     <div className="flex justify-between items-center gap-[6px]">
-                                                                        <span className="font-p-medium text-[12px] text-stone-400">
+                                                                        <span className="font-p-medium text-[12px] text-gray-400">
                                                                             9개월
                                                                             전
                                                                         </span>
 
-                                                                        <span className="font-p-medium text-[12px] text-stone-700">
+                                                                        <span className="font-p-medium text-[12px] text-gray-700">
                                                                             극악무도한송하영사랑꾼
                                                                         </span>
                                                                     </div>
@@ -535,13 +535,13 @@ export default function Fan() {
                                                     )
                                                 }
                                             >
-                                                <span className="font-p-semibold text-[16px] text-stone-900">
+                                                <span className="font-p-semibold text-[16px] text-gray-900">
                                                     모먼트 업로드
                                                 </span>
 
                                                 <ArrowUpRightIcon
                                                     size={16}
-                                                    className="stroke-stone-900"
+                                                    className="stroke-gray-900"
                                                 />
                                             </div>
 

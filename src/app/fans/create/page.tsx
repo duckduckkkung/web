@@ -105,13 +105,13 @@ export default function CreateFan() {
                         icon={
                             <ArrowUpRightIcon
                                 size={14}
-                                className="stroke-stone-700"
+                                className="stroke-gray-700"
                             />
                         }
                         text="꼭! 이것만 읽어주세요"
                     />
 
-                    <span className="font-p-semibold text-[24px] text-stone-900">
+                    <span className="font-p-semibold text-[24px] text-gray-900">
                         새로운 관심사가 생기셨군요.
                     </span>
                 </div>
@@ -121,7 +121,7 @@ export default function CreateFan() {
                         <div className="flex gap-[6px]">
                             <div className="size-[4px] bg-red-600 rounded-full" />
 
-                            <span className="font-p-semibold text-[18px] text-stone-900">
+                            <span className="font-p-semibold text-[18px] text-gray-900">
                                 관심사가 무엇인가요?
                             </span>
                         </div>
@@ -143,7 +143,7 @@ export default function CreateFan() {
                         <div className="flex gap-[6px]">
                             <div className="size-[4px] bg-red-600 rounded-full" />
 
-                            <span className="font-p-semibold text-[18px] text-stone-900">
+                            <span className="font-p-semibold text-[18px] text-gray-900">
                                 &lsquo;{name.trim() || "-"}&lsquo; 에 대해 짧게
                                 소개해 주세요.
                             </span>
@@ -163,8 +163,8 @@ export default function CreateFan() {
                     </div>
 
                     <div className="flex flex-col gap-[16px]">
-                        <span className="font-p-semibold text-[18px] text-stone-900">
-                            <span className="font-p-medium text-[18px] text-stone-400">
+                        <span className="font-p-semibold text-[18px] text-gray-900">
+                            <span className="font-p-medium text-[18px] text-gray-400">
                                 (최대 5개)
                             </span>{" "}
                             &lsquo;{name.trim() || "-"}&lsquo; 의 특징을 나열해
@@ -199,7 +199,7 @@ export default function CreateFan() {
                                 {tags.map((tag, index) => (
                                     <div
                                         key={tag}
-                                        className="p-[4px_8px] rounded-[4px] cursor-pointer flex items-center gap-[4px] bg-white border border-stone-200 hover:bg-stone-50"
+                                        className="p-[4px_8px] rounded-[4px] cursor-pointer flex items-center gap-[4px] bg-white border border-gray-200 hover:bg-gray-50"
                                         onClick={() => {
                                             setTags((prev) =>
                                                 prev.filter(
@@ -208,13 +208,13 @@ export default function CreateFan() {
                                             );
                                         }}
                                     >
-                                        <span className="font-p-regular text-[12px] text-stone-600">
+                                        <span className="font-p-regular text-[12px] text-gray-600">
                                             {tag}
                                         </span>
 
                                         <XIcon
                                             size={12}
-                                            className="stroke-stone-600"
+                                            className="stroke-gray-600"
                                         />
                                     </div>
                                 ))}
@@ -223,8 +223,8 @@ export default function CreateFan() {
                     </div>
 
                     <div className="flex flex-col gap-[16px]">
-                        <span className="font-p-semibold text-[18px] text-stone-900">
-                            <span className="font-p-medium text-[18px] text-stone-400">
+                        <span className="font-p-semibold text-[18px] text-gray-900">
+                            <span className="font-p-medium text-[18px] text-gray-400">
                                 (최대 4장)
                             </span>{" "}
                             &lsquo;{name.trim() || "-"}&lsquo;{" "}
@@ -254,7 +254,7 @@ export default function CreateFan() {
                                                 <ArrowUpToLineIcon
                                                     key="upload-image"
                                                     size={14}
-                                                    className="stroke-stone-900"
+                                                    className="stroke-gray-900"
                                                 />
                                             ),
                                             float: "left",
@@ -273,8 +273,8 @@ export default function CreateFan() {
                                 <div
                                     className={`aspect-square rounded-[8px] overflow-hidden border border-dashed flex justify-center items-center cursor-pointer transition-colors ${
                                         isDragOver
-                                            ? "border-stone-500 bg-stone-50"
-                                            : "border-stone-300 hover:border-stone-400"
+                                            ? "border-gray-500 bg-gray-50"
+                                            : "border-gray-300 hover:border-gray-400"
                                     }`}
                                     onClick={() => {
                                         if (isCreating) return;
@@ -286,7 +286,7 @@ export default function CreateFan() {
                                 >
                                     <ArrowUpToLineIcon
                                         size={24}
-                                        className="stroke-stone-500"
+                                        className="stroke-gray-500"
                                     />
                                 </div>
 
@@ -303,7 +303,7 @@ export default function CreateFan() {
                                         />
 
                                         <div
-                                            className="absolute top-0 left-0 size-full group-hover:opacity-100 opacity-0 bg-stone-900/60 flex justify-center items-center cursor-pointer transition-all duration-[.1s]"
+                                            className="absolute top-0 left-0 size-full group-hover:opacity-100 opacity-0 bg-gray-900/60 flex justify-center items-center cursor-pointer transition-all duration-[.1s]"
                                             onClick={() => {
                                                 if (isCreating) return;
                                                 handleImageRemove(index);
@@ -332,13 +332,13 @@ export default function CreateFan() {
                                         <LoaderCircleIcon
                                             key="loader-cirlce"
                                             size={14}
-                                            className="stroke-stone-900 animate-spin"
+                                            className="stroke-gray-900 animate-spin"
                                         />
                                     ) : (
                                         <BookPlusIcon
                                             key="create-fan"
                                             size={14}
-                                            className="stroke-stone-900"
+                                            className="stroke-gray-900"
                                         />
                                     ),
                                     float: "left",

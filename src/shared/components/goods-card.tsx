@@ -27,16 +27,16 @@ export const GoodsCard = ({ data }: GoodsCardProps) => {
 
             <div className="flex-1 p-[32px] min-w-0 flex flex-col justify-between">
                 <div className="flex flex-col gap-[4px]">
-                    <span className="font-p-bold text-[16px] text-stone-900 block truncate group-hover:underline">
+                    <span className="font-p-bold text-[16px] text-gray-900 block truncate group-hover:underline">
                         {data.name}
                     </span>
 
-                    <span className="font-p-medium text-[16px] text-stone-400 block truncate">
+                    <span className="font-p-medium text-[16px] text-gray-400 block truncate">
                         {data.description}
                     </span>
                 </div>
 
-                <span className="font-p-semibold text-[18px] text-stone-900 text-right">
+                <span className="font-p-semibold text-[18px] text-gray-900 text-right">
                     {data.price.toLocaleString()}원
                 </span>
             </div>

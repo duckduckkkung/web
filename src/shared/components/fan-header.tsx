@@ -24,19 +24,19 @@ export const FanHeader = ({ href, fan }: FanHeaderProps) => {
             <div className="flex items-center gap-[16px]">
                 <div className="flex items-center gap-[4px]">
                     <div
-                        className="p-[8px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
+                        className="p-[8px] flex items-center gap-[8px] hover:bg-gray-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
                         onClick={() => router.push(href)}
                     >
-                        <ArrowLeftIcon size={16} className="stroke-stone-900" />
+                        <ArrowLeftIcon size={16} className="stroke-gray-900" />
                     </div>
 
                     <div
-                        className="p-[6px_12px] flex items-center gap-[8px] hover:bg-stone-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
+                        className="p-[6px_12px] flex items-center gap-[8px] hover:bg-gray-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]"
                         onClick={() => router.push(`/fans/${fan.name}`)}
                     >
-                        <VideotapeIcon size={16} className="stroke-stone-900" />
+                        <VideotapeIcon size={16} className="stroke-gray-900" />
 
-                        <span className="font-p-semibold text-[18px] text-stone-900">
+                        <span className="font-p-semibold text-[18px] text-gray-900">
                             {fan.name}
                         </span>
                     </div>

@@ -7,18 +7,26 @@ interface ModalProps {
 }
 
 export const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
-    const [isVisible, setIsVisible] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [shouldRender, setShouldRender] = useState(false);
 
     useEffect(() => {
         if (isOpen) {
-            setIsVisible(true);
-            setTimeout(() => setIsAnimating(true), 10);
+            setShouldRender(true);
+            // requestAnimationFrame을 두 번 사용하여 DOM 렌더링 후 애니메이션 시작
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    setIsAnimating(true);
+                });
+            });
             document.body.style.overflow = "hidden";
         } else {
             setIsAnimating(false);
-            setTimeout(() => setIsVisible(false), 200);
+            const timer = setTimeout(() => {
+                setShouldRender(false);
+            }, 200);
             document.body.style.overflow = "unset";
+            return () => clearTimeout(timer);
         }
     }, [isOpen]);
 
@@ -44,7 +52,7 @@ export const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
         }
     };
 
-    if (!isVisible) return null;
+    if (!shouldRender) return null;
 
     return (
         <div
@@ -54,7 +62,7 @@ export const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
             onClick={handleBackdropClick}
         >
             <div
-                className={`absolute inset-0 w-full h-full bg-stone-900/64 transition-opacity duration-200 ${
+                className={`absolute inset-0 w-full h-full bg-gray-900/64 transition-opacity duration-200 ${
                     isAnimating ? "opacity-100" : "opacity-0"
                 }`}
                 onClick={handleBackdropClick}
