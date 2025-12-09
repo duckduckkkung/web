@@ -19,7 +19,7 @@ export const WideSearch = ({ value, onChange }: WideSearchProps) => {
                 ref={inputRef}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-[340px] p-[4px_8px] outline-none font-p-medium text-[18px] text-stone-900 placeholder:text-stone-300"
+                className="w-[340px] p-[4px_8px] outline-none font-p-medium text-[18px] text-gray-900 placeholder:text-gray-300"
                 placeholder="덕질 검색"
                 onKeyUp={(e) => {
                     if (e.key === "Enter") {
@@ -31,7 +31,7 @@ export const WideSearch = ({ value, onChange }: WideSearchProps) => {
             {value ? (
                 <XIcon
                     size={18}
-                    className="shrink-0 cursor-pointer stroke-stone-400"
+                    className="shrink-0 cursor-pointer stroke-gray-400"
                     onClick={() => {
                         onChange("");
                         inputRef.current?.focus();

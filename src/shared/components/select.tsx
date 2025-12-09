@@ -22,8 +22,8 @@ export enum SelectTypes {
 }
 
 export enum SelectVariants {
-    free = "bg-white text-stone-900 placeholder:text-stone-400 text-stone-900",
-    outline = "rounded-[6px] bg-white text-stone-900 placeholder:text-stone-400 border border-stone-200 text-stone-900 hover:border-stone-300",
+    free = "bg-white text-gray-900 placeholder:text-gray-400 text-gray-900",
+    outline = "rounded-[6px] bg-white text-gray-900 placeholder:text-gray-400 border border-gray-200 text-gray-900 hover:border-gray-300",
 }
 
 interface SelectProps {
@@ -61,13 +61,13 @@ export const Select = ({
             >
                 <span
                     className={
-                        selectedOption ? "text-stone-900" : "text-stone-400"
+                        selectedOption ? "text-gray-900" : "text-gray-400"
                     }
                 >
                     {selectedOption ? selectedOption.label : placeholder}
                 </span>
 
-                <ChevronDownIcon size={14} className="stroke-stone-400" />
+                <ChevronDownIcon size={14} className="stroke-gray-400" />
             </div>
         );
     }
@@ -75,14 +75,14 @@ export const Select = ({
     const selectTrigger = (
         <div className={`${SelectTypes[type]} ${SelectVariants[variants]}`}>
             <span
-                className={selectedOption ? "text-stone-900" : "text-stone-400"}
+                className={selectedOption ? "text-gray-900" : "text-gray-400"}
             >
                 {selectedOption ? selectedOption.label : placeholder}
             </span>
 
             <ChevronDownIcon
                 size={14}
-                className={`stroke-stone-400 ${isOpen ? "rotate-180" : ""}`}
+                className={`stroke-gray-400 ${isOpen ? "rotate-180" : ""}`}
             />
         </div>
     );
@@ -92,14 +92,14 @@ export const Select = ({
             {options.map((option, index) => (
                 <div
                     key={option.value}
-                    className={`px-4 py-3 cursor-pointer hover:bg-stone-50 transition-colors font-p-medium text-[14px] ${
+                    className={`px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors font-p-medium text-[14px] ${
                         option.value === value
-                            ? "bg-stone-100 text-stone-900"
-                            : "text-stone-700"
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700"
                     } ${
                         index === options.length - 1
                             ? ""
-                            : "border-b border-b-stone-200"
+                            : "border-b border-b-gray-200"
                     }`}
                     onClick={() => handleSelect(option.value)}
                 >

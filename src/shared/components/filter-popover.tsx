@@ -41,37 +41,37 @@ export function FilterPopover({
 
     return (
         <div className="flex">
-            <div className="w-[100px] flex flex-col border-r border-stone-200">
+            <div className="w-[100px] flex flex-col border-r border-gray-200">
                 <div
-                    className={`p-[6px_10px] hover:bg-stone-50 transition-all duration-[.1s] cursor-pointer ${
-                        activeMenu === "tags" ? "bg-stone-50" : "bg-white"
+                    className={`p-[6px_10px] hover:bg-gray-50 transition-all duration-[.1s] cursor-pointer ${
+                        activeMenu === "tags" ? "bg-gray-50" : "bg-white"
                     }`}
                     onClick={() => setActiveMenu("tags")}
                 >
                     <span
                         className={`${
                             activeMenu === "tags"
-                                ? "font-p-medium text-stone-900"
-                                : "font-p-regular text-stone-700"
+                                ? "font-p-medium text-gray-900"
+                                : "font-p-regular text-gray-700"
                         } text-[14px]`}
                     >
                         태그
                     </span>
                 </div>
 
-                <div className="w-full h-[1px] bg-stone-200" />
+                <div className="w-full h-[1px] bg-gray-200" />
 
                 <div
-                    className={`p-[6px_10px] hover:bg-stone-50 transition-all duration-[.1s] cursor-pointer ${
-                        activeMenu === "goods" ? "bg-stone-50" : "bg-white"
+                    className={`p-[6px_10px] hover:bg-gray-50 transition-all duration-[.1s] cursor-pointer ${
+                        activeMenu === "goods" ? "bg-gray-50" : "bg-white"
                     }`}
                     onClick={() => setActiveMenu("goods")}
                 >
                     <span
                         className={`${
                             activeMenu === "goods"
-                                ? "font-p-medium text-stone-900"
-                                : "font-p-regular text-stone-700"
+                                ? "font-p-medium text-gray-900"
+                                : "font-p-regular text-gray-700"
                         } text-[14px]`}
                     >
                         굿즈 판매
@@ -82,7 +82,7 @@ export function FilterPopover({
             <div className="w-[300px]">
                 {activeMenu === "tags" && (
                     <div className="flex flex-col gap-[8px] p-[14px]">
-                        <span className="font-p-semibold text-[16px] text-stone-900">
+                        <span className="font-p-semibold text-[16px] text-gray-900">
                             태그
                         </span>
 
@@ -96,8 +96,8 @@ export function FilterPopover({
                                         key={tag}
                                         className={`p-[4px_8px] rounded-[4px] cursor-pointer flex items-center gap-[4px] ${
                                             isSelected
-                                                ? "bg-stone-900"
-                                                : "bg-white border border-stone-200 hover:bg-stone-50"
+                                                ? "bg-gray-900"
+                                                : "bg-white border border-gray-200 hover:bg-gray-50"
                                         }`}
                                         onClick={() => handleTagToggle(tag)}
                                     >
@@ -105,7 +105,7 @@ export function FilterPopover({
                                             className={`font-p-regular text-[12px] ${
                                                 isSelected
                                                     ? "text-white"
-                                                    : "text-stone-600"
+                                                    : "text-gray-600"
                                             }`}
                                         >
                                             {tag}
@@ -126,17 +126,17 @@ export function FilterPopover({
 
                 {activeMenu === "goods" && (
                     <div className="flex flex-col gap-[8px] p-[14px]">
-                        <span className="font-p-semibold text-[16px] text-stone-900">
+                        <span className="font-p-semibold text-[16px] text-gray-900">
                             굿즈 판매
                         </span>
 
                         <div className="flex flex-wrap gap-[8px]">
-                            <div className="overflow-hidden rounded-[4px] bg-white border border-stone-200 cursor-pointer flex items-center">
+                            <div className="overflow-hidden rounded-[4px] bg-white border border-gray-200 cursor-pointer flex items-center">
                                 <div
                                     className={`p-[4px_12px] transition-all duration-[.1s] ${
                                         filters.hasGoods === true
-                                            ? "bg-stone-900"
-                                            : "bg-white hover:bg-stone-50"
+                                            ? "bg-gray-900"
+                                            : "bg-white hover:bg-gray-50"
                                     }`}
                                     onClick={() => handleGoodsToggle(true)}
                                 >
@@ -144,20 +144,20 @@ export function FilterPopover({
                                         className={`font-p-regular text-[12px] ${
                                             filters.hasGoods === true
                                                 ? "text-white"
-                                                : "text-stone-600"
+                                                : "text-gray-600"
                                         }`}
                                     >
                                         있음
                                     </span>
                                 </div>
 
-                                <div className="w-[1px] h-full bg-stone-200" />
+                                <div className="w-[1px] h-full bg-gray-200" />
 
                                 <div
                                     className={`p-[4px_12px] transition-all duration-[.1s] ${
                                         filters.hasGoods === false
-                                            ? "bg-stone-900"
-                                            : "bg-white hover:bg-stone-50"
+                                            ? "bg-gray-900"
+                                            : "bg-white hover:bg-gray-50"
                                     }`}
                                     onClick={() => handleGoodsToggle(false)}
                                 >
@@ -165,7 +165,7 @@ export function FilterPopover({
                                         className={`font-p-regular text-[12px] ${
                                             filters.hasGoods === false
                                                 ? "text-white"
-                                                : "text-stone-600"
+                                                : "text-gray-600"
                                         }`}
                                     >
                                         없음

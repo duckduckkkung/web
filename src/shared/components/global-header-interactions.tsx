@@ -1,7 +1,6 @@
 "use client";
 
 import {
-    BadgeDollarSignIcon,
     ChevronDownIcon,
     HashIcon,
     Settings2Icon,
@@ -33,23 +32,23 @@ export const GlobalHeaderInteractions = () => {
     const options = (
         <div className="min-w-full w-max max-h-60 overflow-y-auto">
             <div
-                className="px-3 py-2 cursor-pointer hover:bg-stone-50 border-b border-b-stone-200 flex items-center gap-[6px]"
+                className="px-3 py-2 cursor-pointer hover:bg-gray-50 border-b border-b-gray-200 flex items-center gap-[6px]"
                 onClick={redirectKakao}
             >
-                <HashIcon size={14} className="stroke-stone-900" />
+                <HashIcon size={14} className="stroke-gray-900" />
 
-                <span className="font-p-medium text-[14px] text-stone-900">
+                <span className="font-p-medium text-[14px] text-gray-900">
                     카카오
                 </span>
             </div>
 
             <div
-                className="px-3 py-2 cursor-pointer hover:bg-stone-50 flex items-center gap-[6px]"
+                className="px-3 py-2 cursor-pointer hover:bg-gray-50 flex items-center gap-[6px]"
                 onClick={redirectGoogle}
             >
-                <HashIcon size={14} className="stroke-stone-900" />
+                <HashIcon size={14} className="stroke-gray-900" />
 
-                <span className="font-p-medium text-[14px] text-stone-900">
+                <span className="font-p-medium text-[14px] text-gray-900">
                     구글
                 </span>
             </div>
@@ -59,23 +58,23 @@ export const GlobalHeaderInteractions = () => {
     const options2 = (
         <div className="min-w-full w-max max-h-60 overflow-y-auto">
             <div
-                className="px-3 py-2 cursor-pointer hover:bg-stone-50 border-b border-b-stone-200 flex items-center gap-[6px]"
+                className="px-3 py-2 cursor-pointer hover:bg-gray-50 border-b border-b-gray-200 flex items-center gap-[6px]"
                 onClick={() => router.push("/고서온")}
             >
-                <UserRoundIcon size={14} className="stroke-stone-900" />
+                <UserRoundIcon size={14} className="stroke-gray-900" />
 
-                <span className="font-p-medium text-[14px] text-stone-900">
+                <span className="font-p-medium text-[14px] text-gray-900">
                     내 프로필
                 </span>
             </div>
 
             <div
-                className="px-3 py-2 cursor-pointer hover:bg-stone-50 border-b border-b-stone-200 flex items-center gap-[6px]"
+                className="px-3 py-2 cursor-pointer hover:bg-gray-50 flex items-center gap-[6px]"
                 onClick={() => router.push("/settings")}
             >
-                <Settings2Icon size={14} className="stroke-stone-900" />
+                <Settings2Icon size={14} className="stroke-gray-900" />
 
-                <span className="font-p-medium text-[14px] text-stone-900">
+                <span className="font-p-medium text-[14px] text-gray-900">
                     설정
                 </span>
             </div>
@@ -94,7 +93,7 @@ export const GlobalHeaderInteractions = () => {
                                 <SparkleIcon
                                     key="header-start"
                                     size={12}
-                                    className="stroke-stone-900"
+                                    className="stroke-gray-900"
                                 />
                             ),
                             float: "left",
@@ -115,7 +114,7 @@ export const GlobalHeaderInteractions = () => {
                         draggable={false}
                     />
 
-                    <ChevronDownIcon size={14} className="stroke-stone-900" />
+                    <ChevronDownIcon size={14} className="stroke-gray-900" />
                 </div>
             </Popover>
         </div>

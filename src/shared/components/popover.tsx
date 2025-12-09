@@ -156,7 +156,7 @@ export const Popover = ({ overlay, children }: PopoverProps) => {
             {isOpen && (
                 <div
                     ref={overlayRef}
-                    className={`absolute bg-white border border-stone-200 rounded-[6px] overflow-hidden z-50 transition-all duration-200 ease-out transform-gpu ${
+                    className={`absolute bg-white border border-gray-200 rounded-[6px] overflow-hidden z-50 transition-all duration-200 ease-out transform-gpu ${
                         isAnimating
                             ? "opacity-100 scale-100"
                             : "opacity-0 scale-95"

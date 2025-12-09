@@ -92,7 +92,7 @@ export default function CreateBoard() {
                             </div>
 
                             <input
-                                className="pb-[4px] border-b border-b-stone-200 outline-none w-full font-p-semibold text-[20px] text-stone-900"
+                                className="pb-[4px] border-b border-b-gray-200 outline-none w-full font-p-semibold text-[20px] text-gray-900"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                                 placeholder="제목"
@@ -101,7 +101,7 @@ export default function CreateBoard() {
                         </div>
 
                         <textarea
-                            className="outline-none pb-[4px] font-p-mj text-[18px] text-stone-900 min-h-[400px] focus:border-stone-900"
+                            className="outline-none pb-[4px] font-p-mj text-[18px] text-gray-900 min-h-[400px] focus:border-gray-900"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             placeholder="내용 입력..."

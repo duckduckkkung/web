@@ -7,8 +7,8 @@ export enum InputTypes {
 }
 
 export enum InputVariants {
-    outline = "rounded-[6px] bg-white text-stone-900 placeholder:text-stone-400 border border-stone-200 text-stone-900 hover:border-stone-300 outline-solid outline-stone-100 outline-0 focus:outline-4",
-    underline = "bg-white text-stone-900 placeholder:text-stone-400 border-b border-b-stone-300 text-stone-900 hover:border-b-stone-400 focus:border-b-c-primary",
+    outline = "rounded-[6px] bg-white text-gray-900 placeholder:text-gray-400 border border-gray-200 text-gray-900 hover:border-gray-300 outline-solid outline-gray-100 outline-0 focus:outline-4",
+    underline = "bg-white text-gray-900 placeholder:text-gray-400 border-b border-b-gray-300 text-gray-900 hover:border-b-gray-400 focus:border-b-c-primary",
 }
 
 interface InputProps {

@@ -37,17 +37,17 @@ export default function BoardMain() {
                 <div className="flex-1 shrink-0 flex flex-col gap-[96px]">
                     <div className="flex flex-col gap-[16px] cursor-pointer">
                         <div className="flex justify-between items-center">
-                            <span className="font-p-semibold text-[16px] text-stone-900">
+                            <span className="font-p-semibold text-[16px] text-gray-900">
                                 덕질 규칙
                             </span>
 
                             <ArrowUpRightIcon
                                 size={16}
-                                className="stroke-stone-900"
+                                className="stroke-gray-900"
                             />
                         </div>
 
-                        <span className="font-p-mj text-[18px] text-stone-900">
+                        <span className="font-p-mj text-[18px] text-gray-900">
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Sed cursus, nisl vitae sagittis mollis, magna
                             urna posuere ipsum, non aliquet massa nisl nec dui.
@@ -72,7 +72,7 @@ export default function BoardMain() {
                     </div>
 
                     <div className="flex flex-col gap-[16px]">
-                        <span className="font-p-semibold text-[16px] text-stone-900">
+                        <span className="font-p-semibold text-[16px] text-gray-900">
                             최신
                         </span>
 
@@ -90,11 +90,11 @@ export default function BoardMain() {
                                         }
                                     >
                                         <div className="flex items-center gap-[24px]">
-                                            <span className="font-p-semibold text-[16px] text-stone-900">
+                                            <span className="font-p-semibold text-[16px] text-gray-900">
                                                 💩 똥글
                                             </span>
 
-                                            <span className="font-p-medium text-[16px] text-stone-900">
+                                            <span className="font-p-medium text-[16px] text-gray-900">
                                                 송하영 존나 귀여움
                                             </span>
                                         </div>
@@ -104,10 +104,10 @@ export default function BoardMain() {
                                                 <div className="flex items-center gap-[6px]">
                                                     <HeartIcon
                                                         size={14}
-                                                        className="stroke-stone-900"
+                                                        className="stroke-gray-900"
                                                     />
 
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
+                                                    <span className="font-p-medium text-[12px] text-gray-900">
                                                         8
                                                     </span>
                                                 </div>
@@ -115,10 +115,10 @@ export default function BoardMain() {
                                                 <div className="flex items-center gap-[6px]">
                                                     <EyeIcon
                                                         size={14}
-                                                        className="stroke-stone-900"
+                                                        className="stroke-gray-900"
                                                     />
 
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
+                                                    <span className="font-p-medium text-[12px] text-gray-900">
                                                         14
                                                     </span>
                                                 </div>
@@ -126,7 +126,7 @@ export default function BoardMain() {
 
                                             <ArrowUpRightIcon
                                                 size={16}
-                                                className="stroke-stone-900"
+                                                className="stroke-gray-900"
                                             />
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@ export default function BoardMain() {
                     </div>
 
                     <div className="flex flex-col gap-[16px]">
-                        <span className="font-p-semibold text-[16px] text-stone-900">
+                        <span className="font-p-semibold text-[16px] text-gray-900">
                             핫한 게시글
                         </span>
 
@@ -153,11 +153,11 @@ export default function BoardMain() {
                                         }
                                     >
                                         <div className="flex items-center gap-[24px]">
-                                            <span className="font-p-semibold text-[16px] text-stone-900">
+                                            <span className="font-p-semibold text-[16px] text-gray-900">
                                                 💩 똥글
                                             </span>
 
-                                            <span className="font-p-medium text-[16px] text-stone-900">
+                                            <span className="font-p-medium text-[16px] text-gray-900">
                                                 송하영 존나 귀여움
                                             </span>
                                         </div>
@@ -167,10 +167,10 @@ export default function BoardMain() {
                                                 <div className="flex items-center gap-[6px]">
                                                     <HeartIcon
                                                         size={14}
-                                                        className="stroke-stone-900"
+                                                        className="stroke-gray-900"
                                                     />
 
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
+                                                    <span className="font-p-medium text-[12px] text-gray-900">
                                                         8
                                                     </span>
                                                 </div>
@@ -178,10 +178,10 @@ export default function BoardMain() {
                                                 <div className="flex items-center gap-[6px]">
                                                     <EyeIcon
                                                         size={14}
-                                                        className="stroke-stone-900"
+                                                        className="stroke-gray-900"
                                                     />
 
-                                                    <span className="font-p-medium text-[12px] text-stone-900">
+                                                    <span className="font-p-medium text-[12px] text-gray-900">
                                                         14
                                                     </span>
                                                 </div>
@@ -189,7 +189,7 @@ export default function BoardMain() {
 
                                             <ArrowUpRightIcon
                                                 size={16}
-                                                className="stroke-stone-900"
+                                                className="stroke-gray-900"
                                             />
                                         </div>
                                     </div>

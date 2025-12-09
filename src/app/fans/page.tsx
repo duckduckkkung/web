@@ -92,14 +92,14 @@ export default function Fans() {
                         icon={
                             <ArrowUpRightIcon
                                 size={14}
-                                className="stroke-stone-700"
+                                className="stroke-gray-700"
                             />
                         }
                         text="굿즈를 바로 확인할 수 있는 기능이 추가되었어요"
-                        onClick={() => router.push("/patch")}
+                        onClick={() => router.push("/release")}
                     />
 
-                    <span className="font-p-semibold text-[24px] text-stone-900">
+                    <span className="font-p-semibold text-[24px] text-gray-900">
                         덕질하기 좋은 아침이네요, 고서온님.
                     </span>
                 </div>
@@ -112,7 +112,7 @@ export default function Fans() {
                             icon={
                                 <PlusIcon
                                     size={15}
-                                    className="stroke-stone-900"
+                                    className="stroke-gray-900"
                                 />
                             }
                             onClick={() => router.push("/fans/create")}
@@ -133,7 +133,7 @@ export default function Fans() {
                                     icon={
                                         <SlidersHorizontalIcon
                                             size={15}
-                                            className="stroke-stone-900"
+                                            className="stroke-gray-900"
                                         />
                                     }
                                 />
@@ -175,7 +175,7 @@ export default function Fans() {
                             icon={
                                 <RefreshCcwIcon
                                     size={15}
-                                    className="stroke-stone-900"
+                                    className="stroke-gray-900"
                                 />
                             }
                             onClick={handleResetFilters}
@@ -184,7 +184,7 @@ export default function Fans() {
 
                     <div className="flex flex-col gap-[16px]">
                         <div className="flex items-center justify-between">
-                            <span className="font-p-regular text-[14px] text-stone-600">
+                            <span className="font-p-regular text-[14px] text-gray-600">
                                 총{" "}
                                 <span className="font-p-medium">
                                     {filteredFans.length}
@@ -194,13 +194,13 @@ export default function Fans() {
 
                             {(search || activeFiltersCount > 0) && (
                                 <div className="flex items-center gap-[8px]">
-                                    <span className="font-p-regular text-[12px] text-stone-500">
+                                    <span className="font-p-regular text-[12px] text-gray-500">
                                         필터 적용 중
                                     </span>
 
                                     <button
                                         onClick={handleResetFilters}
-                                        className="font-p-medium text-[12px] text-stone-700 hover:text-stone-900 underline cursor-pointer"
+                                        className="font-p-medium text-[12px] text-gray-700 hover:text-gray-900 underline cursor-pointer"
                                     >
                                         초기화
                                     </button>
@@ -216,14 +216,14 @@ export default function Fans() {
 
                         {filteredFans.length === 0 && (
                             <div className="flex flex-col items-center justify-center py-[80px] gap-[4px]">
-                                <span className="font-p-medium text-[18px] text-stone-900">
+                                <span className="font-p-medium text-[18px] text-gray-900">
                                     검색 결과가 없어요
                                 </span>
 
-                                <span className="font-p-regular text-[14px] text-stone-500">
+                                <span className="font-p-regular text-[14px] text-gray-500">
                                     찾으시는 덕질이 없나요?{" "}
                                     <u
-                                        className="text-stone-900 cursor-pointer"
+                                        className="text-gray-900 cursor-pointer"
                                         onClick={() =>
                                             router.push(
                                                 `/fans/create?name=${search}`

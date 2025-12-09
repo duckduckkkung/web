@@ -95,13 +95,13 @@ export default function UploadMoment() {
                         icon={
                             <ArrowUpRightIcon
                                 size={14}
-                                className="stroke-stone-700"
+                                className="stroke-gray-700"
                             />
                         }
                         text="꼭! 이것만 읽어주세요"
                     />
 
-                    <span className="font-p-semibold text-[24px] text-stone-900">
+                    <span className="font-p-semibold text-[24px] text-gray-900">
                         사람들이 이걸보고 입덕할지도 몰라요!
                     </span>
                 </div>
@@ -111,7 +111,7 @@ export default function UploadMoment() {
                         <div className="flex gap-[6px]">
                             <div className="size-[4px] bg-red-600 rounded-full" />
 
-                            <span className="font-p-semibold text-[18px] text-stone-900">
+                            <span className="font-p-semibold text-[18px] text-gray-900">
                                 제목을 입력해 주세요.
                             </span>
                         </div>
@@ -133,7 +133,7 @@ export default function UploadMoment() {
                         <div className="flex gap-[6px]">
                             <div className="size-[4px] bg-red-600 rounded-full" />
 
-                            <span className="font-p-semibold text-[18px] text-stone-900">
+                            <span className="font-p-semibold text-[18px] text-gray-900">
                                 짧은 설명을 작성해 주세요.
                             </span>
                         </div>
@@ -155,7 +155,7 @@ export default function UploadMoment() {
                         <div className="flex gap-[6px]">
                             <div className="size-[4px] bg-red-600 rounded-full" />
 
-                            <span className="font-p-semibold text-[18px] text-stone-900">
+                            <span className="font-p-semibold text-[18px] text-gray-900">
                                 동영상을 업로드해 주세요.
                             </span>
                         </div>
@@ -179,7 +179,7 @@ export default function UploadMoment() {
                                                 <ArrowUpToLineIcon
                                                     key="upload-video"
                                                     size={14}
-                                                    className="stroke-stone-900"
+                                                    className="stroke-gray-900"
                                                 />
                                             ),
                                             float: "left",
@@ -200,8 +200,8 @@ export default function UploadMoment() {
                                 <div
                                     className={`w-[480px] aspect-9/15 rounded-[8px] overflow-hidden border border-dashed flex justify-center items-center cursor-pointer transition-colors ${
                                         isDragOver
-                                            ? "border-stone-500 bg-stone-50"
-                                            : "border-stone-300 hover:border-stone-400"
+                                            ? "border-gray-500 bg-gray-50"
+                                            : "border-gray-300 hover:border-gray-400"
                                     }`}
                                     onClick={() => {
                                         if (isCreating) return;
@@ -213,7 +213,7 @@ export default function UploadMoment() {
                                 >
                                     <ArrowUpToLineIcon
                                         size={24}
-                                        className="stroke-stone-500"
+                                        className="stroke-gray-500"
                                     />
                                 </div>
                             ) : (
@@ -225,7 +225,7 @@ export default function UploadMoment() {
                                     />
 
                                     <div
-                                        className="absolute top-[8px] right-[8px] p-[8px] bg-stone-900/60 rounded-[4px] group-hover:opacity-100 opacity-0 cursor-pointer transition-all duration-[.1s]"
+                                        className="absolute top-[8px] right-[8px] p-[8px] bg-gray-900/60 rounded-[4px] group-hover:opacity-100 opacity-0 cursor-pointer transition-all duration-[.1s]"
                                         onClick={() => {
                                             if (isCreating) return;
                                             handleVideoRemove();
@@ -255,13 +255,13 @@ export default function UploadMoment() {
                                             <LoaderCircleIcon
                                                 key="loader-cirlce"
                                                 size={14}
-                                                className="stroke-stone-900 animate-spin"
+                                                className="stroke-gray-900 animate-spin"
                                             />
                                         ) : (
                                             <UploadCloudIcon
                                                 key="create-fan"
                                                 size={14}
-                                                className="stroke-stone-900"
+                                                className="stroke-gray-900"
                                             />
                                         ),
                                         float: "left",

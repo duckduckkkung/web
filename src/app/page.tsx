@@ -33,14 +33,14 @@ export default function Home() {
                                 icon={
                                     <ArrowUpRightIcon
                                         size={14}
-                                        className="stroke-stone-700"
+                                        className="stroke-gray-700"
                                     />
                                 }
                                 text="굿즈를 바로 확인할 수 있는 기능이 추가되었어요"
-                                onClick={() => router.push("/patch")}
+                                onClick={() => router.push("/release")}
                             />
 
-                            <span className="font-p-semibold text-[72px] text-stone-900 leading-[76px] text-center">
+                            <span className="font-p-semibold text-[72px] text-gray-900 leading-[76px] text-center">
                                 덕질은
                                 <br />
                                 덕덕쿵
@@ -56,7 +56,7 @@ export default function Home() {
                                         <SparkleIcon
                                             key="start"
                                             size={16}
-                                            className="stroke-stone-900"
+                                            className="stroke-gray-900"
                                         />
                                     ),
                                     float: "left",
@@ -86,7 +86,7 @@ export default function Home() {
                                 icon={
                                     <BadgeCheckIcon
                                         size={14}
-                                        className="stroke-stone-700"
+                                        className="stroke-gray-700"
                                     />
                                 }
                                 text="힘들고 지쳤던 하루를 녹일 땐"
@@ -116,7 +116,7 @@ export default function Home() {
                                 icon={
                                     <BadgeCheckIcon
                                         size={14}
-                                        className="stroke-stone-700"
+                                        className="stroke-gray-700"
                                     />
                                 }
                                 text="원하는 굿즈만 빠르게 찾아보려면"
@@ -142,7 +142,7 @@ export default function Home() {
                                 icon={
                                     <BadgeCheckIcon
                                         size={14}
-                                        className="stroke-stone-700"
+                                        className="stroke-gray-700"
                                     />
                                 }
                                 text="바쁜 일상에, 최애 근황 한 숟가락"

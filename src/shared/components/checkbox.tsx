@@ -1,3 +1,5 @@
+import { CheckIcon } from "lucide-react";
+
 export enum CheckboxTypes {
     default = "flex items-center justify-center cursor-pointer transition-all duration-[.1s] border-2 rounded-[4px]",
 
@@ -7,7 +9,7 @@ export enum CheckboxTypes {
 }
 
 export enum CheckboxVariants {
-    primary = "bg-white border-stone-300 hover:border-stone-400 data-[checked=true]:bg-c-primary data-[checked=true]:border-c-primary",
+    primary = "bg-white border-gray-300 hover:border-gray-400 data-[checked=true]:bg-c-primary data-[checked=true]:border-c-primary",
 }
 
 interface CheckboxProps {
@@ -40,30 +42,22 @@ export const Checkbox = ({
     return (
         <div className="flex items-center gap-[8px]">
             <div
-                className={`${CheckboxTypes[type]} ${CheckboxVariants[variants]} ${
-                    disabled ? "!cursor-not-allowed opacity-50" : "active:scale-95"
+                className={`${CheckboxTypes[type]} ${
+                    CheckboxVariants[variants]
+                } ${
+                    disabled
+                        ? "!cursor-not-allowed opacity-50"
+                        : "active:scale-95"
                 }`}
                 data-checked={checked}
                 onClick={handleChange}
             >
-                {checked && (
-                    <svg
-                        className="w-[70%] h-[70%] text-white"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
-                )}
+                {checked && <CheckIcon size={12} className="stroke-white" />}
             </div>
             {label && (
                 <label
                     htmlFor={id}
-                    className={`font-p-medium text-[14px] text-stone-900 ${
+                    className={`font-p-medium text-[14px] text-gray-900 ${
                         disabled ? "opacity-50" : "cursor-pointer"
                     }`}
                     onClick={handleChange}

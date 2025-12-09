@@ -89,7 +89,7 @@ export function ContributionGraph() {
                                     <Popover
                                         key={`day-${weekIndex}-${dayIndex}`}
                                         overlay={
-                                            <div className="w-[180px] p-3 font-p-medium text-[14px] text-stone-900">
+                                            <div className="w-[180px] p-3 font-p-medium text-[14px] text-gray-900">
                                                 {formattedDate}
                                             </div>
                                         }
