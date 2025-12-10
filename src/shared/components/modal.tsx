@@ -56,7 +56,7 @@ export const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
 
     return (
         <div
-            className={`z-50 fixed inset-0 w-full h-full flex justify-center items-center transition-opacity duration-200 ${
+            className={`z-[500] fixed inset-0 w-full h-full flex justify-center items-center transition-opacity duration-200 ${
                 isAnimating ? "opacity-100" : "opacity-0"
             }`}
             onClick={handleBackdropClick}

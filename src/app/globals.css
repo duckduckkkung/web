@@ -46,6 +46,16 @@
 }
 
 @font-face {
+    font-family: "GMarketSans Bold";
+    src: url("/fonts/GMarketSansBold.otf");
+}
+
+@font-face {
+    font-family: "GMarketSans Medium";
+    src: url("/fonts/GMarketSansMedium.otf");
+}
+
+@font-face {
     font-family: "GyeonggiMillenniumBackground";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Batang_Regular.woff")
         format("woff");
@@ -66,6 +76,8 @@
     --font-p-semibold: "p-semibold";
     --font-p-thin: "p-thin";
 
+    --font-p-gmsm: "GMarketSans Medium";
+    --font-p-gmsb: "GMarketSans Bold";
     --font-p-mj: "GyeonggiMillenniumBackground";
 }
 
