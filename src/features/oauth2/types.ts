@@ -10,7 +10,7 @@ export interface RegisterRequest {
     introduction: string;
     provider_name: string;
     oauth2_user_id: string;
-    profileImage: File;
+    file: File;
 }
 
 // 공통 res
@@ -23,6 +23,6 @@ export interface Response {
     refresh_token_expires_in: number;
     kakaoId: string;
     email: string;
-    profileImage: string;
+    file: string;
     type: "register" | "signin";
 }
