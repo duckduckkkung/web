@@ -6,7 +6,6 @@ export interface SignRequest {
 // 소셜 회원가입 req
 export interface RegisterRequest {
     username: string;
-    email: string;
     introduction: string;
     provider_name: string;
     oauth2_user_id: string;
