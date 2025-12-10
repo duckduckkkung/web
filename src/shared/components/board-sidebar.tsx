@@ -117,7 +117,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                     </span>
 
                                     <span className="font-p-medium text-[16px] text-gray-900">
-                                        2025. 09. 11.
+                                        2025년 9월 11일
                                     </span>
                                 </div>
 
