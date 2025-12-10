@@ -1,4 +1,4 @@
-import { CheckIcon } from "lucide-react";
+import { ChevronRightIcon, CheckIcon } from "lucide-react";
 
 export enum CheckboxTypes {
     default = "flex items-center justify-center cursor-pointer transition-all duration-[.1s] border-2 rounded-[4px]",
@@ -9,7 +9,7 @@ export enum CheckboxTypes {
 }
 
 export enum CheckboxVariants {
-    primary = "bg-white border-gray-300 hover:border-gray-400 data-[checked=true]:bg-c-primary data-[checked=true]:border-c-primary",
+    primary = "bg-white border-gray-200 group-hover:border-gray-300 data-[checked=true]:bg-c-primary data-[checked=true]:border-c-primary",
 }
 
 interface CheckboxProps {
@@ -22,6 +22,9 @@ interface CheckboxProps {
     disabled?: boolean;
     label?: string;
     id?: string;
+
+    required?: boolean;
+    shortcut?: string;
 }
 
 export const Checkbox = ({
@@ -32,6 +35,8 @@ export const Checkbox = ({
     disabled = false,
     label,
     id,
+    required,
+    shortcut,
 }: CheckboxProps) => {
     const handleChange = () => {
         if (!disabled && onChange) {
@@ -40,7 +45,7 @@ export const Checkbox = ({
     };
 
     return (
-        <div className="flex items-center gap-[8px]">
+        <div className="group flex items-center gap-[8px]">
             <div
                 className={`${CheckboxTypes[type]} ${
                     CheckboxVariants[variants]
@@ -48,22 +53,43 @@ export const Checkbox = ({
                     disabled
                         ? "!cursor-not-allowed opacity-50"
                         : "active:scale-95"
-                }`}
+                } shrink-0`}
                 data-checked={checked}
                 onClick={handleChange}
             >
                 {checked && <CheckIcon size={12} className="stroke-white" />}
             </div>
             {label && (
-                <label
-                    htmlFor={id}
-                    className={`font-p-medium text-[14px] text-gray-900 ${
-                        disabled ? "opacity-50" : "cursor-pointer"
-                    }`}
-                    onClick={handleChange}
-                >
-                    {label}
-                </label>
+                <div className="w-full flex justify-between items-center">
+                    <div className="flex items-center gap-[4px]">
+                        {required && (
+                            <span
+                                className="font-p-semibold text-[14px] text-c-primary cursor-pointer"
+                                onClick={handleChange}
+                            >
+                                (필수)
+                            </span>
+                        )}
+
+                        <label
+                            htmlFor={id}
+                            className={`font-p-medium text-[14px] group-hover:text-gray-600 text-gray-500 ${
+                                checked ? "text-gray-600" : ""
+                            } ${disabled ? "opacity-50" : "cursor-pointer"}`}
+                            onClick={handleChange}
+                        >
+                            {label}
+                        </label>
+                    </div>
+
+                    {shortcut && (
+                        <ChevronRightIcon
+                            size={16}
+                            className="stroke-gray-400 cursor-pointer"
+                            onClick={() => window.open(shortcut)}
+                        />
+                    )}
+                </div>
             )}
             {id && (
                 <input

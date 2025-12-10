@@ -110,7 +110,7 @@ export const GlobalHeaderInteractions = () => {
                     <img
                         src="https://avatars.githubusercontent.com/u/98827759?v=4"
                         alt="profile"
-                        className="size-[32px] object-cover"
+                        className="size-[32px] object-cover rounded-[4px]"
                         draggable={false}
                     />
 

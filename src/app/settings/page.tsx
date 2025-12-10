@@ -1,11 +1,13 @@
 "use client";
 
 import {
+    EllipsisIcon,
     HashIcon,
+    ImageUpIcon,
     KeySquareIcon,
     LogOutIcon,
     PencilLineIcon,
-    UploadIcon,
+    Trash2Icon,
     XIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,6 +19,7 @@ import { Button } from "@/shared/components/button";
 import { Input } from "@/shared/components/input";
 import { Modal } from "@/shared/components/modal";
 import { Tab } from "@/shared/components/tab";
+import { Popover } from "@/shared/components/popover";
 
 export default function Settings() {
     const [tab, setTab] = useState<string>("프로필");
@@ -79,7 +82,7 @@ export default function Settings() {
                     <div className="p-[24px] grid grid-cols-2 gap-[16px]">
                         <Button
                             type="lg"
-                            variants="black"
+                            variants="warning"
                             icons={[
                                 {
                                     float: "left",
@@ -87,7 +90,7 @@ export default function Settings() {
                                         <LogOutIcon
                                             key="delete-account"
                                             size={16}
-                                            className="stroke-white"
+                                            className="stroke-red-700"
                                         />
                                     ),
                                 },
@@ -126,7 +129,7 @@ export default function Settings() {
                     onChange={handleTabChange}
                 />
 
-                <div className="relative overflow-hidden">
+                <div className="relative">
                     <AnimatePresence mode="wait" custom={direction}>
                         <motion.div
                             key={tab}
@@ -143,14 +146,27 @@ export default function Settings() {
                             className="w-full"
                         >
                             {tab === "프로필" && (
-                                <div className="py-[48px] flex flex-col gap-[48px]">
+                                <div className="py-[48px] flex flex-col gap-[24px]">
                                     <div className="flex flex-col gap-[8px]">
-                                        <span className="font-p-semibold text-[16px] text-gray-900">
+                                        <input
+                                            ref={fileInputRef}
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleImageUpload}
+                                            className="hidden"
+                                        />
+
+                                        <span className="font-p-medium text-[14px] text-gray-600">
                                             프로필 사진
                                         </span>
 
-                                        <div className="relative size-[140px] rounded-[8px] bg-gray-100">
-                                            {profileImage && (
+                                        <div
+                                            className="relative size-[120px] rounded-[8px] bg-gray-100 cursor-pointer flex justify-center items-center"
+                                            onClick={() =>
+                                                fileInputRef.current?.click()
+                                            }
+                                        >
+                                            {profileImage ? (
                                                 <div className="size-full rounded-[8px] overflow-hidden">
                                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                                     <img
@@ -159,55 +175,40 @@ export default function Settings() {
                                                         className="w-full h-full object-cover"
                                                     />
                                                 </div>
-                                            )}
-
-                                            <div
-                                                className="absolute size-[32px] rounded-full bg-white border border-gray-300 top-full left-full -translate-x-[75%] -translate-y-[75%] flex justify-center items-center cursor-pointer"
-                                                onClick={() =>
-                                                    fileInputRef.current?.click()
-                                                }
-                                            >
-                                                <UploadIcon
-                                                    size={16}
-                                                    className="stroke-gray-900"
+                                            ) : (
+                                                <ImageUpIcon
+                                                    size={48}
+                                                    className="stroke-gray-300"
                                                 />
-                                            </div>
-
-                                            <input
-                                                ref={fileInputRef}
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={handleImageUpload}
-                                                className="hidden"
-                                            />
+                                            )}
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col gap-[8px]">
-                                        <span className="font-p-semibold text-[16px] text-gray-900">
+                                    <div className="flex flex-col gap-[6px]">
+                                        <span className="font-p-medium text-[14px] text-gray-600">
                                             닉네임
                                         </span>
 
                                         <Input
-                                            type="lg"
-                                            variants="underline"
+                                            type="md"
+                                            variants="outline"
                                             value=""
                                             onChange={() => {}}
-                                            placeholder="16글자 이내"
+                                            placeholder="닉네임을 입력해 주세요."
                                         />
                                     </div>
 
-                                    <div className="flex flex-col gap-[8px]">
-                                        <span className="font-p-semibold text-[16px] text-gray-900">
+                                    <div className="flex flex-col gap-[6px]">
+                                        <span className="font-p-medium text-[14px] text-gray-600">
                                             자기소개
                                         </span>
 
                                         <Input
-                                            type="lg"
-                                            variants="underline"
+                                            type="md"
+                                            variants="outline"
                                             value=""
                                             onChange={() => {}}
-                                            placeholder="30글자 이내"
+                                            placeholder="간단한 자기소개를 입력해 주세요."
                                         />
                                     </div>
 
@@ -333,59 +334,168 @@ export default function Settings() {
                             )}
 
                             {tab === "청구" && (
-                                <div className="py-[48px]">
-                                    <div className="flex flex-col gap-[24px]">
-                                        <div className="flex flex-col gap-[12px]">
-                                            <div className="flex items-center gap-[6px]">
-                                                <span className="w-[140px] font-p-medium text-[16px] text-gray-900">
-                                                    현재 플랜
-                                                </span>
+                                <div className="py-[48px] flex flex-col gap-[24px]">
+                                    <div className="grid grid-cols-2 gap-[24px]">
+                                        <div className="border border-gray-200 rounded-[8px] p-[24px]">
+                                            <div className="flex flex-col gap-[16px]">
+                                                <div className="flex flex-col gap-[2px]">
+                                                    <span className="font-p-medium text-[14px] text-gray-600">
+                                                        다음 결제
+                                                    </span>
 
-                                                <span className="font-p-medium text-[14px] text-gray-500">
-                                                    덕질
-                                                </span>
-                                            </div>
+                                                    <span className="font-p-gmsb text-[24px] text-gray-900">
+                                                        1,400원
+                                                    </span>
+                                                </div>
 
-                                            <div className="flex items-center gap-[6px]">
-                                                <span className="w-[140px] font-p-medium text-[16px] text-gray-900">
-                                                    다음 청구 날짜
-                                                </span>
+                                                <div className="flex flex-col gap-[4px]">
+                                                    <div className="flex justify-between items-center">
+                                                        <span className="font-p-medium text-[14px] text-gray-900">
+                                                            다음 결제일
+                                                        </span>
 
-                                                <span className="font-p-medium text-[14px] text-gray-500">
-                                                    2025. 10. 10.
-                                                </span>
-                                            </div>
+                                                        <span className="font-p-medium text-[14px] text-gray-600">
+                                                            2025년 11월 4일
+                                                        </span>
+                                                    </div>
 
-                                            <div className="flex items-center gap-[6px]">
-                                                <span className="w-[140px] font-p-medium text-[16px] text-gray-900">
-                                                    청구 금액
-                                                </span>
+                                                    <div className="flex justify-between items-center">
+                                                        <span className="font-p-medium text-[14px] text-gray-900">
+                                                            최근 결제일
+                                                        </span>
 
-                                                <span className="font-p-medium text-[14px] text-red-600">
-                                                    ₩1,400
-                                                </span>
+                                                        <span className="font-p-medium text-[14px] text-gray-600">
+                                                            2025년 10월 4일
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className="w-[140px] flex flex-col">
-                                            <Button
-                                                type="md"
-                                                variants="warning"
-                                                icons={[
-                                                    {
-                                                        float: "left",
-                                                        component: (
-                                                            <LogOutIcon
-                                                                key="billing"
-                                                                size={16}
-                                                                className="stroke-red-700"
-                                                            />
-                                                        ),
-                                                    },
-                                                ]}
-                                            >
-                                                구독 해지
-                                            </Button>
+                                        <div className="border border-gray-200 rounded-[8px] p-[24px]">
+                                            <div className="flex flex-col gap-[16px]">
+                                                <div className="flex flex-col gap-[2px]">
+                                                    <span className="font-p-medium text-[14px] text-gray-600">
+                                                        결제 수단
+                                                    </span>
+
+                                                    <span className="font-p-gmsb text-[24px] text-gray-900">
+                                                        KEB하나카드
+                                                    </span>
+                                                </div>
+
+                                                <div className="flex flex-col gap-[4px]">
+                                                    <div className="flex justify-between items-center">
+                                                        <span className="font-p-medium text-[14px] text-gray-900">
+                                                            카드 번호
+                                                        </span>
+
+                                                        <span className="font-p-medium text-[14px] text-gray-600">
+                                                            5327-XXXX-XXXX-568X
+                                                        </span>
+                                                    </div>
+
+                                                    <div className="flex justify-between items-center">
+                                                        <span className="font-p-medium text-[14px] text-gray-900">
+                                                            설정
+                                                        </span>
+
+                                                        <Popover
+                                                            overlay={
+                                                                <div className="min-w-full w-max max-h-60 overflow-y-auto">
+                                                                    <div className="px-3 py-2 cursor-pointer hover:bg-gray-50 flex items-center gap-[6px]">
+                                                                        <Trash2Icon
+                                                                            size={
+                                                                                14
+                                                                            }
+                                                                            className="stroke-gray-900"
+                                                                        />
+
+                                                                        <span className="font-p-medium text-[14px] text-gray-900">
+                                                                            삭제하기
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        >
+                                                            <div className="p-[4px] flex items-center gap-[8px] hover:bg-gray-100 rounded-[8px] cursor-pointer transition-all duration-[.1s]">
+                                                                <EllipsisIcon
+                                                                    size={14}
+                                                                    className="stroke-gray-600"
+                                                                />
+                                                            </div>
+                                                        </Popover>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-[8px] p-[24px]">
+                                        <div className="flex flex-col gap-[16px]">
+                                            <span className="font-p-medium text-[14px] text-gray-600">
+                                                결제 내역
+                                            </span>
+
+                                            <div className="flex justify-between items-center">
+                                                <div className="flex items-center gap-[12px]">
+                                                    <span className="font-p-medium text-[16px] text-c-primary">
+                                                        완료
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[16px] text-gray-400">
+                                                        구독 갱신
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[16px] text-gray-900">
+                                                        2025년 10월 6일
+                                                    </span>
+                                                </div>
+
+                                                <span className="font-p-gmsm text-[16px] text-gray-900">
+                                                    1,400원
+                                                </span>
+                                            </div>
+
+                                            <div className="flex justify-between items-center">
+                                                <div className="flex items-center gap-[12px]">
+                                                    <span className="font-p-medium text-[16px] text-red-700">
+                                                        실패
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[16px] text-gray-400">
+                                                        구독 갱신
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[16px] text-gray-900">
+                                                        2025년 10월 5일
+                                                    </span>
+                                                </div>
+
+                                                <span className="font-p-gmsm text-[16px] text-gray-900">
+                                                    1,400원
+                                                </span>
+                                            </div>
+
+                                            <div className="flex justify-between items-center">
+                                                <div className="flex items-center gap-[12px]">
+                                                    <span className="font-p-medium text-[16px] text-red-700">
+                                                        실패
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[16px] text-gray-400">
+                                                        구독 갱신
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[16px] text-gray-900">
+                                                        2025년 10월 4일
+                                                    </span>
+                                                </div>
+
+                                                <span className="font-p-gmsm text-[16px] text-gray-900">
+                                                    1,400원
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -394,9 +504,16 @@ export default function Settings() {
                             {tab === "기타" && (
                                 <div className="py-[48px]">
                                     <div className="flex flex-col gap-[16px]">
-                                        <span className="font-p-medium text-[16px] text-gray-900">
-                                            탈퇴
-                                        </span>
+                                        <div className="flex flex-col gap-[6px]">
+                                            <span className="font-p-medium text-[16px] text-gray-900">
+                                                탈퇴
+                                            </span>
+
+                                            <span className="font-p-medium text-[14px] text-gray-500">
+                                                모든 정보를 지우고 덕덕쿵에서
+                                                탈퇴합니다.
+                                            </span>
+                                        </div>
 
                                         <div className="w-fit">
                                             <Button

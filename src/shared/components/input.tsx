@@ -15,6 +15,8 @@ interface InputProps {
     type: keyof typeof InputTypes;
     variants: keyof typeof InputVariants;
 
+    id?: string;
+
     placeholder?: string;
     value: string;
     onChange: (value: string) => void;
@@ -26,6 +28,7 @@ interface InputProps {
 export const Input = ({
     type,
     variants,
+    id,
     placeholder,
     value,
     onChange,
@@ -34,8 +37,11 @@ export const Input = ({
 }: InputProps) => {
     return (
         <input
+            id={id}
             type="text"
-            className={`${InputTypes[type]} ${InputVariants[variants]}`}
+            className={`${InputTypes[type]} ${InputVariants[variants]} ${
+                disabled ? "!cursor-not-allowed !bg-gray-50 !text-gray-500" : ""
+            }`}
             placeholder={placeholder}
             value={value}
             onChange={(e) => onChange(e.target.value)}
