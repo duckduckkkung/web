@@ -31,7 +31,7 @@ export const register = async (
         fromData.append(key, value);
     });
 
-    return await apiClient.postFormData<Response>("/api/user", fromData, {
+    return await apiClient.postFormData<Response>("/api/auth", fromData, {
         headers: { skipAuth: true },
     });
 };
