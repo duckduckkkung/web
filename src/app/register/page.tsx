@@ -278,7 +278,7 @@ export default function Register() {
                                     oauth2_user_id: searchParams.get(
                                         "id"
                                     ) as string,
-                                    profileImage,
+                                    file: profileImage,
                                 });
                                 router.push("/fans");
                             }}
