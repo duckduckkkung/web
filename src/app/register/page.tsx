@@ -270,7 +270,6 @@ export default function Register() {
                                 setIsCreating(true);
                                 await register({
                                     username: name,
-                                    email,
                                     introduction: bio,
                                     provider_name: searchParams.get(
                                         "provider"
