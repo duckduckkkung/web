@@ -1,18 +1,25 @@
 "use client";
 
-import { ArrowUpRightIcon, ImageUpIcon, LoaderCircleIcon } from "lucide-react";
+import {
+    ArrowUpRightIcon,
+    ImageUpIcon,
+    LoaderCircleIcon,
+    MessageCircleWarningIcon,
+} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect, useMemo } from "react";
 
+import { ToastMessage } from "@/shared/components/toast-message";
 import { Checkbox } from "@/shared/components/checkbox";
 import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
 import { Button } from "@/shared/components/button";
+import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
 import { register } from "@/features/oauth2/api";
+
 import { REGEX } from "@/shared/utils/regex";
-import { Verify } from "@/shared/components/verify";
 
 export default function Register() {
     const searchParams = useSearchParams();
@@ -49,6 +56,8 @@ export default function Register() {
         false,
     ]);
 
+    const [isError, setIsError] = useState<boolean>(false);
+
     useEffect(() => {
         const url = searchParams.get("image") as string;
         setProfileImage((url === "undefined" ? "" : url) || "");
@@ -82,6 +91,9 @@ export default function Register() {
             return;
         }
 
+        setIsError(false);
+        setIsCreating(true);
+
         let profileImage: File;
         if (
             fileInputRef.current?.files &&
@@ -97,8 +109,6 @@ export default function Register() {
         }
 
         try {
-            setIsCreating(true);
-
             await register({
                 username: name,
                 introduction: bio,
@@ -109,6 +119,7 @@ export default function Register() {
 
             router.push("/fans");
         } catch {
+            setIsError(true);
             setIsCreating(false);
         }
     };
@@ -302,56 +313,74 @@ export default function Register() {
                             />
                         </div>
 
-                        <Button
-                            type="lg"
-                            variants="primary"
-                            icons={[
-                                {
-                                    component: isCreating ? (
-                                        <LoaderCircleIcon
-                                            key="loader-cirlce"
-                                            size={16}
-                                            className={`animate-spin ${
-                                                isCreating ||
-                                                !REGEX.NICKNAME.test(
-                                                    name.trim()
-                                                ) ||
-                                                !REGEX.INTRODUCTION.test(
-                                                    bio.trim()
-                                                )
-                                                    ? "stroke-gray-400"
-                                                    : "stroke-white"
-                                            }`}
-                                        />
-                                    ) : (
-                                        <ArrowUpRightIcon
-                                            key="register"
-                                            size={16}
-                                            className={`${
-                                                isCreating ||
-                                                !REGEX.NICKNAME.test(
-                                                    name.trim()
-                                                ) ||
-                                                !REGEX.INTRODUCTION.test(
-                                                    bio.trim()
-                                                )
-                                                    ? "stroke-gray-400"
-                                                    : "stroke-white"
-                                            }`}
-                                        />
-                                    ),
-                                    float: "left",
-                                },
-                            ]}
-                            onClick={submit}
-                            disabled={
-                                isCreating ||
-                                !REGEX.NICKNAME.test(name.trim()) ||
-                                !REGEX.INTRODUCTION.test(bio.trim())
+                        <ToastMessage
+                            variants="error"
+                            message={
+                                <div className="flex items-center gap-[6px]">
+                                    <MessageCircleWarningIcon
+                                        size={14}
+                                        className="stroke-white"
+                                        strokeWidth={3}
+                                    />
+
+                                    <span className="font-p-medium text-[14px] text-white">
+                                        오류가 발생하였습니다.
+                                    </span>
+                                </div>
                             }
+                            isOpen={isError}
                         >
-                            덕질 시작하기
-                        </Button>
+                            <Button
+                                type="lg"
+                                variants="primary"
+                                icons={[
+                                    {
+                                        component: isCreating ? (
+                                            <LoaderCircleIcon
+                                                key="loader-cirlce"
+                                                size={16}
+                                                className={`animate-spin ${
+                                                    isCreating ||
+                                                    !REGEX.NICKNAME.test(
+                                                        name.trim()
+                                                    ) ||
+                                                    !REGEX.INTRODUCTION.test(
+                                                        bio.trim()
+                                                    )
+                                                        ? "stroke-gray-400"
+                                                        : "stroke-white"
+                                                }`}
+                                            />
+                                        ) : (
+                                            <ArrowUpRightIcon
+                                                key="register"
+                                                size={16}
+                                                className={`${
+                                                    isCreating ||
+                                                    !REGEX.NICKNAME.test(
+                                                        name.trim()
+                                                    ) ||
+                                                    !REGEX.INTRODUCTION.test(
+                                                        bio.trim()
+                                                    )
+                                                        ? "stroke-gray-400"
+                                                        : "stroke-white"
+                                                }`}
+                                            />
+                                        ),
+                                        float: "left",
+                                    },
+                                ]}
+                                onClick={submit}
+                                disabled={
+                                    isCreating ||
+                                    !REGEX.NICKNAME.test(name.trim()) ||
+                                    !REGEX.INTRODUCTION.test(bio.trim())
+                                }
+                            >
+                                덕질 시작하기
+                            </Button>
+                        </ToastMessage>
                     </div>
                 </div>
             </div>
