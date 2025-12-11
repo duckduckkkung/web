@@ -1,16 +1,25 @@
 "use client";
 
-import { ArrowUpRightIcon, ImageUpIcon, LoaderCircleIcon } from "lucide-react";
+import {
+    ArrowUpRightIcon,
+    ImageUpIcon,
+    LoaderCircleIcon,
+    MessageCircleWarningIcon,
+} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 
+import { ToastMessage } from "@/shared/components/toast-message";
 import { Checkbox } from "@/shared/components/checkbox";
 import { Header } from "@/shared/components/header";
 import { Footer } from "@/shared/components/footer";
 import { Button } from "@/shared/components/button";
+import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
 import { register } from "@/features/oauth2/api";
+
+import { REGEX } from "@/shared/utils/regex";
 
 export default function Register() {
     const searchParams = useSearchParams();
@@ -19,7 +28,21 @@ export default function Register() {
     const [email, setEmail] = useState<string>("");
 
     const [name, setName] = useState<string>("고서온");
+    const nameVerify = useMemo(
+        () => ({
+            one: /^[a-zA-Zㄱ-ㅎ가-힣 ]+$/.test(name.trim()),
+            two: /^[\s\S]{3,20}$/.test(name.trim()),
+        }),
+        [name]
+    );
+
     const [bio, setBio] = useState<string>("");
+    const bioVerify = useMemo(
+        () => ({
+            one: REGEX.INTRODUCTION.test(bio.trim()),
+        }),
+        [bio]
+    );
 
     const [profileImage, setProfileImage] = useState<string>("");
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -32,6 +55,8 @@ export default function Register() {
         false,
         false,
     ]);
+
+    const [isError, setIsError] = useState<boolean>(false);
 
     useEffect(() => {
         const url = searchParams.get("image") as string;
@@ -52,6 +77,50 @@ export default function Register() {
                 setProfileImage(reader.result as string);
             };
             reader.readAsDataURL(file);
+        }
+    };
+
+    const submit = async () => {
+        if (isCreating) return;
+
+        if (!REGEX.NICKNAME.test(name.trim())) {
+            return;
+        }
+
+        if (!REGEX.INTRODUCTION.test(bio.trim())) {
+            return;
+        }
+
+        setIsError(false);
+        setIsCreating(true);
+
+        let profileImage: File;
+        if (
+            fileInputRef.current?.files &&
+            (fileInputRef.current?.files?.length || 0) > 0
+        ) {
+            profileImage = fileInputRef.current.files[0];
+        } else {
+            const url = searchParams.get("image") as string;
+            const blob = await (
+                await fetch(url, { mode: "no-cors", credentials: "omit" })
+            ).blob();
+            profileImage = new File([blob], "image.png");
+        }
+
+        try {
+            await register({
+                username: name,
+                introduction: bio,
+                provider_name: searchParams.get("provider") as string,
+                oauth2_user_id: searchParams.get("id") as string,
+                file: profileImage,
+            });
+
+            router.push("/fans");
+        } catch {
+            setIsError(true);
+            setIsCreating(false);
         }
     };
 
@@ -126,6 +195,17 @@ export default function Register() {
                                     onChange={setName}
                                     placeholder="닉네임을 입력해 주세요."
                                 />
+
+                                <div className="flex flex-wrap gap-[12px]">
+                                    <Verify
+                                        label="한영 대소문자 (띄어쓰기 가능)"
+                                        checked={nameVerify.one}
+                                    />
+                                    <Verify
+                                        label="3-20자"
+                                        checked={nameVerify.two}
+                                    />
+                                </div>
                             </div>
 
                             <div className="flex flex-col gap-[6px]">
@@ -146,6 +226,13 @@ export default function Register() {
                                     onChange={setBio}
                                     placeholder="간단한 자기소개를 입력해 주세요."
                                 />
+
+                                <div className="flex flex-wrap gap-[12px]">
+                                    <Verify
+                                        label="0-40자"
+                                        checked={bioVerify.one}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -226,65 +313,74 @@ export default function Register() {
                             />
                         </div>
 
-                        <Button
-                            type="lg"
-                            variants="primary"
-                            icons={[
-                                {
-                                    component: isCreating ? (
-                                        <LoaderCircleIcon
-                                            key="loader-cirlce"
-                                            size={16}
-                                            className="stroke-white animate-spin"
-                                        />
-                                    ) : (
-                                        <ArrowUpRightIcon
-                                            key="register"
-                                            size={16}
-                                            className="stroke-white"
-                                        />
-                                    ),
-                                    float: "left",
-                                },
-                            ]}
-                            onClick={async () => {
-                                if (isCreating) return;
+                        <ToastMessage
+                            variants="error"
+                            message={
+                                <div className="flex items-center gap-[6px]">
+                                    <MessageCircleWarningIcon
+                                        size={14}
+                                        className="stroke-white"
+                                        strokeWidth={3}
+                                    />
 
-                                let profileImage: File;
-                                if (fileInputRef.current?.files) {
-                                    profileImage =
-                                        fileInputRef.current.files[0];
-                                } else {
-                                    const url = searchParams.get(
-                                        "image"
-                                    ) as string;
-                                    const blob = await (
-                                        await fetch(url)
-                                    ).blob();
-                                    profileImage = new File(
-                                        [blob],
-                                        "image.png"
-                                    );
-                                }
-
-                                setIsCreating(true);
-                                await register({
-                                    username: name,
-                                    introduction: bio,
-                                    provider_name: searchParams.get(
-                                        "provider"
-                                    ) as string,
-                                    oauth2_user_id: searchParams.get(
-                                        "id"
-                                    ) as string,
-                                    file: profileImage,
-                                });
-                                router.push("/fans");
-                            }}
-                            disabled={isCreating}
+                                    <span className="font-p-medium text-[14px] text-white">
+                                        오류가 발생하였습니다.
+                                    </span>
+                                </div>
+                            }
+                            isOpen={isError}
                         >
-                            덕질 시작하기
-                        </Button>
+                            <Button
+                                type="lg"
+                                variants="primary"
+                                icons={[
+                                    {
+                                        component: isCreating ? (
+                                            <LoaderCircleIcon
+                                                key="loader-cirlce"
+                                                size={16}
+                                                className={`animate-spin ${
+                                                    isCreating ||
+                                                    !REGEX.NICKNAME.test(
+                                                        name.trim()
+                                                    ) ||
+                                                    !REGEX.INTRODUCTION.test(
+                                                        bio.trim()
+                                                    )
+                                                        ? "stroke-gray-400"
+                                                        : "stroke-white"
+                                                }`}
+                                            />
+                                        ) : (
+                                            <ArrowUpRightIcon
+                                                key="register"
+                                                size={16}
+                                                className={`${
+                                                    isCreating ||
+                                                    !REGEX.NICKNAME.test(
+                                                        name.trim()
+                                                    ) ||
+                                                    !REGEX.INTRODUCTION.test(
+                                                        bio.trim()
+                                                    )
+                                                        ? "stroke-gray-400"
+                                                        : "stroke-white"
+                                                }`}
+                                            />
+                                        ),
+                                        float: "left",
+                                    },
+                                ]}
+                                onClick={submit}
+                                disabled={
+                                    isCreating ||
+                                    !REGEX.NICKNAME.test(name.trim()) ||
+                                    !REGEX.INTRODUCTION.test(bio.trim())
+                                }
+                            >
+                                덕질 시작하기
+                            </Button>
+                        </ToastMessage>
                     </div>
                 </div>
             </div>

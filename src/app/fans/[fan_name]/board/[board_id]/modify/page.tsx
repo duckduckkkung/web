@@ -121,14 +121,22 @@ export default function ModifyBoard() {
                                     component: isPosting ? (
                                         <LoaderCircleIcon
                                             key="loader-cirlce"
-                                            size={16}
-                                            className="stroke-white animate-spin"
+                                            size={14}
+                                            className={`animate-spin ${
+                                                isPosting
+                                                    ? "stroke-gray-400"
+                                                    : "stroke-white"
+                                            }`}
                                         />
                                     ) : (
                                         <PencilLineIcon
                                             key="modify"
                                             size={16}
-                                            className="stroke-white"
+                                            className={`${
+                                                isPosting
+                                                    ? "stroke-gray-400"
+                                                    : "stroke-white"
+                                            }`}
                                         />
                                     ),
                                 },

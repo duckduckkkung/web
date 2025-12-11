@@ -45,7 +45,9 @@ export const Button = ({
     return (
         <button
             className={`${ButtonTypes[type]} ${ButtonVariants[variants]} ${
-                disabled ? "active:!scale-100 !cursor-not-allowed" : ""
+                disabled
+                    ? "!bg-gray-100 !text-gray-400 active:!scale-100 !cursor-not-allowed"
+                    : ""
             }`}
             onClick={onClick}
             disabled={disabled}
