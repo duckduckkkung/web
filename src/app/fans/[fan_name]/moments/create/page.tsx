@@ -251,20 +251,28 @@ export default function UploadMoment() {
                                 variants="outline"
                                 icons={[
                                     {
+                                        float: "left",
                                         component: isCreating ? (
                                             <LoaderCircleIcon
                                                 key="loader-cirlce"
                                                 size={14}
-                                                className="stroke-gray-900 animate-spin"
+                                                className={`animate-spin ${
+                                                    isCreating
+                                                        ? "stroke-gray-400"
+                                                        : "stroke-gray-900"
+                                                }`}
                                             />
                                         ) : (
                                             <UploadCloudIcon
                                                 key="create-fan"
-                                                size={14}
-                                                className="stroke-gray-900"
+                                                size={16}
+                                                className={`${
+                                                    isCreating
+                                                        ? "stroke-gray-400"
+                                                        : "stroke-gray-900"
+                                                }`}
                                             />
                                         ),
-                                        float: "left",
                                     },
                                 ]}
                                 onClick={() => {

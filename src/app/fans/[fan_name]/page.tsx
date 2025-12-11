@@ -356,7 +356,11 @@ export default function Fan() {
                                                                                     size={
                                                                                         14
                                                                                     }
-                                                                                    className="stroke-white animate-spin"
+                                                                                    className={`animate-spin ${
+                                                                                        isCreating
+                                                                                            ? "stroke-gray-400"
+                                                                                            : "stroke-white"
+                                                                                    }`}
                                                                                 />
                                                                             ) : (
                                                                                 <ArrowUpRightIcon
@@ -364,7 +368,11 @@ export default function Fan() {
                                                                                     size={
                                                                                         16
                                                                                     }
-                                                                                    className="stroke-white"
+                                                                                    className={`${
+                                                                                        isCreating
+                                                                                            ? "stroke-gray-400"
+                                                                                            : "stroke-white"
+                                                                                    }`}
                                                                                 />
                                                                             ),
                                                                         float: "left",
