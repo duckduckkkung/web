@@ -83,26 +83,28 @@ export const GlobalHeaderInteractions = () => {
 
     return (
         <div className="flex items-center gap-[16px]">
-            <Popover overlay={options}>
-                <Button
-                    type="sm"
-                    variants="outline"
-                    icons={[
-                        {
-                            component: (
-                                <SparkleIcon
-                                    key="header-start"
-                                    size={12}
-                                    className="stroke-gray-900"
-                                />
-                            ),
-                            float: "left",
-                        },
-                    ]}
-                >
-                    시작하기
-                </Button>
-            </Popover>
+            <div className="sm:block hidden">
+                <Popover overlay={options}>
+                    <Button
+                        type="sm"
+                        variants="outline"
+                        icons={[
+                            {
+                                component: (
+                                    <SparkleIcon
+                                        key="header-start"
+                                        size={12}
+                                        className="stroke-gray-900"
+                                    />
+                                ),
+                                float: "left",
+                            },
+                        ]}
+                    >
+                        시작하기
+                    </Button>
+                </Popover>
+            </div>
 
             <Popover overlay={options2}>
                 <div className="flex items-center gap-[6px] cursor-pointer">
