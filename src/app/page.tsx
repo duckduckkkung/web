@@ -25,7 +25,7 @@ export default function Home() {
         <div>
             <Header />
 
-            <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
+            <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] min-h-[800px] m-[0_auto] flex justify-center items-center">
                 <div className="relative w-[350px] translate-y-[100px]">
                     <div className="flex flex-col items-center gap-[16px]">
                         <div className="flex flex-col items-center gap-[24px]">
@@ -79,7 +79,7 @@ export default function Home() {
             </div>
 
             <div className="max-w-[1280px] m-[0_auto] flex flex-col">
-                <section className="p-[48px] h-dvh flex justify-center items-center">
+                <section className="p-[48px] lg:h-dvh md:min-h-[800px] min-h-dvh flex justify-center items-center">
                     <div className="flex flex-col gap-[64px]">
                         <div className="flex flex-col items-center gap-[24px]">
                             <LongerTag
@@ -97,7 +97,7 @@ export default function Home() {
                             </span>
                         </div>
 
-                        <div className="grid grid-cols-6 gap-[32px]">
+                        <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-[32px]">
                             {fans.slice(0, 12).map((fan) => (
                                 <FanCard
                                     variants="onlyname"
@@ -109,7 +109,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="p-[48px] h-dvh flex justify-center items-center">
+                <section className="p-[48px] lg:h-dvh md:min-h-[800px] min-h-dvh flex justify-center items-center">
                     <div className="flex flex-col gap-[64px]">
                         <div className="flex flex-col items-center gap-[24px]">
                             <LongerTag
@@ -127,7 +127,7 @@ export default function Home() {
                             </span>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-[32px]">
+                        <div className="grid md:grid-cols-2 grid-cols-1 gap-[32px]">
                             {goods.map((goods) => (
                                 <GoodsCard key={goods.id} data={goods} />
                             ))}
@@ -135,7 +135,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="p-[48px] h-dvh flex justify-center items-center">
+                <section className="p-[48px] lg:h-dvh md:min-h-[800px] min-h-dvh flex justify-center items-center">
                     <div className="flex flex-col gap-[64px]">
                         <div className="flex flex-col items-center gap-[24px]">
                             <LongerTag
@@ -153,7 +153,7 @@ export default function Home() {
                             </span>
                         </div>
 
-                        <div className="grid grid-cols-5 gap-[32px]">
+                        <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-[32px]">
                             {moments.map((moment) => (
                                 <MomentCard key={moment.id} data={moment} />
                             ))}

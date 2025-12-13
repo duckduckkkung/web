@@ -15,7 +15,7 @@ export const Header = () => {
     const [search, setSearch] = useState<string>("");
 
     return (
-        <div className="max-w-[1280px] h-[80px] m-[0_auto] flex justify-between items-center">
+        <div className="xl:px-0 px-[32px] max-w-[1280px] h-[80px] m-[0_auto] flex justify-between items-center">
             <div className="flex items-center gap-[16px]">
                 <Image
                     src={Logo}

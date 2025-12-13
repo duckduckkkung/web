@@ -20,7 +20,7 @@ export default function Oauth2Google() {
 
                     if (response.type === "register")
                         router.push(
-                            `/register?id=${response.kakaoId}&provider=google&image=${response.file}&email=${response.email}`
+                            `/register?id=${response.id}&provider=google&image=${response.file}&email=${response.email}`
                         );
                     else {
                         Storage.setAccessToken(response.access_token);
