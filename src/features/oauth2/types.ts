@@ -20,7 +20,7 @@ export interface Response {
     expires_in: number;
     scope: string;
     refresh_token_expires_in: number;
-    kakaoId: string;
+    id: string;
     email: string;
     file: string;
     type: "register" | "signin";
