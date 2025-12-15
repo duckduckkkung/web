@@ -47,12 +47,12 @@
 
 @font-face {
     font-family: "GMarketSans Bold";
-    src: url("/fonts/GMarketSansBold.otf");
+    src: url("/fonts/GMarketSansTTFBold.ttf");
 }
 
 @font-face {
     font-family: "GMarketSans Medium";
-    src: url("/fonts/GMarketSansMedium.otf");
+    src: url("/fonts/GMarketSansTTFMedium.ttf");
 }
 
 @font-face {
