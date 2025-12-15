@@ -20,7 +20,7 @@ export default function Oauth2Kakao() {
 
                     if (response.type === "register")
                         router.push(
-                            `/register?id=${response.id}&provider=kakao&image=${response.file}&email=${response.email}`
+                            `/register?token=${response.token}&provider=kakao`
                         );
                     else {
                         Storage.setAccessToken(response.access_token);

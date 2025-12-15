@@ -17,6 +17,7 @@ import { Button } from "@/shared/components/button";
 import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
+import { useShortInfo } from "@/features/user/hooks";
 import { register } from "@/features/oauth2/api";
 
 import { REGEX } from "@/shared/utils/regex";
@@ -58,16 +59,14 @@ export default function Register() {
 
     const [isError, setIsError] = useState<boolean>(false);
 
+    const shortInfo = useShortInfo();
+
     useEffect(() => {
-        const url = searchParams.get("image") as string;
-        setProfileImage((url === "undefined" ? "" : url) || "");
+        if (!shortInfo) return;
 
-        const name = searchParams.get("name") as string;
-        setName(name || "");
-
-        const email = searchParams.get("email") as string;
-        setEmail(email || "");
-    }, [searchParams]);
+        setName(shortInfo.data?.username || "");
+        setEmail(shortInfo.data?.email || "");
+    }, [shortInfo]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -113,7 +112,7 @@ export default function Register() {
                 username: name,
                 introduction: bio,
                 provider_name: searchParams.get("provider") as string,
-                oauth2_user_id: searchParams.get("id") as string,
+                token: searchParams.get("token") as string,
                 file: profileImage,
             });
 

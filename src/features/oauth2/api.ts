@@ -1,12 +1,16 @@
 import { apiClient } from "@/shared/api/client";
 
-import { RegisterRequest, SignRequest, Response } from "./types";
+import {
+    RegisterRequest,
+    SocialLoginRequest,
+    SocialLoginResponse,
+} from "./types";
 
 // 카카오 로그인 api
 export const signWithKakao = async (
-    credentials: SignRequest
-): Promise<Response> => {
-    return await apiClient.get<Response>("/social/callback/kakao", {
+    credentials: SocialLoginRequest
+): Promise<SocialLoginResponse> => {
+    return await apiClient.get<SocialLoginResponse>("/social/callback/kakao", {
         params: credentials,
         headers: { skipAuth: true },
     });
@@ -14,9 +18,9 @@ export const signWithKakao = async (
 
 // 구글 로그인 api
 export const signWithGoogle = async (
-    credentials: SignRequest
-): Promise<Response> => {
-    return await apiClient.get<Response>("/social/callback/google", {
+    credentials: SocialLoginRequest
+): Promise<SocialLoginResponse> => {
+    return await apiClient.get<SocialLoginResponse>("/social/callback/google", {
         params: credentials,
         headers: { skipAuth: true },
     });
@@ -25,13 +29,17 @@ export const signWithGoogle = async (
 // 소셜 회원가입 api
 export const register = async (
     credentials: RegisterRequest
-): Promise<Response> => {
-    const fromData = new FormData();
+): Promise<SocialLoginResponse> => {
+    const formData = new FormData();
     Object.entries(credentials).forEach(([key, value]) => {
-        fromData.append(key, value);
+        formData.append(key, value);
     });
 
-    return await apiClient.postFormData<Response>("/api/auth", fromData, {
-        headers: { skipAuth: true },
-    });
+    return await apiClient.postFormData<SocialLoginResponse>(
+        "/api/auth",
+        formData,
+        {
+            headers: { skipAuth: true },
+        }
+    );
 };
