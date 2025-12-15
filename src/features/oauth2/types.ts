@@ -24,5 +24,16 @@ export interface RegisterRequest {
     introduction: string;
     provider_name: string;
     token: string;
-    file: File;
+    file?: File;
+}
+
+// 인증번호 전송 req
+export interface SendOtpRequest {
+    token: string;
+}
+
+// 인증번호 검증 req
+export interface VerifyOtpRequest {
+    token: string;
+    otp: string;
 }

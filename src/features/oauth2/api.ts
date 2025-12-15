@@ -1,45 +1,74 @@
+import { DefaultResponse } from "@/shared/api/types";
 import { apiClient } from "@/shared/api/client";
 
 import {
     RegisterRequest,
+    SendOtpRequest,
     SocialLoginRequest,
     SocialLoginResponse,
+    VerifyOtpRequest,
 } from "./types";
 
 // 카카오 로그인 api
 export const signWithKakao = async (
     credentials: SocialLoginRequest
-): Promise<SocialLoginResponse> => {
-    return await apiClient.get<SocialLoginResponse>("/social/callback/kakao", {
-        params: credentials,
-        headers: { skipAuth: true },
-    });
+): DefaultResponse<SocialLoginResponse> => {
+    return await apiClient.get<DefaultResponse<SocialLoginResponse>>(
+        "/social/callback/kakao",
+        {
+            params: credentials,
+            headers: { skipAuth: true },
+        }
+    );
 };
 
 // 구글 로그인 api
 export const signWithGoogle = async (
     credentials: SocialLoginRequest
-): Promise<SocialLoginResponse> => {
-    return await apiClient.get<SocialLoginResponse>("/social/callback/google", {
-        params: credentials,
-        headers: { skipAuth: true },
-    });
+): DefaultResponse<SocialLoginResponse> => {
+    return await apiClient.get<DefaultResponse<SocialLoginResponse>>(
+        "/social/callback/google",
+        {
+            params: credentials,
+            headers: { skipAuth: true },
+        }
+    );
 };
 
 // 소셜 회원가입 api
 export const register = async (
     credentials: RegisterRequest
-): Promise<SocialLoginResponse> => {
+): DefaultResponse<SocialLoginResponse> => {
     const formData = new FormData();
     Object.entries(credentials).forEach(([key, value]) => {
         formData.append(key, value);
     });
 
-    return await apiClient.postFormData<SocialLoginResponse>(
+    return await apiClient.postFormData<DefaultResponse<SocialLoginResponse>>(
         "/api/auth",
         formData,
         {
             headers: { skipAuth: true },
         }
     );
+};
+
+// 인증번호 전송 api
+export const sendOtp = async (
+    credentials: SendOtpRequest
+): DefaultResponse<boolean> => {
+    return await apiClient.get<DefaultResponse<boolean>>("/api/otp", {
+        params: credentials,
+        headers: { skipAuth: true },
+    });
+};
+
+// 인증번호 검증 api
+export const verifyOtp = async (
+    credentials: VerifyOtpRequest
+): DefaultResponse<boolean> => {
+    return await apiClient.get<DefaultResponse<boolean>>("/api/otp/verify", {
+        params: credentials,
+        headers: { skipAuth: true },
+    });
 };

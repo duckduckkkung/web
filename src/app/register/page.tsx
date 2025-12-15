@@ -3,11 +3,13 @@
 import {
     ArrowUpRightIcon,
     ImageUpIcon,
+    KeyRoundIcon,
     LoaderCircleIcon,
     MessageCircleWarningIcon,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect, useMemo } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { ToastMessage } from "@/shared/components/toast-message";
 import { Checkbox } from "@/shared/components/checkbox";
@@ -18,7 +20,7 @@ import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
 import { useShortInfo } from "@/features/user/hooks";
-import { register } from "@/features/oauth2/api";
+import { register, sendOtp, verifyOtp } from "@/features/oauth2/api";
 
 import { REGEX } from "@/shared/utils/regex";
 
@@ -27,8 +29,15 @@ export default function Register() {
     const router = useRouter();
 
     const [email, setEmail] = useState<string>("");
+    const emailVerify = useMemo(
+        () => ({
+            one: REGEX.EMAIL.test(email.trim()),
+        }),
+        [email]
+    );
 
     const [name, setName] = useState<string>("고서온");
+    const [isNameError, setIsNameError] = useState<boolean>(false);
     const nameVerify = useMemo(
         () => ({
             one: /^[a-zA-Zㄱ-ㅎ가-힣 ]+$/.test(name.trim()),
@@ -48,8 +57,6 @@ export default function Register() {
     const [profileImage, setProfileImage] = useState<string>("");
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const [isCreating, setIsCreating] = useState<boolean>(false);
-
     const [agrees, setAgrees] = useState<boolean[]>([
         false,
         false,
@@ -57,16 +64,31 @@ export default function Register() {
         false,
     ]);
 
-    const [isError, setIsError] = useState<boolean>(false);
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [isMainError, setIsMainError] = useState<boolean>(false);
+    const [isRegisterError, setIsRegisterError] = useState<boolean>(false);
+
+    const [action, setAction] = useState<"main" | "otp">("main");
+    const [otp, setOtp] = useState<string>("");
+    const [isOtpError, setIsOtpError] = useState<boolean>(false);
+    const otpVerify = useMemo(
+        () => ({
+            one: /^[0-9]+$/.test(otp.trim()),
+            two: /^.{6}$/.test(otp.trim()),
+        }),
+        [otp]
+    );
 
     const shortInfo = useShortInfo();
+    const [setupFlag, setSetupFlag] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!shortInfo) return;
+        if (!shortInfo || setupFlag) return;
 
-        setName(shortInfo.data?.username || "");
-        setEmail(shortInfo.data?.email || "");
-    }, [shortInfo]);
+        setSetupFlag(true);
+        setName(shortInfo.data?.data?.username || "");
+        setEmail(shortInfo.data?.data?.email || "");
+    }, [setupFlag, shortInfo]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -82,6 +104,14 @@ export default function Register() {
     const submit = async () => {
         if (isCreating) return;
 
+        if (!(agrees[0] && agrees[1] && agrees[2])) {
+            return;
+        }
+
+        if (!REGEX.OTP.test(otp.trim())) {
+            return;
+        }
+
         if (!REGEX.NICKNAME.test(name.trim())) {
             return;
         }
@@ -90,16 +120,32 @@ export default function Register() {
             return;
         }
 
-        setIsError(false);
+        setIsMainError(false);
+        setIsRegisterError(false);
+        setIsOtpError(false);
+        setIsNameError(false);
         setIsCreating(true);
 
-        let profileImage: File;
+        try {
+            await verifyOtp({
+                token: searchParams.get("token") as string,
+                otp,
+            });
+        } catch {
+            setIsCreating(false);
+            setIsOtpError(true);
+            setOtp("");
+
+            return;
+        }
+
+        let profileImage: File | undefined;
         if (
             fileInputRef.current?.files &&
             (fileInputRef.current?.files?.length || 0) > 0
         ) {
             profileImage = fileInputRef.current.files[0];
-        } else {
+
             const url = searchParams.get("image") as string;
             const blob = await (
                 await fetch(url, { mode: "no-cors", credentials: "omit" })
@@ -118,269 +164,487 @@ export default function Register() {
 
             router.push("/fans");
         } catch {
-            setIsError(true);
             setIsCreating(false);
+            setIsRegisterError(true);
+            setIsNameError(true);
+            setAction("main");
+            setOtp("");
+
+            return;
         }
     };
+
+    const containerVariants = useMemo(
+        () => ({
+            initial: { opacity: 0 },
+            animate: { opacity: 1, transition: { duration: 0.1 } },
+            exit: { opacity: 0, transition: { duration: 0.1 } },
+        }),
+        []
+    );
 
     return (
         <div>
             <Header />
 
             <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
-                <div className="w-[380px] flex flex-col gap-[48px]">
-                    <div className="flex flex-col gap-[32px]">
-                        <div className="flex justify-center">
-                            <input
-                                ref={fileInputRef}
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                                className="hidden"
-                            />
-
-                            <div
-                                className="relative size-[120px] rounded-[8px] bg-gray-100 cursor-pointer flex justify-center items-center"
-                                onClick={() => fileInputRef.current?.click()}
-                            >
-                                {profileImage ? (
-                                    <div className="size-full rounded-[8px] overflow-hidden">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
-                                            src={profileImage}
-                                            alt="Profile"
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                ) : (
-                                    <ImageUpIcon
-                                        size={48}
-                                        className="stroke-gray-300"
-                                    />
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-[24px]">
-                            <div className="flex flex-col gap-[6px]">
-                                <span className="font-p-medium text-[14px] text-gray-600">
-                                    이메일
-                                </span>
-
-                                <Input
-                                    type="md"
-                                    variants="outline"
-                                    value={email}
-                                    onChange={() => {}}
-                                    disabled
-                                />
-                            </div>
-
-                            <div className="flex flex-col gap-[6px]">
-                                <div className="flex items-center gap-[4px]">
-                                    <span className="font-p-semibold text-[14px] text-c-primary cursor-pointer">
-                                        *
-                                    </span>
-
-                                    <span className="font-p-medium text-[14px] text-gray-600">
-                                        닉네임
-                                    </span>
-                                </div>
-
-                                <Input
-                                    type="md"
-                                    variants="outline"
-                                    value={name}
-                                    onChange={setName}
-                                    placeholder="닉네임을 입력해 주세요."
-                                />
-
-                                <div className="flex flex-wrap gap-[12px]">
-                                    <Verify
-                                        label="한영 대소문자 (띄어쓰기 가능)"
-                                        checked={nameVerify.one}
-                                    />
-                                    <Verify
-                                        label="3-20자"
-                                        checked={nameVerify.two}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col gap-[6px]">
-                                <div className="flex items-center gap-[4px]">
-                                    <span className="font-p-semibold text-[14px] text-gray-400 cursor-pointer">
-                                        (선택)
-                                    </span>
-
-                                    <span className="font-p-medium text-[14px] text-gray-600">
-                                        자기소개
-                                    </span>
-                                </div>
-
-                                <Input
-                                    type="md"
-                                    variants="outline"
-                                    value={bio}
-                                    onChange={setBio}
-                                    placeholder="간단한 자기소개를 입력해 주세요."
-                                />
-
-                                <div className="flex flex-wrap gap-[12px]">
-                                    <Verify
-                                        label="0-40자"
-                                        checked={bioVerify.one}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col gap-[20px]">
-                        <div className="flex flex-col gap-[10px]">
-                            <Checkbox
-                                type="lg"
-                                variants="primary"
-                                label="전체 선택"
-                                checked={agrees.every((e) => e)}
-                                onChange={() =>
-                                    setAgrees(
-                                        agrees.every((e) => e)
-                                            ? [false, false, false, false]
-                                            : [true, true, true, true]
-                                    )
-                                }
-                            />
-
-                            <Checkbox
-                                type="lg"
-                                variants="primary"
-                                label="이용약관에 동의합니다."
-                                checked={agrees[0]}
-                                onChange={(e) =>
-                                    setAgrees(([a, b, c, d]) => {
-                                        a = e;
-                                        return [a, b, c, d];
-                                    })
-                                }
-                                required
-                                shortcut="1"
-                            />
-
-                            <Checkbox
-                                type="lg"
-                                variants="primary"
-                                label="개인정보 수집 및 이용에 동의합니다."
-                                checked={agrees[1]}
-                                onChange={(e) =>
-                                    setAgrees(([a, b, c, d]) => {
-                                        b = e;
-                                        return [a, b, c, d];
-                                    })
-                                }
-                                required
-                                shortcut="2"
-                            />
-
-                            <Checkbox
-                                type="lg"
-                                variants="primary"
-                                label="개인정보 처리 위탁에 동의합니다."
-                                checked={agrees[2]}
-                                onChange={(e) =>
-                                    setAgrees(([a, b, c, d]) => {
-                                        c = e;
-                                        return [a, b, c, d];
-                                    })
-                                }
-                                required
-                                shortcut="3"
-                            />
-
-                            <Checkbox
-                                type="lg"
-                                variants="primary"
-                                label="마케팅 수신에 동의합니다."
-                                checked={agrees[3]}
-                                onChange={(e) =>
-                                    setAgrees(([a, b, c, d]) => {
-                                        d = e;
-                                        return [a, b, c, d];
-                                    })
-                                }
-                                shortcut="4"
-                            />
-                        </div>
-
-                        <ToastMessage
-                            variants="error"
-                            message={
-                                <div className="flex items-center gap-[6px]">
-                                    <MessageCircleWarningIcon
-                                        size={14}
-                                        className="stroke-white"
-                                        strokeWidth={3}
-                                    />
-
-                                    <span className="font-p-medium text-[14px] text-white">
-                                        오류가 발생하였습니다.
-                                    </span>
-                                </div>
-                            }
-                            isOpen={isError}
+                <div className="w-[380px]">
+                    <AnimatePresence mode="popLayout">
+                        <motion.div
+                            key={action}
+                            variants={containerVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            className="relative flex flex-col gap-[48px]"
                         >
-                            <Button
-                                type="lg"
-                                variants="primary"
-                                icons={[
-                                    {
-                                        component: isCreating ? (
-                                            <LoaderCircleIcon
-                                                key="loader-cirlce"
-                                                size={16}
-                                                className={`animate-spin ${
+                            {action === "main" && (
+                                <>
+                                    <div className="flex flex-col gap-[32px]">
+                                        <div className="flex justify-center">
+                                            <input
+                                                ref={fileInputRef}
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleImageUpload}
+                                                className="hidden"
+                                            />
+
+                                            <div
+                                                className="relative size-[120px] rounded-[8px] bg-gray-100 cursor-pointer flex justify-center items-center"
+                                                onClick={() =>
+                                                    fileInputRef.current?.click()
+                                                }
+                                            >
+                                                {profileImage ? (
+                                                    <div className="size-full rounded-[8px] overflow-hidden">
+                                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                        <img
+                                                            src={profileImage}
+                                                            alt="Profile"
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <ImageUpIcon
+                                                        size={48}
+                                                        className="stroke-gray-300"
+                                                    />
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-[24px]">
+                                            <div className="flex flex-col gap-[6px]">
+                                                <span className="font-p-medium text-[14px] text-gray-600">
+                                                    이메일
+                                                </span>
+
+                                                <Input
+                                                    type="md"
+                                                    variants="outline"
+                                                    value={email}
+                                                    onChange={setEmail}
+                                                    placeholder="이메일을 입력해 주세요."
+                                                    disabled={isCreating}
+                                                />
+
+                                                <div className="flex flex-wrap gap-[12px]">
+                                                    <Verify
+                                                        label="올바른 이메일"
+                                                        checked={
+                                                            emailVerify.one
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-col gap-[6px]">
+                                                <div className="flex items-center gap-[4px]">
+                                                    <span className="font-p-semibold text-[14px] text-c-primary cursor-pointer">
+                                                        *
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[14px] text-gray-600">
+                                                        닉네임
+                                                    </span>
+                                                </div>
+
+                                                <ToastMessage
+                                                    variants="error"
+                                                    message={
+                                                        <div className="flex items-center gap-[6px]">
+                                                            <MessageCircleWarningIcon
+                                                                size={14}
+                                                                className="stroke-white"
+                                                                strokeWidth={3}
+                                                            />
+
+                                                            <span className="font-p-medium text-[14px] text-white">
+                                                                중복된 이름이
+                                                                존재합니다.
+                                                            </span>
+                                                        </div>
+                                                    }
+                                                    isOpen={isNameError}
+                                                >
+                                                    <Input
+                                                        type="md"
+                                                        variants="outline"
+                                                        value={name}
+                                                        onChange={setName}
+                                                        placeholder="닉네임을 입력해 주세요."
+                                                        disabled={isCreating}
+                                                    />
+                                                </ToastMessage>
+
+                                                <div className="flex flex-wrap gap-[12px]">
+                                                    <Verify
+                                                        label="한영 대소문자 (띄어쓰기 가능)"
+                                                        checked={nameVerify.one}
+                                                    />
+                                                    <Verify
+                                                        label="3-20자"
+                                                        checked={nameVerify.two}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-col gap-[6px]">
+                                                <div className="flex items-center gap-[4px]">
+                                                    <span className="font-p-semibold text-[14px] text-gray-400 cursor-pointer">
+                                                        (선택)
+                                                    </span>
+
+                                                    <span className="font-p-medium text-[14px] text-gray-600">
+                                                        자기소개
+                                                    </span>
+                                                </div>
+
+                                                <Input
+                                                    type="md"
+                                                    variants="outline"
+                                                    value={bio}
+                                                    onChange={setBio}
+                                                    placeholder="간단한 자기소개를 입력해 주세요."
+                                                    disabled={isCreating}
+                                                />
+
+                                                <div className="flex flex-wrap gap-[12px]">
+                                                    <Verify
+                                                        label="0-40자"
+                                                        checked={bioVerify.one}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col gap-[20px]">
+                                        <div className="flex flex-col gap-[10px]">
+                                            <Checkbox
+                                                type="lg"
+                                                variants="primary"
+                                                label="전체 선택"
+                                                checked={agrees.every((e) => e)}
+                                                onChange={() =>
+                                                    setAgrees(
+                                                        agrees.every((e) => e)
+                                                            ? [
+                                                                  false,
+                                                                  false,
+                                                                  false,
+                                                                  false,
+                                                              ]
+                                                            : [
+                                                                  true,
+                                                                  true,
+                                                                  true,
+                                                                  true,
+                                                              ]
+                                                    )
+                                                }
+                                            />
+
+                                            <Checkbox
+                                                type="lg"
+                                                variants="primary"
+                                                label="이용약관에 동의합니다."
+                                                checked={agrees[0]}
+                                                onChange={(e) =>
+                                                    setAgrees(
+                                                        ([a, b, c, d]) => {
+                                                            a = e;
+                                                            return [a, b, c, d];
+                                                        }
+                                                    )
+                                                }
+                                                required
+                                                shortcut="1"
+                                            />
+
+                                            <Checkbox
+                                                type="lg"
+                                                variants="primary"
+                                                label="개인정보 수집 및 이용에 동의합니다."
+                                                checked={agrees[1]}
+                                                onChange={(e) =>
+                                                    setAgrees(
+                                                        ([a, b, c, d]) => {
+                                                            b = e;
+                                                            return [a, b, c, d];
+                                                        }
+                                                    )
+                                                }
+                                                required
+                                                shortcut="2"
+                                            />
+
+                                            <Checkbox
+                                                type="lg"
+                                                variants="primary"
+                                                label="개인정보 처리 위탁에 동의합니다."
+                                                checked={agrees[2]}
+                                                onChange={(e) =>
+                                                    setAgrees(
+                                                        ([a, b, c, d]) => {
+                                                            c = e;
+                                                            return [a, b, c, d];
+                                                        }
+                                                    )
+                                                }
+                                                required
+                                                shortcut="3"
+                                            />
+
+                                            <Checkbox
+                                                type="lg"
+                                                variants="primary"
+                                                label="마케팅 수신에 동의합니다."
+                                                checked={agrees[3]}
+                                                onChange={(e) =>
+                                                    setAgrees(
+                                                        ([a, b, c, d]) => {
+                                                            d = e;
+                                                            return [a, b, c, d];
+                                                        }
+                                                    )
+                                                }
+                                                shortcut="4"
+                                            />
+                                        </div>
+
+                                        <ToastMessage
+                                            variants="error"
+                                            message={
+                                                <div className="flex items-center gap-[6px]">
+                                                    <MessageCircleWarningIcon
+                                                        size={14}
+                                                        className="stroke-white"
+                                                        strokeWidth={3}
+                                                    />
+
+                                                    <span className="font-p-medium text-[14px] text-white">
+                                                        오류가 발생하였습니다.
+                                                    </span>
+                                                </div>
+                                            }
+                                            isOpen={isMainError}
+                                        >
+                                            <Button
+                                                type="lg"
+                                                variants="primary"
+                                                icons={[
+                                                    {
+                                                        component: (
+                                                            <KeyRoundIcon
+                                                                key="otp"
+                                                                size={16}
+                                                                className={`${
+                                                                    isCreating ||
+                                                                    !REGEX.NICKNAME.test(
+                                                                        name.trim()
+                                                                    ) ||
+                                                                    !REGEX.EMAIL.test(
+                                                                        email.trim()
+                                                                    ) ||
+                                                                    !REGEX.INTRODUCTION.test(
+                                                                        bio.trim()
+                                                                    ) ||
+                                                                    !(
+                                                                        agrees[0] &&
+                                                                        agrees[1] &&
+                                                                        agrees[2]
+                                                                    )
+                                                                        ? "stroke-gray-400"
+                                                                        : "stroke-white"
+                                                                }`}
+                                                            />
+                                                        ),
+                                                        float: "left",
+                                                    },
+                                                ]}
+                                                onClick={async () => {
+                                                    setIsCreating(true);
+                                                    setIsMainError(false);
+
+                                                    try {
+                                                        await sendOtp({
+                                                            token: searchParams.get(
+                                                                "token"
+                                                            ) as string,
+                                                        });
+
+                                                        setAction("otp");
+                                                        setIsCreating(false);
+                                                    } catch {
+                                                        setIsCreating(false);
+                                                        setIsMainError(true);
+                                                    }
+                                                }}
+                                                disabled={
                                                     isCreating ||
                                                     !REGEX.NICKNAME.test(
                                                         name.trim()
                                                     ) ||
-                                                    !REGEX.INTRODUCTION.test(
-                                                        bio.trim()
-                                                    )
-                                                        ? "stroke-gray-400"
-                                                        : "stroke-white"
-                                                }`}
-                                            />
-                                        ) : (
-                                            <ArrowUpRightIcon
-                                                key="register"
-                                                size={16}
-                                                className={`${
-                                                    isCreating ||
-                                                    !REGEX.NICKNAME.test(
-                                                        name.trim()
+                                                    !REGEX.EMAIL.test(
+                                                        email.trim()
                                                     ) ||
                                                     !REGEX.INTRODUCTION.test(
                                                         bio.trim()
+                                                    ) ||
+                                                    !(
+                                                        agrees[0] &&
+                                                        agrees[1] &&
+                                                        agrees[2]
                                                     )
-                                                        ? "stroke-gray-400"
-                                                        : "stroke-white"
-                                                }`}
+                                                }
+                                            >
+                                                2차 인증하기
+                                            </Button>
+                                        </ToastMessage>
+                                    </div>
+                                </>
+                            )}
+
+                            {action === "otp" && (
+                                <>
+                                    <div className="flex flex-col gap-[6px]">
+                                        <div className="flex items-center gap-[4px]">
+                                            <span className="font-p-semibold text-[14px] text-c-primary cursor-pointer">
+                                                *
+                                            </span>
+
+                                            <span className="font-p-medium text-[14px] text-gray-600">
+                                                인증번호
+                                            </span>
+                                        </div>
+
+                                        <ToastMessage
+                                            variants="error"
+                                            message={
+                                                <div className="flex items-center gap-[6px]">
+                                                    <MessageCircleWarningIcon
+                                                        size={14}
+                                                        className="stroke-white"
+                                                        strokeWidth={3}
+                                                    />
+
+                                                    <span className="font-p-medium text-[14px] text-white">
+                                                        인증번호가 일치하지
+                                                        않습니다.
+                                                    </span>
+                                                </div>
+                                            }
+                                            isOpen={isOtpError}
+                                        >
+                                            <Input
+                                                type="md"
+                                                variants="outline"
+                                                value={otp}
+                                                onChange={setOtp}
+                                                placeholder="6자리 인증번호를 입력해 주세요."
+                                                disabled={isCreating}
                                             />
-                                        ),
-                                        float: "left",
-                                    },
-                                ]}
-                                onClick={submit}
-                                disabled={
-                                    isCreating ||
-                                    !REGEX.NICKNAME.test(name.trim()) ||
-                                    !REGEX.INTRODUCTION.test(bio.trim())
-                                }
-                            >
-                                덕질 시작하기
-                            </Button>
-                        </ToastMessage>
-                    </div>
+                                        </ToastMessage>
+
+                                        <div className="flex flex-wrap gap-[12px]">
+                                            <Verify
+                                                label="숫자만"
+                                                checked={otpVerify.one}
+                                            />
+                                            <Verify
+                                                label="6자"
+                                                checked={otpVerify.two}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <ToastMessage
+                                        variants="error"
+                                        message={
+                                            <div className="flex items-center gap-[6px]">
+                                                <MessageCircleWarningIcon
+                                                    size={14}
+                                                    className="stroke-white"
+                                                    strokeWidth={3}
+                                                />
+
+                                                <span className="font-p-medium text-[14px] text-white">
+                                                    오류가 발생하였습니다.
+                                                </span>
+                                            </div>
+                                        }
+                                        isOpen={isRegisterError}
+                                    >
+                                        <Button
+                                            type="lg"
+                                            variants="primary"
+                                            icons={[
+                                                {
+                                                    component: isCreating ? (
+                                                        <LoaderCircleIcon
+                                                            key="loader-cirlce"
+                                                            size={16}
+                                                            className={`animate-spin ${
+                                                                isCreating ||
+                                                                !REGEX.OTP.test(
+                                                                    otp.trim()
+                                                                )
+                                                                    ? "stroke-gray-400"
+                                                                    : "stroke-white"
+                                                            }`}
+                                                        />
+                                                    ) : (
+                                                        <ArrowUpRightIcon
+                                                            key="register"
+                                                            size={16}
+                                                            className={`${
+                                                                isCreating ||
+                                                                !REGEX.OTP.test(
+                                                                    otp.trim()
+                                                                )
+                                                                    ? "stroke-gray-400"
+                                                                    : "stroke-white"
+                                                            }`}
+                                                        />
+                                                    ),
+                                                    float: "left",
+                                                },
+                                            ]}
+                                            onClick={submit}
+                                            disabled={
+                                                isCreating ||
+                                                !REGEX.OTP.test(otp.trim())
+                                            }
+                                        >
+                                            덕질 시작하기
+                                        </Button>
+                                    </ToastMessage>
+                                </>
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
             </div>
 

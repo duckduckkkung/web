@@ -1,4 +1,7 @@
 export const REGEX = {
+    OTP: /^[0-9]{6}$/,
+
+    EMAIL: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
     NICKNAME: /^[a-zA-Zㄱ-ㅎ가-힣 ]{3,20}$/,
     INTRODUCTION: /^[\s\S]{0,40}$/,
 
