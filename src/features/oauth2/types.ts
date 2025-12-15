@@ -37,3 +37,13 @@ export interface VerifyOtpRequest {
     token: string;
     otp: string;
 }
+
+// 게스트 토큰 정보 req, res
+export interface GuestInfoRequest {
+    provider: string;
+    token: string;
+}
+
+export interface GuestInfoRespone {
+    email: string;
+}

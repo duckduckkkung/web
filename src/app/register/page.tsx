@@ -20,7 +20,7 @@ import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
 import { register, sendOtp, verifyOtp } from "@/features/oauth2/api";
-import { useShortInfo } from "@/features/user/hooks";
+import { useGuestInfo } from "@/features/oauth2/hooks";
 
 import { REGEX } from "@/shared/utils/regex";
 
@@ -80,16 +80,18 @@ export default function Register() {
         [otp]
     );
 
-    const shortInfo = useShortInfo();
+    const guestInfo = useGuestInfo({
+        provider: searchParams.get("provider") as string,
+        token: searchParams.get("token") as string,
+    });
     const [setupFlag, setSetupFlag] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!shortInfo || setupFlag) return;
+        if (!guestInfo || setupFlag) return;
 
         setSetupFlag(true);
-        setName(shortInfo.data?.data?.username || "");
-        setEmail(shortInfo.data?.data?.email || "");
-    }, [setupFlag, shortInfo]);
+        setEmail(guestInfo.data?.data?.email || "");
+    }, [setupFlag, guestInfo]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];

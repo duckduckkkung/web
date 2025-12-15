@@ -2,6 +2,8 @@ import { DefaultResponse } from "@/shared/api/types";
 import { apiClient } from "@/shared/api/client";
 
 import {
+    GuestInfoRequest,
+    GuestInfoRespone,
     RegisterRequest,
     SendOtpRequest,
     SocialLoginRequest,
@@ -71,4 +73,16 @@ export const verifyOtp = async (
         params: credentials,
         headers: { skipAuth: true },
     });
+};
+
+// 게스트 토큰 정보 api
+export const getGuestInfo = async (
+    credentials: GuestInfoRequest
+): DefaultResponse<GuestInfoRespone> => {
+    return await apiClient.get<DefaultResponse<GuestInfoRespone>>(
+        `/guest/${credentials.provider}/${credentials.token}`,
+        {
+            headers: { skipAuth: true },
+        }
+    );
 };
