@@ -19,8 +19,8 @@ import { Button } from "@/shared/components/button";
 import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
-import { useShortInfo } from "@/features/user/hooks";
 import { register, sendOtp, verifyOtp } from "@/features/oauth2/api";
+import { useShortInfo } from "@/features/user/hooks";
 
 import { REGEX } from "@/shared/utils/regex";
 
@@ -65,10 +65,11 @@ export default function Register() {
     ]);
 
     const [isCreating, setIsCreating] = useState<boolean>(false);
+
+    const [action, setAction] = useState<"main" | "otp">("main");
     const [isMainError, setIsMainError] = useState<boolean>(false);
     const [isRegisterError, setIsRegisterError] = useState<boolean>(false);
 
-    const [action, setAction] = useState<"main" | "otp">("main");
     const [otp, setOtp] = useState<string>("");
     const [isOtpError, setIsOtpError] = useState<boolean>(false);
     const otpVerify = useMemo(
@@ -101,7 +102,38 @@ export default function Register() {
         }
     };
 
+    const isNextStepImpossible = useMemo(
+        () =>
+            isCreating ||
+            !REGEX.NICKNAME.test(name.trim()) ||
+            !REGEX.EMAIL.test(email.trim()) ||
+            !REGEX.INTRODUCTION.test(bio.trim()) ||
+            !(agrees[0] && agrees[1] && agrees[2]),
+        [isCreating, name, email, bio, agrees]
+    );
+    const isRegisterImpossible = useMemo(
+        () => isCreating || !REGEX.OTP.test(otp.trim()),
+        [isCreating, otp]
+    );
+
     const submit = async () => {
+        setIsCreating(true);
+        setIsMainError(false);
+
+        try {
+            await sendOtp({
+                token: searchParams.get("token") as string,
+            });
+
+            setAction("otp");
+            setIsCreating(false);
+        } catch {
+            setIsCreating(false);
+            setIsMainError(true);
+        }
+    };
+
+    const otpSubmit = async () => {
         if (isCreating) return;
 
         if (!(agrees[0] && agrees[1] && agrees[2])) {
@@ -109,6 +141,10 @@ export default function Register() {
         }
 
         if (!REGEX.OTP.test(otp.trim())) {
+            return;
+        }
+
+        if (!REGEX.EMAIL.test(email.trim())) {
             return;
         }
 
@@ -461,21 +497,7 @@ export default function Register() {
                                                                 key="otp"
                                                                 size={16}
                                                                 className={`${
-                                                                    isCreating ||
-                                                                    !REGEX.NICKNAME.test(
-                                                                        name.trim()
-                                                                    ) ||
-                                                                    !REGEX.EMAIL.test(
-                                                                        email.trim()
-                                                                    ) ||
-                                                                    !REGEX.INTRODUCTION.test(
-                                                                        bio.trim()
-                                                                    ) ||
-                                                                    !(
-                                                                        agrees[0] &&
-                                                                        agrees[1] &&
-                                                                        agrees[2]
-                                                                    )
+                                                                    isNextStepImpossible
                                                                         ? "stroke-gray-400"
                                                                         : "stroke-white"
                                                                 }`}
@@ -484,41 +506,8 @@ export default function Register() {
                                                         float: "left",
                                                     },
                                                 ]}
-                                                onClick={async () => {
-                                                    setIsCreating(true);
-                                                    setIsMainError(false);
-
-                                                    try {
-                                                        await sendOtp({
-                                                            token: searchParams.get(
-                                                                "token"
-                                                            ) as string,
-                                                        });
-
-                                                        setAction("otp");
-                                                        setIsCreating(false);
-                                                    } catch {
-                                                        setIsCreating(false);
-                                                        setIsMainError(true);
-                                                    }
-                                                }}
-                                                disabled={
-                                                    isCreating ||
-                                                    !REGEX.NICKNAME.test(
-                                                        name.trim()
-                                                    ) ||
-                                                    !REGEX.EMAIL.test(
-                                                        email.trim()
-                                                    ) ||
-                                                    !REGEX.INTRODUCTION.test(
-                                                        bio.trim()
-                                                    ) ||
-                                                    !(
-                                                        agrees[0] &&
-                                                        agrees[1] &&
-                                                        agrees[2]
-                                                    )
-                                                }
+                                                onClick={submit}
+                                                disabled={isNextStepImpossible}
                                             >
                                                 2차 인증하기
                                             </Button>
@@ -607,10 +596,7 @@ export default function Register() {
                                                             key="loader-cirlce"
                                                             size={16}
                                                             className={`animate-spin ${
-                                                                isCreating ||
-                                                                !REGEX.OTP.test(
-                                                                    otp.trim()
-                                                                )
+                                                                isRegisterImpossible
                                                                     ? "stroke-gray-400"
                                                                     : "stroke-white"
                                                             }`}
@@ -620,10 +606,7 @@ export default function Register() {
                                                             key="register"
                                                             size={16}
                                                             className={`${
-                                                                isCreating ||
-                                                                !REGEX.OTP.test(
-                                                                    otp.trim()
-                                                                )
+                                                                isRegisterImpossible
                                                                     ? "stroke-gray-400"
                                                                     : "stroke-white"
                                                             }`}
@@ -632,11 +615,8 @@ export default function Register() {
                                                     float: "left",
                                                 },
                                             ]}
-                                            onClick={submit}
-                                            disabled={
-                                                isCreating ||
-                                                !REGEX.OTP.test(otp.trim())
-                                            }
+                                            onClick={otpSubmit}
+                                            disabled={isRegisterImpossible}
                                         >
                                             덕질 시작하기
                                         </Button>
