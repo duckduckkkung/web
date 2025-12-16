@@ -18,12 +18,12 @@ export default function Oauth2Google() {
                 try {
                     const response = await signWithGoogle({ code });
 
-                    if (response.data.type === "register")
+                    if (response.type === "register")
                         router.push(
-                            `/register?token=${response.data.token}&provider=google`
+                            `/register?token=${response.token}&provider=google`
                         );
                     else {
-                        Storage.setAccessToken(response.data.access_token);
+                        Storage.setAccessToken(response.access_token);
                         router.push("/fans");
                     }
 
