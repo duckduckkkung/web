@@ -4,4 +4,4 @@
 //     message: string;
 //     data: T;
 // }>;
-export type DefaultResponse<T> = T;
+export type DefaultResponse<T> = Promise<T>;
