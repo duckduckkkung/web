@@ -90,7 +90,7 @@ export default function Register() {
         if (!guestInfo || setupFlag) return;
 
         setSetupFlag(true);
-        setEmail(guestInfo.data?.data?.email || "");
+        setEmail(guestInfo.data?.email || "");
     }, [setupFlag, guestInfo]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
