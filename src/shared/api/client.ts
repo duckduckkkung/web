@@ -21,7 +21,7 @@ export class ApiClient {
             (config) => {
                 if (!config.headers?.["skipAuth"]) {
                     const token = Storage.getAccessToken();
-                    if (token) config.headers.Authorization = `Bearer ${token}`;
+                    if (token) config.headers["x-auth-token"] = token;
                 } else delete config.headers["skipAuth"];
 
                 return config;

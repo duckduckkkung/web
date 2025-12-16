@@ -1,11 +1,14 @@
-// import { useQuery } from "@tanstack/react-query";
-// import { getUser } from "./api";
+import { useQuery } from "@tanstack/react-query";
 
-// // 내 정보 조회 query
-// export const useUser = () => {
-//     return useQuery({
-//         queryKey: ["mypage"],
-//         queryFn: async () => await getUser(),
-//         retry: false,
-//     });
-// };
+import { getGuestInfo } from "./api";
+import { GuestInfoRequest } from "./types";
+
+// 게스트 토큰 정보 query
+export const useGuestInfo = (credentials: GuestInfoRequest) => {
+    return useQuery({
+        queryKey: ["guest"],
+        queryFn: async () => await getGuestInfo(credentials),
+        retry: false,
+        refetchOnWindowFocus: false,
+    });
+};

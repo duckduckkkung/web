@@ -46,13 +46,13 @@
 }
 
 @font-face {
-    font-family: "GMarketSans Bold";
-    src: url("/fonts/GMarketSansBold.otf");
+    font-family: "p-gmsb";
+    src: url("/fonts/GMarketSansTTFBold.ttf");
 }
 
 @font-face {
-    font-family: "GMarketSans Medium";
-    src: url("/fonts/GMarketSansMedium.otf");
+    font-family: "p-gmsm";
+    src: url("/fonts/GMarketSansTTFMedium.ttf");
 }
 
 @font-face {
@@ -76,8 +76,8 @@
     --font-p-semibold: "p-semibold";
     --font-p-thin: "p-thin";
 
-    --font-p-gmsm: "GMarketSans Medium";
-    --font-p-gmsb: "GMarketSans Bold";
+    --font-p-gmsm: "p-gmsm";
+    --font-p-gmsb: "p-gmsb";
     --font-p-mj: "GyeonggiMillenniumBackground";
 }
 

@@ -42,7 +42,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                     <div className="p-[24px] grid grid-cols-2 gap-[16px]">
                         <Button
                             type="lg"
-                            variants="black"
+                            variants="warning"
                             onClick={() => {
                                 setIsOpen(false);
                                 router.push(`/fans/${fan.name}/board`);
@@ -54,7 +54,7 @@ export const BoardSidebar = ({ type, fan }: BoardSidebarProps) => {
                                         <Trash2Icon
                                             key="delete-post"
                                             size={16}
-                                            className="stroke-white"
+                                            className="stroke-red-700"
                                         />
                                     ),
                                 },

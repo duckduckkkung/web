@@ -18,12 +18,12 @@ export default function Oauth2Kakao() {
                 try {
                     const response = await signWithKakao({ code });
 
-                    if (response.type === "register")
+                    if (response.data.type === "register")
                         router.push(
-                            `/register?id=${response.id}&provider=kakao&image=${response.file}&email=${response.email}`
+                            `/register?token=${response.data.token}&provider=kakao`
                         );
                     else {
-                        Storage.setAccessToken(response.access_token);
+                        Storage.setAccessToken(response.data.access_token);
                         router.push("/fans");
                     }
 

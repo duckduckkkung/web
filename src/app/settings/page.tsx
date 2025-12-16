@@ -282,7 +282,7 @@ export default function Settings() {
                                                             <HashIcon
                                                                 key="google"
                                                                 size={16}
-                                                                className="stroke-gray-900"
+                                                                className="stroke-gray-400"
                                                             />
                                                         ),
                                                     },
@@ -290,43 +290,6 @@ export default function Settings() {
                                                 disabled
                                             >
                                                 구글
-                                            </Button>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex flex-col gap-[16px]">
-                                        <div className="flex flex-col gap-[6px]">
-                                            <span className="font-p-medium text-[16px] text-gray-900">
-                                                2차 인증 등록
-                                            </span>
-
-                                            <span className="font-p-medium text-[14px] text-gray-500">
-                                                아직 2차 인증이 설정되어 있지
-                                                않아요.
-                                                <br />
-                                                버튼을 클릭해서 계정의 보안을
-                                                강화해 주세요.
-                                            </span>
-                                        </div>
-
-                                        <div className="w-fit">
-                                            <Button
-                                                type="md"
-                                                variants="outline"
-                                                icons={[
-                                                    {
-                                                        float: "left",
-                                                        component: (
-                                                            <KeySquareIcon
-                                                                key="two-factor"
-                                                                size={16}
-                                                                className="stroke-gray-900"
-                                                            />
-                                                        ),
-                                                    },
-                                                ]}
-                                            >
-                                                Two-Factor 설정
                                             </Button>
                                         </div>
                                     </div>
