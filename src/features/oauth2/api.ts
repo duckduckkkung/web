@@ -47,7 +47,7 @@ export const register = async (
     });
 
     return await apiClient.postFormData<DefaultResponse<SocialLoginResponse>>(
-        "/api/auth",
+        "/api/user",
         formData,
         {
             headers: { skipAuth: true },

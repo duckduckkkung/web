@@ -2,5 +2,6 @@
 export interface ShortInfoResponse {
     username: string;
     email: string;
-    file: string;
+    profile: string;
+    introduction: string;
 }

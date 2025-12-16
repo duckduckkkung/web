@@ -36,7 +36,7 @@ export default function Register() {
         [email]
     );
 
-    const [name, setName] = useState<string>("고서온");
+    const [name, setName] = useState<string>("");
     const [isNameError, setIsNameError] = useState<boolean>(false);
     const nameVerify = useMemo(
         () => ({
@@ -194,6 +194,7 @@ export default function Register() {
         try {
             await register({
                 username: name,
+                email: email,
                 introduction: bio,
                 provider_name: searchParams.get("provider") as string,
                 token: searchParams.get("token") as string,
@@ -225,7 +226,7 @@ export default function Register() {
         <div>
             <Header />
 
-            <div className="max-w-[1280px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
+            <div className="max-w-[1280px] min-h-[800px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
                 <div className="w-[380px]">
                     <AnimatePresence mode="popLayout">
                         <motion.div
@@ -520,6 +521,14 @@ export default function Register() {
 
                             {action === "otp" && (
                                 <>
+                                    <span className="font-p-medium text-[18px] text-gray-900 text-center">
+                                        <b className="font-p-bold">
+                                            &lsquo;{email}&rsquo;
+                                        </b>{" "}
+                                        로<br />
+                                        6자리 인증번호를 전송하였습니다.
+                                    </span>
+
                                     <div className="flex flex-col gap-[6px]">
                                         <div className="flex items-center gap-[4px]">
                                             <span className="font-p-semibold text-[14px] text-c-primary cursor-pointer">
@@ -556,6 +565,7 @@ export default function Register() {
                                                 onChange={setOtp}
                                                 placeholder="6자리 인증번호를 입력해 주세요."
                                                 disabled={isCreating}
+                                                className="!font-p-gmsm"
                                             />
                                         </ToastMessage>
 

@@ -21,6 +21,7 @@ export interface SocialLoginResponse extends SocialLogin {
 // 소셜 회원가입 req
 export interface RegisterRequest {
     username: string;
+    email: string;
     introduction: string;
     provider_name: string;
     token: string;

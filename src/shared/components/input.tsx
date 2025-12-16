@@ -22,6 +22,8 @@ interface InputProps {
     onChange: (value: string) => void;
     onKeyUp?: (e: React.KeyboardEvent) => void;
 
+    className?: string;
+
     disabled?: boolean;
 }
 
@@ -34,6 +36,7 @@ export const Input = ({
     onChange,
     disabled,
     onKeyUp,
+    className = "",
 }: InputProps) => {
     return (
         <input
@@ -41,7 +44,7 @@ export const Input = ({
             type="text"
             className={`${InputTypes[type]} ${InputVariants[variants]} ${
                 disabled ? "!cursor-not-allowed !bg-gray-50 !text-gray-500" : ""
-            }`}
+            } ${className}`}
             placeholder={placeholder}
             value={value}
             onChange={(e) => onChange(e.target.value)}
