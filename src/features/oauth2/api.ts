@@ -79,9 +79,8 @@ export const verifyOtp = async (
 export const getGuestInfo = async (
     credentials: GuestInfoRequest
 ): DefaultResponse<GuestInfoRespone> => {
-    return await apiClient.post<DefaultResponse<GuestInfoRespone>>(
-        `/api/user/guest/${credentials.provider}`,
-        { token: credentials.token },
+    return await apiClient.get<DefaultResponse<GuestInfoRespone>>(
+        `/api/user/guest/${credentials.provider}?token=${credentials.token}`,
         {
             headers: { skipAuth: true },
         }
