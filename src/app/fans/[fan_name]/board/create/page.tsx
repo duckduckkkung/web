@@ -120,7 +120,7 @@ export default function CreateBoard() {
                                         <LoaderCircleIcon
                                             key="loader-cirlce"
                                             size={14}
-                                            className={`animate-spin ${
+                                            className={`animate-spin transition-all duration-[.1s] ${
                                                 isPosting
                                                     ? "stroke-gray-400"
                                                     : "stroke-white"
@@ -130,7 +130,7 @@ export default function CreateBoard() {
                                         <PlusIcon
                                             key="upload-post"
                                             size={16}
-                                            className={`${
+                                            className={`transition-all duration-[.1s] ${
                                                 isPosting
                                                     ? "stroke-gray-400"
                                                     : "stroke-white"

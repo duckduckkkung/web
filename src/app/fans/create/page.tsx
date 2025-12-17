@@ -333,7 +333,7 @@ export default function CreateFan() {
                                         <LoaderCircleIcon
                                             key="loader-cirlce"
                                             size={14}
-                                            className={`animate-spin ${
+                                            className={`animate-spin transition-all duration-[.1s] ${
                                                 isCreating
                                                     ? "stroke-gray-400"
                                                     : "stroke-gray-900"
@@ -343,7 +343,7 @@ export default function CreateFan() {
                                         <BookPlusIcon
                                             key="create-fan"
                                             size={16}
-                                            className={`${
+                                            className={`transition-all duration-[.1s] ${
                                                 isCreating
                                                     ? "stroke-gray-400"
                                                     : "stroke-gray-900"

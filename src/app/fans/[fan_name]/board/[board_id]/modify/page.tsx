@@ -122,7 +122,7 @@ export default function ModifyBoard() {
                                         <LoaderCircleIcon
                                             key="loader-cirlce"
                                             size={14}
-                                            className={`animate-spin ${
+                                            className={`animate-spin transition-all duration-[.1s] ${
                                                 isPosting
                                                     ? "stroke-gray-400"
                                                     : "stroke-white"
@@ -132,7 +132,7 @@ export default function ModifyBoard() {
                                         <PencilLineIcon
                                             key="modify"
                                             size={16}
-                                            className={`${
+                                            className={`transition-all duration-[.1s] ${
                                                 isPosting
                                                     ? "stroke-gray-400"
                                                     : "stroke-white"
