@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>OTP</title>
+    </head>
+
+    <style>
+        @font-face {
+            font-family: "Paperozi";
+            src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2")
+                format("woff2");
+            font-weight: 400;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "Paperozi";
+            src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2")
+                format("woff2");
+            font-weight: 500;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "GMarketSans";
+            src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+                format("woff");
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "FounderYooGeonWook";
+            src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff")
+                format("woff");
+            font-weight: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            width: 128px;
+            height: 42px;
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 600px;
+            height: 800px;
+            background: white;
+            border: 1px solid #d1d5dc;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .content {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        .footer {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            background: #f3f4f6;
+        }
+
+        .info {
+            padding: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-type {
+            font-family: "FounderYooGeonWook";
+            font-size: 14px;
+            color: #99a1af;
+        }
+
+        .info-datetime-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            gap: 4px;
+        }
+
+        .info-datetime {
+            font-family: "FounderYooGeonWook";
+            font-size: 14px;
+            color: #4a5565;
+        }
+
+        .right {
+            align-items: end;
+        }
+
+        .description {
+            font-family: "Paperozi";
+            font-weight: 400;
+            font-size: 16px;
+            color: #030712;
+            line-height: 28px;
+        }
+
+        .big-wrapper {
+            width: 200px;
+            height: 48px;
+            padding: 8px 16px;
+            background: #f3f4f6;
+        }
+
+        .big-wrapper-text {
+            font-family: "GMarketSans";
+            font-weight: 700;
+            font-size: 32px;
+            color: #030712;
+            letter-spacing: 16px;
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            font-family: "Paperozi";
+            font-weight: 500;
+            font-size: 14px;
+            color: #030712;
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+    </style>
+
+    <body>
+        <div class="container">
+            <div class="content">
+                <img
+                    src="https://i.ibb.co/8nXfd4ZS/wdqwjdnqhjdn.png"
+                    alt="logo"
+                    class="logo"
+                />
+
+                <p class="description">
+                    안녕하세요, 덕덕쿵 입니다.<br />
+                    저희 서비스는 개인정보를 보호하기 위해 이메일 인증을
+                    요구하고 있습니다.<br />
+                    <br />
+                    아래 6자리 인증번호를 복사해서 사이트에 붙여넣어주세요.
+                </p>
+
+                <div class="big-wrapper">
+                    <p class="big-wrapper-text">16330</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="info">
+                    <p class="info-type">One-Time-Password</p>
+
+                    <div class="info-datetime-wrapper">
+                        <p class="info-datetime">2025년 12월 24일</p>
+                        <p class="info-datetime">17:20:03</p>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p class="footer-text">덕덕쿵 ™</p>
+
+                    <div class="footer-wrapper">
+                        <div class="footer-column">
+                            <p class="footer-text">프론트엔드 · ICe1</p>
+                            <p class="footer-text">백엔드 · yeobaek</p>
+                        </div>
+
+                        <div class="footer-column right">
+                            <p class="footer-text">주소 · 자기 집</p>
+                            <p class="footer-text">
+                                이메일 · example@domain.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
