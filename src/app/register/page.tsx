@@ -90,11 +90,16 @@ export default function Register() {
     const [setupFlag, setSetupFlag] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!guestInfo.data || setupFlag) return;
+        if (setupFlag) return;
+
+        if (!guestInfo.data) {
+            router.push("/");
+            return;
+        }
 
         setSetupFlag(true);
         setEmail(guestInfo.data?.email || "");
-    }, [setupFlag, guestInfo]);
+    }, [setupFlag, guestInfo, router]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
