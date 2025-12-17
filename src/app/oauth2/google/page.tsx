@@ -20,7 +20,9 @@ export default function Oauth2Google() {
 
                     if (response.type === "register")
                         router.push(
-                            `/register?token=${response.token}&provider=google`
+                            `/register?token=${encodeURIComponent(
+                                response.token
+                            )}&provider=google`
                         );
                     else {
                         Storage.setAccessToken(response.access_token);

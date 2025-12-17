@@ -82,7 +82,7 @@ export default function Register() {
 
     const guestInfo = useGuestInfo({
         provider: searchParams.get("provider") as string,
-        token: searchParams.get("token") as string,
+        token: decodeURIComponent(searchParams.get("token") as string),
     });
     const [setupFlag, setSetupFlag] = useState<boolean>(false);
 
@@ -124,7 +124,7 @@ export default function Register() {
 
         try {
             await sendOtp({
-                token: searchParams.get("token") as string,
+                token: decodeURIComponent(searchParams.get("token") as string),
             });
 
             setAction("otp");
@@ -166,7 +166,7 @@ export default function Register() {
 
         try {
             await verifyOtp({
-                token: searchParams.get("token") as string,
+                token: decodeURIComponent(searchParams.get("token") as string),
                 otp,
             });
         } catch {
@@ -197,7 +197,7 @@ export default function Register() {
                 email: email,
                 introduction: bio,
                 provider_name: searchParams.get("provider") as string,
-                token: searchParams.get("token") as string,
+                token: decodeURIComponent(searchParams.get("token") as string),
                 file: profileImage,
             });
 
