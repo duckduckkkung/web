@@ -83,23 +83,23 @@ export default function Register() {
         [otp]
     );
 
-    const guestInfo = useGuestInfo({
+    const { data: guestInfo, isFetching: isGuestInfoFetching } = useGuestInfo({
         provider,
         token,
     });
     const [setupFlag, setSetupFlag] = useState<boolean>(false);
 
     useEffect(() => {
-        if (setupFlag) return;
+        if (setupFlag || isGuestInfoFetching) return;
 
-        if (!guestInfo.data) {
+        if (!guestInfo) {
             router.push("/");
             return;
         }
 
         setSetupFlag(true);
-        setEmail(guestInfo.data?.email || "");
-    }, [setupFlag, guestInfo, router]);
+        setEmail(guestInfo.email || "");
+    }, [setupFlag, guestInfo, isGuestInfoFetching, router]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
