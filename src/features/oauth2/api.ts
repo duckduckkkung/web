@@ -80,10 +80,8 @@ export const getGuestInfo = async (
     credentials: GuestInfoRequest
 ): DefaultResponse<GuestInfoRespone> => {
     return await apiClient.post<DefaultResponse<GuestInfoRespone>>(
-        `/api/user/guest/${credentials.provider}/${encodeURIComponent(
-            credentials.token
-        )}`,
-        {},
+        `/api/user/guest/${credentials.provider}`,
+        { token: credentials.token },
         {
             headers: { skipAuth: true },
         }
