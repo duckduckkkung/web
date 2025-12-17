@@ -98,7 +98,9 @@ export default function Register() {
         }
 
         setSetupFlag(true);
-        setEmail(guestInfo.email || "");
+        setEmail(guestInfo?.email || "");
+        setName(guestInfo?.name || "");
+        setProfileImage(guestInfo?.file || "");
     }, [setupFlag, guestInfo, isGuestInfoFetching, router]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -507,7 +509,7 @@ export default function Register() {
                                                             <KeyRoundIcon
                                                                 key="otp"
                                                                 size={16}
-                                                                className={`${
+                                                                className={`transition-all duration-[.1s] ${
                                                                     isNextStepImpossible
                                                                         ? "stroke-gray-400"
                                                                         : "stroke-white"
@@ -615,7 +617,7 @@ export default function Register() {
                                                         <LoaderCircleIcon
                                                             key="loader-cirlce"
                                                             size={16}
-                                                            className={`animate-spin ${
+                                                            className={`animate-spin transition-all duration-[.1s] ${
                                                                 isRegisterImpossible
                                                                     ? "stroke-gray-400"
                                                                     : "stroke-white"
@@ -625,7 +627,7 @@ export default function Register() {
                                                         <ArrowUpRightIcon
                                                             key="register"
                                                             size={16}
-                                                            className={`${
+                                                            className={`transition-all duration-[.1s] ${
                                                                 isRegisterImpossible
                                                                     ? "stroke-gray-400"
                                                                     : "stroke-white"

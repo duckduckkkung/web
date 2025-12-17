@@ -356,7 +356,7 @@ export default function Fan() {
                                                                                     size={
                                                                                         14
                                                                                     }
-                                                                                    className={`animate-spin ${
+                                                                                    className={`animate-spin transition-all duration-[.1s] ${
                                                                                         isCreating
                                                                                             ? "stroke-gray-400"
                                                                                             : "stroke-white"
@@ -368,7 +368,7 @@ export default function Fan() {
                                                                                     size={
                                                                                         16
                                                                                     }
-                                                                                    className={`${
+                                                                                    className={`transition-all duration-[.1s] ${
                                                                                         isCreating
                                                                                             ? "stroke-gray-400"
                                                                                             : "stroke-white"
