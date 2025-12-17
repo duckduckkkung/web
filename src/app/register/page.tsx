@@ -28,6 +28,9 @@ export default function Register() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
+    const token = decodeURIComponent(searchParams.get("token") as string);
+    const provider = searchParams.get("provider") as string;
+
     const [email, setEmail] = useState<string>("");
     const emailVerify = useMemo(
         () => ({
@@ -81,13 +84,13 @@ export default function Register() {
     );
 
     const guestInfo = useGuestInfo({
-        provider: searchParams.get("provider") as string,
-        token: decodeURIComponent(searchParams.get("token") as string),
+        provider,
+        token,
     });
     const [setupFlag, setSetupFlag] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!guestInfo || setupFlag) return;
+        if (!guestInfo.data || setupFlag) return;
 
         setSetupFlag(true);
         setEmail(guestInfo.data?.email || "");
@@ -124,7 +127,7 @@ export default function Register() {
 
         try {
             await sendOtp({
-                token: decodeURIComponent(searchParams.get("token") as string),
+                token,
             });
 
             setAction("otp");
@@ -166,7 +169,7 @@ export default function Register() {
 
         try {
             await verifyOtp({
-                token: decodeURIComponent(searchParams.get("token") as string),
+                token,
                 otp,
             });
         } catch {
@@ -196,8 +199,8 @@ export default function Register() {
                 username: name,
                 email: email,
                 introduction: bio,
-                provider_name: searchParams.get("provider") as string,
-                token: decodeURIComponent(searchParams.get("token") as string),
+                provider_name: provider,
+                token,
                 file: profileImage,
             });
 
