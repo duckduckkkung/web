@@ -31,12 +31,14 @@ export interface RegisterRequest {
 // 인증번호 전송 req
 export interface SendOtpRequest {
     token: string;
+    email: string;
 }
 
 // 인증번호 검증 req
 export interface VerifyOtpRequest {
     token: string;
-    otp: string;
+    email: string;
+    code: string;
 }
 
 // 게스트 토큰 정보 req, res
