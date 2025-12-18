@@ -135,6 +135,7 @@ export default function Register() {
         try {
             await sendOtp({
                 token,
+                email,
             });
 
             setAction("otp");
@@ -177,7 +178,8 @@ export default function Register() {
         try {
             await verifyOtp({
                 token,
-                otp,
+                email,
+                code: otp,
             });
         } catch {
             setIsCreating(false);

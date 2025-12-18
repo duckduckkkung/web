@@ -59,20 +59,26 @@ export const register = async (
 export const sendOtp = async (
     credentials: SendOtpRequest
 ): DefaultResponse<boolean> => {
-    return await apiClient.get<DefaultResponse<boolean>>("/api/otp", {
-        params: credentials,
-        headers: { skipAuth: true },
-    });
+    return await apiClient.post<DefaultResponse<boolean>>(
+        "/api/user/authorize",
+        credentials,
+        {
+            headers: { skipAuth: true },
+        }
+    );
 };
 
 // 인증번호 검증 api
 export const verifyOtp = async (
     credentials: VerifyOtpRequest
 ): DefaultResponse<boolean> => {
-    return await apiClient.get<DefaultResponse<boolean>>("/api/otp/verify", {
-        params: credentials,
-        headers: { skipAuth: true },
-    });
+    return await apiClient.post<DefaultResponse<boolean>>(
+        "/api/user/authorize/verify",
+        credentials,
+        {
+            headers: { skipAuth: true },
+        }
+    );
 };
 
 // 게스트 토큰 정보 api
