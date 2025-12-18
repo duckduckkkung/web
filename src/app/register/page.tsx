@@ -175,13 +175,13 @@ export default function Register() {
         setIsNameError(false);
         setIsCreating(true);
 
-        try {
-            await verifyOtp({
-                token,
-                email,
-                code: otp,
-            });
-        } catch {
+        const otpResponse = await verifyOtp({
+            token,
+            email,
+            code: otp,
+        });
+
+        if (!otpResponse.result) {
             setIsCreating(false);
             setIsOtpError(true);
             setOtp("");
@@ -195,8 +195,8 @@ export default function Register() {
             (fileInputRef.current?.files?.length || 0) > 0
         ) {
             profileImage = fileInputRef.current.files[0];
-
-            const url = searchParams.get("image") as string;
+        } else if (guestInfo?.profile_image_src) {
+            const url = guestInfo.profile_image_src;
             const blob = await (
                 await fetch(url, { mode: "no-cors", credentials: "omit" })
             ).blob();

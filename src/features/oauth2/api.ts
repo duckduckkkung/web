@@ -43,7 +43,7 @@ export const register = async (
 ): DefaultResponse<SocialLoginResponse> => {
     const formData = new FormData();
     Object.entries(credentials).forEach(([key, value]) => {
-        formData.append(key, value);
+        if (value) formData.append(key, value);
     });
 
     return await apiClient.postFormData<DefaultResponse<SocialLoginResponse>>(
@@ -58,8 +58,8 @@ export const register = async (
 // 인증번호 전송 api
 export const sendOtp = async (
     credentials: SendOtpRequest
-): DefaultResponse<boolean> => {
-    return await apiClient.post<DefaultResponse<boolean>>(
+): DefaultResponse<{ result: boolean }> => {
+    return await apiClient.post<DefaultResponse<{ result: boolean }>>(
         "/api/user/authorize",
         credentials,
         {
@@ -71,8 +71,8 @@ export const sendOtp = async (
 // 인증번호 검증 api
 export const verifyOtp = async (
     credentials: VerifyOtpRequest
-): DefaultResponse<boolean> => {
-    return await apiClient.post<DefaultResponse<boolean>>(
+): DefaultResponse<{ result: boolean }> => {
+    return await apiClient.post<DefaultResponse<{ result: boolean }>>(
         "/api/user/authorize/verify",
         credentials,
         {
