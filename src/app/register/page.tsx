@@ -99,8 +99,8 @@ export default function Register() {
 
         setSetupFlag(true);
         setEmail(guestInfo?.email || "");
-        setName(guestInfo?.name || "");
-        setProfileImage(guestInfo?.file || "");
+        setName(guestInfo?.username || "");
+        setProfileImage(guestInfo?.profile_image_src || "");
     }, [setupFlag, guestInfo, isGuestInfoFetching, router]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
