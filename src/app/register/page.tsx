@@ -99,8 +99,8 @@ export default function Register() {
 
         setSetupFlag(true);
         setEmail(guestInfo?.email || "");
-        setName(guestInfo?.name || "");
-        setProfileImage(guestInfo?.file || "");
+        setName(guestInfo?.username || "");
+        setProfileImage(guestInfo?.profile_image_src || "");
     }, [setupFlag, guestInfo, isGuestInfoFetching, router]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -415,6 +415,7 @@ export default function Register() {
                                                               ]
                                                     )
                                                 }
+                                                disabled={isCreating}
                                             />
 
                                             <Checkbox
@@ -432,6 +433,7 @@ export default function Register() {
                                                 }
                                                 required
                                                 shortcut="1"
+                                                disabled={isCreating}
                                             />
 
                                             <Checkbox
@@ -449,6 +451,7 @@ export default function Register() {
                                                 }
                                                 required
                                                 shortcut="2"
+                                                disabled={isCreating}
                                             />
 
                                             <Checkbox
@@ -466,6 +469,7 @@ export default function Register() {
                                                 }
                                                 required
                                                 shortcut="3"
+                                                disabled={isCreating}
                                             />
 
                                             <Checkbox
@@ -482,6 +486,7 @@ export default function Register() {
                                                     )
                                                 }
                                                 shortcut="4"
+                                                disabled={isCreating}
                                             />
                                         </div>
 

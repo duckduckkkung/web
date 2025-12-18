@@ -45,15 +45,15 @@ export const Checkbox = ({
     };
 
     return (
-        <div className="group flex items-center gap-[8px]">
+        <div
+            className={`group flex items-center gap-[8px] ${
+                disabled ? "!cursor-not-allowed opacity-50" : ""
+            }`}
+        >
             <div
                 className={`${CheckboxTypes[type]} ${
                     CheckboxVariants[variants]
-                } ${
-                    disabled
-                        ? "!cursor-not-allowed opacity-50"
-                        : "active:scale-95"
-                } shrink-0`}
+                } ${disabled ? "" : "active:scale-95"} shrink-0`}
                 data-checked={checked}
                 onClick={handleChange}
             >

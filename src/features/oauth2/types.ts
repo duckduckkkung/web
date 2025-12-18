@@ -48,7 +48,7 @@ export interface GuestInfoRequest {
 }
 
 export interface GuestInfoRespone {
-    file: string;
-    name: string;
+    profile_image_src: string;
+    username: string;
     email: string;
 }
