@@ -542,7 +542,8 @@ export default function Register() {
                                         <b className="font-p-bold">
                                             &lsquo;{email}&rsquo;
                                         </b>{" "}
-                                        로<br />
+                                        으로
+                                        <br />
                                         6자리 인증번호를 전송하였습니다.
                                     </span>
 
@@ -582,7 +583,7 @@ export default function Register() {
                                                 onChange={setOtp}
                                                 placeholder="6자리 인증번호를 입력해 주세요."
                                                 disabled={isCreating}
-                                                className="!font-p-gmsm"
+                                                className="!font-p-gmsm placeholder:!font-p-medium"
                                             />
                                         </ToastMessage>
 
