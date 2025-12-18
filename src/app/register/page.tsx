@@ -302,7 +302,7 @@ export default function Register() {
 
                                                 <div className="flex flex-wrap gap-[12px]">
                                                     <Verify
-                                                        label="올바른 이메일"
+                                                        label="유효한 이메일"
                                                         checked={
                                                             emailVerify.one
                                                         }
