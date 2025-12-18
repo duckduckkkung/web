@@ -46,13 +46,27 @@
 }
 
 @font-face {
-    font-family: "p-gmsb";
-    src: url("/fonts/GMarketSansTTFBold.ttf");
+    font-family: "GMarketSansLight";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+        format("woff");
+    font-weight: 300;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "p-gmsm";
-    src: url("/fonts/GMarketSansTTFMedium.ttf");
+    font-family: "GMarketSansMedium";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+        format("woff");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "GMarketSansBold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+        format("woff");
+    font-weight: 700;
+    font-display: swap;
 }
 
 @font-face {
@@ -76,8 +90,10 @@
     --font-p-semibold: "p-semibold";
     --font-p-thin: "p-thin";
 
-    --font-p-gmsm: "p-gmsm";
-    --font-p-gmsb: "p-gmsb";
+    --font-p-gmsl: "GMarketSansLight";
+    --font-p-gmsm: "GMarketSansMedium";
+    --font-p-gmsb: "GMarketSansBold";
+
     --font-p-mj: "GyeonggiMillenniumBackground";
 }
 
