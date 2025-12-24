@@ -3,7 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-import { signWithGoogle } from "@/features/oauth2/api";
+import { signWithGoogle } from "@ice1/api-client";
+
 import { Storage } from "@/shared/services/storage";
 
 export default function Oauth2Google() {

@@ -3,7 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-import { signWithKakao } from "@/features/oauth2/api";
+import { signWithKakao } from "@ice1/api-client";
+
 import { Storage } from "@/shared/services/storage";
 
 export default function Oauth2Kakao() {
