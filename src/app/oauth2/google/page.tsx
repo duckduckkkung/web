@@ -3,9 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-import { signWithGoogle } from "@ice1/api-client";
-
-import { Storage } from "@/shared/services/storage";
+import { signWithGoogle, Storage } from "@ice1/api-client";
 
 export default function Oauth2Google() {
     const searchParams = useSearchParams();
