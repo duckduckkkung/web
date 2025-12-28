@@ -121,7 +121,7 @@ jobs:
                     
                     # 최신 이미지 pull
                     log_info "최신 이미지 다운로드 중..."
-                    docker pull $IMAGE_NAME
+                    docker pull "\$IMAGE_NAME"
                     
                     # 대상 컨테이너가 실행 중이면 중지
                     if docker ps -a | grep -q "frontend-${TARGET_CONTAINER}"; then
