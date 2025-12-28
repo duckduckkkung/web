@@ -48,13 +48,25 @@ jobs:
                   SERVER_HOST: ${{ secrets.SSH_HOST }}
                   APP_DIR: ${{ secrets.APP_DIR }}
                   GITHUB_REPO_OWNER: ${{ github.repository_owner }}
+                  GITHUB_ACTOR: ${{ github.actor }}
+                  PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
                   NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
                   NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY }}
                   NEXT_PUBLIC_KAKAO_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI }}
                   NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
                   NEXT_PUBLIC_GOOGLE_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }}
               run: |
-                  ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" 'bash -s' <<'ENDSSH'
+                  ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" \
+                  "APP_DIR='$APP_DIR' \
+                  GITHUB_REPO_OWNER='$GITHUB_REPO_OWNER' \
+                  GITHUB_ACTOR='$GITHUB_ACTOR' \
+                  PACKAGE_TOKEN='$PACKAGE_TOKEN' \
+                  NEXT_PUBLIC_BACKEND_URL='$NEXT_PUBLIC_BACKEND_URL' \
+                  NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY='$NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY' \
+                  NEXT_PUBLIC_KAKAO_REDIRECT_URI='$NEXT_PUBLIC_KAKAO_REDIRECT_URI' \
+                  NEXT_PUBLIC_GOOGLE_CLIENT_ID='$NEXT_PUBLIC_GOOGLE_CLIENT_ID' \
+                  NEXT_PUBLIC_GOOGLE_REDIRECT_URI='$NEXT_PUBLIC_GOOGLE_REDIRECT_URI' \
+                  bash -s" <<'ENDSSH'
                     set -e
                     
                     # 색상 정의
@@ -72,21 +84,32 @@ jobs:
                         echo -e "${YELLOW}[WARN]${NC} $1"
                     }
 
-                    # 환경변수 설정
-                    APP_DIR="${APP_DIR}"
+                    log_error() {
+                        echo -e "${RED}[ERROR]${NC} $1"
+                    }
 
                     cd "$APP_DIR"
                     
-                    # .env 파일 생성 (.env 내용을 별도로 처리)
+                    # .env 파일 생성
                     touch .env
-                    echo NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }} >> .env
-                    echo NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY }} >> .env
-                    echo NEXT_PUBLIC_KAKAO_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI }} >> .env
-                    echo NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} >> .env
-                    echo NEXT_PUBLIC_GOOGLE_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }} >> .env
+                    echo "NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}" > .env
+                    echo "NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY=${NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}" >> .env
+                    echo "NEXT_PUBLIC_KAKAO_REDIRECT_URI=${NEXT_PUBLIC_KAKAO_REDIRECT_URI}" >> .env
+                    echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}" >> .env
+                    echo "NEXT_PUBLIC_GOOGLE_REDIRECT_URI=${NEXT_PUBLIC_GOOGLE_REDIRECT_URI}" >> .env
                     
                     chmod 600 .env
                     log_info ".env 파일 생성 완료"
+                    
+                    # GitHub Container Registry 로그인
+                    log_info "GitHub Container Registry 로그인 중..."
+                    echo "${PACKAGE_TOKEN}" | docker login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin
+                    
+                    if [ $? -ne 0 ]; then
+                        log_error "GitHub Container Registry 로그인 실패"
+                        exit 1
+                    fi
+                    log_info "로그인 성공"
                     
                     # Blue-Green 배포 로직
                     log_info "=========================================="
@@ -120,7 +143,12 @@ jobs:
                     
                     # 최신 이미지 pull
                     log_info "최신 이미지 다운로드 중..."
-                    docker pull ${GITHUB_REPO_OWNER}/frontend:latest
+                    docker pull ghcr.io/${GITHUB_REPO_OWNER}/frontend:latest
+                    
+                    if [ $? -ne 0 ]; then
+                        log_error "이미지 다운로드 실패"
+                        exit 1
+                    fi
                     
                     # 대상 컨테이너가 실행 중이면 중지
                     if docker ps -a | grep -q "frontend-${TARGET_CONTAINER}"; then
@@ -132,6 +160,11 @@ jobs:
                     # 새 컨테이너 시작
                     log_info "${TARGET_CONTAINER} 컨테이너 시작 중..."
                     docker-compose up -d frontend-${TARGET_CONTAINER}
+                    
+                    if [ $? -ne 0 ]; then
+                        log_error "${TARGET_CONTAINER} 컨테이너 시작 실패"
+                        exit 1
+                    fi
                     
                     # 컨테이너 헬스체크 (30초 대기)
                     log_info "컨테이너 헬스체크 대기 중..."
@@ -149,7 +182,7 @@ jobs:
                             log_info "${ACTIVE_CONTAINER} 컨테이너 정리 완료"
                         fi
                     else
-                        log_info "${TARGET_CONTAINER} 컨테이너 시작 실패!"
+                        log_error "${TARGET_CONTAINER} 컨테이너 시작 실패!"
                         exit 1
                     fi
                     
@@ -167,4 +200,7 @@ jobs:
                     else
                         log_info "Green: http://localhost:3002"
                     fi
+                    
+                    # Docker 로그아웃
+                    docker logout ghcr.io
                   ENDSSH
