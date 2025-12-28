@@ -37,6 +37,15 @@ jobs:
                   source: "docker-compose.yml"
                   target: "${{ secrets.APP_DIR }}"
 
+            - name: Copy scripts directory to server
+              uses: appleboy/scp-action@v0.1.7
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USER_NAME }}
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  source: "scripts/"
+                  target: "${{ secrets.APP_DIR }}"
+
             - name: Setup SSH Key
               uses: webfactory/ssh-agent@v0.7.0
               with:
