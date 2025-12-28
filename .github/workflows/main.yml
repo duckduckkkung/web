@@ -53,6 +53,7 @@ jobs:
                   NEXT_PUBLIC_KAKAO_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI }}
                   NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
                   NEXT_PUBLIC_GOOGLE_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }}
+                  DOCKER_IMAGE: ghcr.io/${{ github.repository_owner }}/frontend:latest
               run: |
                   ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" 'bash -s' <<'ENDSSH'
                     set -e
@@ -120,7 +121,7 @@ jobs:
                     
                     # 최신 이미지 pull
                     log_info "최신 이미지 다운로드 중..."
-                    docker pull ghcr.io/${GITHUB_REPO_OWNER}/frontend:latest
+                    docker pull ${DOCKER_IMAGE}
                     
                     # 대상 컨테이너가 실행 중이면 중지
                     if docker ps -a | grep -q "frontend-${TARGET_CONTAINER}"; then
