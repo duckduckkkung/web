@@ -19,7 +19,8 @@ import { Button } from "@/shared/components/button";
 import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
-import { register, sendOtp, verifyOtp, useGuestInfo } from "@ice1/api-client";
+import { register, sendOtp, verifyOtp } from "@ice1/api-client";
+import { useGuestInfo } from "@/shared/hooks/oauth2";
 
 import { REGEX } from "@/shared/utils/regex";
 
