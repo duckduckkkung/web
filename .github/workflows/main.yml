@@ -72,10 +72,6 @@ jobs:
                         echo -e "${YELLOW}[WARN]${NC} $1"
                     }
 
-                    log_error() {
-                        echo -e "${RED}[ERROR]${NC} $1"
-                    }
-
                     # 환경변수 설정
                     APP_DIR="${APP_DIR}"
                     IMAGE_NAME="ghcr.io/${GITHUB_REPO_OWNER}/frontend:latest"
@@ -155,7 +151,7 @@ jobs:
                             log_info "${ACTIVE_CONTAINER} 컨테이너 정리 완료"
                         fi
                     else
-                        log_error "${TARGET_CONTAINER} 컨테이너 시작 실패!"
+                        log_info "${TARGET_CONTAINER} 컨테이너 시작 실패!"
                         exit 1
                     fi
                     
