@@ -57,8 +57,8 @@ jobs:
                     set -e
                     
                     # 환경변수 설정
-                    SERVER_USER="$SERVER_USER"
-                    APP_DIR="$APP_DIR"
+                    SERVER_USER="${{ secrets.SSH_USER_NAME }}"
+                    APP_DIR="${{ secrets.APP_DIR }}"
 
                     cd "$APP_DIR"
                     
