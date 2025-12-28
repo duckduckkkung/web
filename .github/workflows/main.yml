@@ -69,11 +69,12 @@ jobs:
                     echo NEXT_PUBLIC_KAKAO_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI }} >> .env
                     echo NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} >> .env
                     echo NEXT_PUBLIC_GOOGLE_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }} >> .env
+
                     echo APP_DIR=${{ secrets.APP_DIR }} >> .env
+                    echo "GITHUB_REPOSITORY_OWNER=${{ github.repository_owner }}" >> .env
                     
                     chmod 600 .env
                     echo ".env file created"
-                    
                     
                     bash deploy.sh
                   ENDSSH
