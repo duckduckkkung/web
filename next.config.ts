@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    output: "standalone",
+    reactStrictMode: true,
     images: {
         domains: [
             "encrypted-tbn0.gstatic.com",
