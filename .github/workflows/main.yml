@@ -74,7 +74,6 @@ jobs:
 
                     # 환경변수 설정
                     APP_DIR="${APP_DIR}"
-                    IMAGE_NAME="ghcr.io/${GITHUB_REPO_OWNER}/frontend:latest"
 
                     cd "$APP_DIR"
                     
@@ -121,7 +120,7 @@ jobs:
                     
                     # 최신 이미지 pull
                     log_info "최신 이미지 다운로드 중..."
-                    docker pull "\${IMAGE_NAME}"
+                    docker pull ghcr.io/${GITHUB_REPO_OWNER}/frontend:latest
                     
                     # 대상 컨테이너가 실행 중이면 중지
                     if docker ps -a | grep -q "frontend-${TARGET_CONTAINER}"; then
