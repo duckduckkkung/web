@@ -74,5 +74,5 @@ jobs:
                     echo ".env file created"
                     
                     
-                    bash deploy.sh
+                    bash scripts/deploy.sh
                   ENDSSH
