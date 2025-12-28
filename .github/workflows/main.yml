@@ -60,6 +60,7 @@ jobs:
                     SERVER_USER="${{ secrets.SSH_USER_NAME }}"
                     APP_DIR="${{ secrets.APP_DIR }}"
 
+                    : > "${APP_DIR}/.env"
                     cd "$APP_DIR"
                     
                     # .env 파일 생성 (.env 내용을 별도로 처리)
