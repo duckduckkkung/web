@@ -10,6 +10,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { AxiosError } from "axios";
 
 import { ToastMessage } from "@/shared/components/toast-message";
 import { Checkbox } from "@/shared/components/checkbox";
@@ -19,7 +20,14 @@ import { Button } from "@/shared/components/button";
 import { Verify } from "@/shared/components/verify";
 import { Input } from "@/shared/components/input";
 
-import { register, sendOtp, verifyOtp } from "@ice1/api-client";
+import {
+    register,
+    sendOtp,
+    SocialLoginResponse,
+    verifyOtp,
+    ResponseTemplate,
+    ErrorCode,
+} from "@ice1/api-client";
 import { useGuestInfo } from "@/shared/hooks/oauth2";
 
 import { REGEX } from "@/shared/utils/regex";
@@ -98,9 +106,9 @@ export default function Register() {
         }
 
         setSetupFlag(true);
-        setEmail(guestInfo?.email || "");
-        setName(guestInfo?.username || "");
-        setProfileImage(guestInfo?.profile_image_src || "");
+        setEmail(guestInfo?.data.email || "");
+        setName(guestInfo?.data.username || "");
+        setProfileImage(guestInfo?.data.profile_image_src || "");
     }, [setupFlag, guestInfo, isGuestInfoFetching, router]);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -181,7 +189,7 @@ export default function Register() {
             code: otp,
         });
 
-        if (!otpResponse.result) {
+        if (!otpResponse.data.result) {
             setIsCreating(false);
             setIsOtpError(true);
             setOtp("");
@@ -195,8 +203,8 @@ export default function Register() {
             (fileInputRef.current?.files?.length || 0) > 0
         ) {
             profileImage = fileInputRef.current.files[0];
-        } else if (guestInfo?.profile_image_src) {
-            const url = guestInfo.profile_image_src;
+        } else if (guestInfo?.data.profile_image_src) {
+            const url = guestInfo.data.profile_image_src;
             const blob = await (
                 await fetch(url, { mode: "no-cors", credentials: "omit" })
             ).blob();
@@ -214,12 +222,24 @@ export default function Register() {
             });
 
             router.push("/fans");
-        } catch {
+        } catch (error) {
+            if (!(error instanceof AxiosError)) {
+                return;
+            }
+
             setIsCreating(false);
             setIsRegisterError(true);
-            setIsNameError(true);
-            setAction("main");
-            setOtp("");
+
+            const response = error.response
+                ?.data as unknown as ResponseTemplate<SocialLoginResponse>;
+
+            if (response.errorCode === ErrorCode.USER_IS_EXISTS_NAME) {
+                setIsNameError(true);
+                setAction("main");
+                setOtp("");
+
+                return;
+            }
 
             return;
         }
