@@ -198,7 +198,7 @@ export default function Register() {
         }
 
         let profileImage: File | undefined;
-        console.log(fileInputRef.current?.files?.length);
+        console.log(fileInputRef.current);
         if (
             fileInputRef.current?.files &&
             (fileInputRef.current?.files?.length || 0) > 0
