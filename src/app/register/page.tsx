@@ -203,12 +203,6 @@ export default function Register() {
             (fileInputRef.current?.files?.length || 0) > 0
         ) {
             profileImage = fileInputRef.current.files[0];
-        } else if (guestInfo?.data.profile_image_src) {
-            const url = guestInfo.data.profile_image_src;
-            const blob = await (
-                await fetch(url, { mode: "no-cors", credentials: "omit" })
-            ).blob();
-            profileImage = new File([blob], "image.png");
         }
 
         try {
