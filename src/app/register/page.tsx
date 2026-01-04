@@ -198,7 +198,6 @@ export default function Register() {
         }
 
         let profileImage: File | undefined;
-        console.log(fileInputRef.current);
         if (
             fileInputRef.current?.files &&
             (fileInputRef.current?.files?.length || 0) > 0
@@ -257,6 +256,14 @@ export default function Register() {
 
     return (
         <div>
+            <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+            />
+
             <Header />
 
             <div className="max-w-[1280px] min-h-[800px] h-[calc(100dvh_-_80px)] m-[0_auto] flex justify-center items-center">
@@ -274,14 +281,6 @@ export default function Register() {
                                 <>
                                     <div className="flex flex-col gap-[32px]">
                                         <div className="flex justify-center">
-                                            <input
-                                                ref={fileInputRef}
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={handleImageUpload}
-                                                className="hidden"
-                                            />
-
                                             <div
                                                 className="relative size-[120px] rounded-[8px] bg-gray-100 cursor-pointer flex justify-center items-center"
                                                 onClick={() =>
