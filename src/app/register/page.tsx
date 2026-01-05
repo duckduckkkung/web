@@ -114,6 +114,10 @@ export default function Register() {
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
+            if (!["image/png", "image/jpeg"].includes(file.type)) {
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = () => {
                 setProfileImage(reader.result as string);
@@ -233,6 +237,10 @@ export default function Register() {
                 setOtp("");
 
                 return;
+            } else {
+                setIsMainError(true);
+                setAction("main");
+                setOtp("");
             }
 
             return;
