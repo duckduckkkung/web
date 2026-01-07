@@ -38,7 +38,8 @@ export default function CreateFan() {
 
     const processFiles = (files: FileList) => {
         Array.from(files).forEach((file) => {
-            if (!file.type.startsWith("image/")) return;
+            if (!["image/png", "image/jpeg", "image/webp"].includes(file.type))
+                return;
             if (uploadedImages.length >= 4) return;
 
             const reader = new FileReader();

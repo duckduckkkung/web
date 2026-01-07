@@ -114,7 +114,9 @@ export default function Register() {
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            if (!["image/png", "image/jpeg"].includes(file.type)) {
+            if (
+                !["image/png", "image/jpeg", "image/webp"].includes(file.type)
+            ) {
                 return;
             }
 
