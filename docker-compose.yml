@@ -29,4 +29,5 @@ services:
 
 networks:
     user-a-network:
+        name: ddk_user-a-network
         driver: bridge
