@@ -15,7 +15,10 @@ export default function Oauth2Google() {
 
             if (code) {
                 try {
-                    const response = await signWithGoogle({ code });
+                    const response = await signWithGoogle({
+                        code,
+                        type: "web",
+                    });
 
                     if (response.data.type === "register")
                         router.push(
