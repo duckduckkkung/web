@@ -142,7 +142,7 @@ export default function Board() {
                     <div className="flex flex-col gap-[24px]">
                         <div className="flex items-center gap-[12px]">
                             <span className="font-p-semibold text-[20px] text-gray-900">
-                                코멘트
+                                댓글
                             </span>
 
                             <span className="font-p-semibold text-[18px] text-gray-400">
@@ -153,7 +153,7 @@ export default function Board() {
                         <div className="w-full flex flex-col gap-[16px]">
                             <textarea
                                 className="outline-none p-[16px_20px] border border-gray-200 rounded-[16px] font-p-mj text-[18px] text-gray-900 min-h-[140px] focus:border-gray-900"
-                                placeholder="코멘트 입력..."
+                                placeholder="댓글 입력..."
                             />
 
                             <div className="flex justify-end">

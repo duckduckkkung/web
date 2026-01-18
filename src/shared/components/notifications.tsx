@@ -24,7 +24,7 @@ export const Notifications = ({}: NotificationsProps) => {
             animate: { opacity: 1, transition: { duration: 0.3 } },
             exit: { opacity: 0, transition: { duration: 0.3 } },
         }),
-        []
+        [],
     );
 
     return (
@@ -110,7 +110,7 @@ export const Notifications = ({}: NotificationsProps) => {
 
                             <div className="flex flex-col gap-[4px]">
                                 <span className="font-p-semibold text-[14px] text-gray-900">
-                                    새 코멘트 9개
+                                    새 댓글 9개
                                 </span>
 
                                 <div className="flex-1 flex flex-wrap gap-[8px] items-center">
