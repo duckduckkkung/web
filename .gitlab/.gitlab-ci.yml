@@ -1,0 +1,70 @@
+stages:
+    - build
+    - deploy
+
+build:
+    stage: build
+    before_script:
+        - docker info
+        - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+        - docker buildx create --use --name amd64-builder --driver docker-container || docker buildx use amd64-builder
+        - docker buildx inspect --bootstrap
+    script:
+        - |
+            docker buildx build \
+              --platform linux/amd64 \
+              --tag $CI_REGISTRY_IMAGE:latest \
+              --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA \
+              --cache-from type=registry,ref=$CI_REGISTRY_IMAGE:buildcache \
+              --cache-to type=registry,ref=$CI_REGISTRY_IMAGE:buildcache,mode=max \
+              --build-arg NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL \
+              --build-arg NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY=$NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY \
+              --build-arg NEXT_PUBLIC_KAKAO_REDIRECT_URI=$NEXT_PUBLIC_KAKAO_REDIRECT_URI \
+              --build-arg NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID \
+              --build-arg NEXT_PUBLIC_GOOGLE_REDIRECT_URI=$NEXT_PUBLIC_GOOGLE_REDIRECT_URI \
+              --push \
+              .
+    after_script:
+        - docker buildx rm amd64-builder || true
+    only:
+        - dev
+
+deploy:
+    stage: deploy
+    before_script:
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo "$SSH_PRIVATE_KEY_BASE64" | base64 -d > ~/.ssh/id_ed25519
+        - chmod 600 ~/.ssh/id_ed25519
+        - ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+        - chmod 644 ~/.ssh/known_hosts
+    script:
+        - scp -i ~/.ssh/id_ed25519 docker-compose.yml $SSH_USER_NAME@$SSH_HOST:$APP_DIR/
+        - |
+            ssh -i ~/.ssh/id_ed25519 $SSH_USER_NAME@$SSH_HOST bash << ENDSSH
+              set -e
+
+              cd $APP_DIR
+
+              : > .env
+
+              echo "NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL" >> .env
+              echo "NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY=$NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY" >> .env
+              echo "NEXT_PUBLIC_KAKAO_REDIRECT_URI=$NEXT_PUBLIC_KAKAO_REDIRECT_URI" >> .env
+              echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID" >> .env
+              echo "NEXT_PUBLIC_GOOGLE_REDIRECT_URI=$NEXT_PUBLIC_GOOGLE_REDIRECT_URI" >> .env
+
+              echo "CI_REGISTRY=$CI_REGISTRY" >> .env
+              echo "CI_REGISTRY_USER=$CI_REGISTRY_USER" >> .env
+              echo "CI_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD" >> .env
+              echo "CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE" >> .env
+              echo "CI_PROJECT_NAMESPACE=$CI_PROJECT_NAMESPACE" >> .env
+              echo "APP_DIR=$APP_DIR" >> .env
+
+              chmod 600 .env
+              echo ".env file created"
+
+              bash gitlab-deploy.sh
+            ENDSSH
+    only:
+        - dev
