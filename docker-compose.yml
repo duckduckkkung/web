@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
     frontend-blue:
-        image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/frontend:latest
+        image: ${CI_REGISTRY_IMAGE}:latest
+        platform: linux/amd64
         container_name: frontend-blue
         ports:
             - "3001:3000"
@@ -15,7 +16,8 @@ services:
         restart: always
 
     frontend-green:
-        image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/frontend:latest
+        image: ${CI_REGISTRY_IMAGE}:latest
+        platform: linux/amd64
         container_name: frontend-green
         ports:
             - "3002:3000"
